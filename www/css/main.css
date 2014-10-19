@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+body{
+	background-color: #990000;
+	
+}
+
+div#wrapper{
+	top: 0px;
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+	background: -webkit-radial-gradient(center, ellipse,  
+		#fff 15%, #990000 75%); /* Chrome10+,Safari5.1+ */
+	opacity: 0.1;
+	z-index: -1;
+}
+
+div#logo{
+	display: block;
+	margin-top: 5%;
+	width: 90%;
+	height: 40vh;
+	margin-left: 5%;
+	background-image: URL("../img/logo.svg");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+div#login{
+	margin-top: 10vh;
+	font-size: 12pt;
+	//padding-top: 20vh;
+	text-align: center;
+	width: 100%;
+}
+
+div#footer{
+	position: absolute;
+	display: block;
+	width: 100%;
+	text-align: center;
+	bottom: 10px;
+
+}
+
+form.appcki-form input{
+	font-size: 14pt;
+	background-color: #660000;
+	border: 0px;
+	padding: 5px;
+	color: #ffffff;
+	outline: 0;
+	margin-top: 5px;
+	border-radius: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
+	box-shadow: 2px 2px 5px #362B2B;
+	box-shadow: inset 2px 2px 5px #362B2B;
+}
+
+form.appcki-form input[type=text], form.appcki-form input[type=password] {
+	width: 80%;
+}
+
+form.appcki-form input[type=text]:focus, form.appcki-form input[type=password]:focus {
+	
+	box-shadow: 0px 0px 15px red;
+	
+}
+
+form.appcki-form input[type=button]{
+	box-shadow: 2px 2px 5px #362B2B;
+}
+
+form.appcki-form input[type=button]:active {
+	box-shadow: inset 2px 2px 5px #362B2B;
+}
