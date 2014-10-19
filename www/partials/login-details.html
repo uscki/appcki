@@ -1,3 +1,5 @@
+
+<!--  Old form: 
 <form>
 	<label>
 		Gebruikernaam: 
@@ -11,3 +13,27 @@
 
 	<button ng-click="login()" > Inloggen </button>
 </form>
+-->
+	
+<div id="logo"></div>
+
+<div id="login">
+			
+	<form class="appcki-form">
+		<div>
+			<input type="text" ng-model="username" placeholder="Gebruikersnaam" />
+		</div>
+		<div>
+			<input type="password" ng-model="password" placeholder="Wachtwoord"/>
+		</div>
+		<div>
+			<input type="button" value="Inloggen" ng-click="login()" />
+		</div>
+	</form>
+</div>
+<div id="footer">
+			USCKI Incognito<br/>
+			<a href="#">Disclaimer & User Policy</a>
+</div>
+<div id="wrapper"></div>
+

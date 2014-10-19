@@ -1,6 +1,8 @@
 appcki
-	.controller("loginPageController",function($scope, $http){		
-		$scope.username = "asdf";
+	.controller("loginPageController",function($scope, $http){	
+		// Edit by Jan de Mooij
+		// 	Is dit nodig (a)?
+		//$scope.username = "asdf";
 
 		$scope.login = function(){
 			console.log("inloggen met: " 
