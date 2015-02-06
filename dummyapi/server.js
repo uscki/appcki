@@ -1,16 +1,27 @@
 var express = require('express');
 var app = express();
 
+var response = function(req, res, obj){
+	if(req.query.format == "jsonp"){
+		var callback = req.query.callback || "callback";
+		res.send(callback + "("+JSON.stringify(obj)+")");
+	}else if(req.query.format == "json"){
+		res.send(JSON.stringify(obj));
+	}else{
+		res.send("unkown format specified ");
+	}
+}
+
 app.get('/login', function(req, res){
-  res.send(JSON.stringify({
+  response(req, res,{
   	success:true,
   	token: "88861d56dbe4b82f40cd00439b6d1542"
-  }));
+  });
 });
 
 
 app.get('/agenda', function(req, res){
-  res.send(JSON.stringify([
+  response(req, res,[
   	{
   		id: 1234,
   		title: "Dummy titel",
@@ -52,13 +63,13 @@ app.get('/agenda', function(req, res){
   		when:{
   			start: 100000,
   			stop: 100100
-  		}
+  		},
   		category:{
   			id: 1,
   			title: "AI"
   		}
   	},
-  ]));
+  ]);
 });
 
 app.listen(4000);

@@ -9,11 +9,18 @@ appcki
 				+ $scope.username + ", " 
 				+ $scope.password);
 
-			$http.post('https://www.uscki.nl/?api',
-				{login:$scope.username, password:$scope.password})
+			$http.jsonp(apiUrl + '/login',
+				{
+					params:{
+						login:$scope.username, 
+						password:$scope.password,
+						format:"jsonp",
+						callback:"JSON_CALLBACK"
+					}
+				})
 			.success(function(data, status, headers, config) {
 				$("html").append(data);
-				
+
 				console.log(data);
 			}).error(function(data, status, headers, config) {
 
