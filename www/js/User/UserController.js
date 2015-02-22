@@ -1,5 +1,6 @@
-appcki
-	.controller("loginPageController",function($scope, $http){	
+angular.module('appcki')
+	.controller("loginPageController", ['$scope', '$http','$location','UserService',
+        function($scope, $http, $location, UserService){	
 		// Edit by Jan de Mooij
 		// 	Is dit nodig (a)?
 		//$scope.username = "asdf";
@@ -9,25 +10,20 @@ appcki
 				+ $scope.username + ", " 
 				+ $scope.password);
 
-			$http.jsonp(apiUrl + '/login',
-				{
-					params:{
-						login:$scope.username, 
-						password:$scope.password,
-						format:"jsonp",
-						callback:"JSON_CALLBACK"
-					}
-				})
-			.success(function(data, status, headers, config) {
-				$("html").append(data);
+            UserService.signin({
+                emailaddress: $scope.username,
+                password: $scope.password
+            },function(){
+                $location.path('/home');
+                console.log(data);
+            },function(){
+                console.log("Login failed");
+            });
 
-				console.log(data);
-			}).error(function(data, status, headers, config) {
 
-				console.log("Login failed");
-			});
 		}
-	})
+	}])
+    ;
 
 
 	/*
