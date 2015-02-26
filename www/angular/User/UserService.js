@@ -38,7 +38,12 @@ angular.module('appcki')
         return {
             getUserFromToken: getUserFromToken,
             signin: function(data, success, error) {
-                $http.post(apiUrl + '/auth', data).success(success).error(error)
+                console.log(success);
+                console.log(error);
+                
+                $http.post(apiUrl + '/auth', data)
+                    .success(success)
+                    .error(error)
             },
             me: function(success, error) {
                 $http.get(apiUrl + '/me').success(success).error(error)

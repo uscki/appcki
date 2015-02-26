@@ -1,29 +1,33 @@
 angular.module('appcki')
 	.controller("loginPageController", ['$scope', '$http','$location','UserService',
         function($scope, $http, $location, UserService){	
-		// Edit by Jan de Mooij
-		// 	Is dit nodig (a)?
-		//$scope.username = "asdf";
+
+        $scope.credentials = {};
 
 		$scope.login = function(){
+
+           
 			console.log("inloggen met: " 
-				+ $scope.username + ", " 
-				+ $scope.password);
+				+ $scope.credentials.username + ", " 
+				+ $scope.credentials.password);
 
-            UserService.signin({
-                emailaddress: $scope.username,
-                password: $scope.password
-            },function(){
-                $location.path('/home');
-                console.log(data);
-            },function(){
-                console.log("Login failed");
-            });
+            UserService.signin(
+                {
+                    emailaddress: $scope.credentials.username,
+                    password: $scope.credentials.password
+                },
+                function(data){
+               //     $location.path('/home');
+                },
+                function(){
+                //    $scope.loginFailed = true;
+                 //   console.log("Login failed");
+                }
+            );
 
+		};
 
-		}
-	}])
-    ;
+	}]);
 
 
 	/*

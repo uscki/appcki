@@ -25,18 +25,22 @@
 				</h2>
 			</md-toolbar>
 
+				<div class="md-toolbar-tools" ng-show="loginFailed">
+			    	<span class="md-flex"> Inloggen niet gelukt </span>
+				</div>
+			
 			<md-content layout-padding>
 				<md-input-container>
 					<label>Gebruikernaam</label>
-					<input ng-model="username" >
+					<input ng-model="credentials.username" >
 				</md-input-container>
 				
 				<md-input-container>
 					<label>Wachtwoord</label>
-					<input ng-model="password" type="password">
+					<input ng-model="credentials.password" type="password">
 				</md-input-container>
 
-				<md-button class="md-primary right" ng-click="login()" />
+				<md-button class="md-primary" ng-click="login($event)" />
 			    	Inloggen
 				</md-button>
 			</md-content>

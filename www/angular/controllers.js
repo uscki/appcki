@@ -1,4 +1,5 @@
-appcki
+    /*
+    appcki
 	.controller("loginPageController",function($scope, $http){	
 		// Edit by Jan de Mooij
 		// 	Is dit nodig (a)?
@@ -30,7 +31,7 @@ appcki
 	})
 
 
-	/*
+
 angular.module('angularRestfulAuth')
     .controller('HomeCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'Main', 
         function($rootScope, $scope, $location, $localStorage, Main) {
