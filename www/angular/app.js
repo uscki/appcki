@@ -11,7 +11,7 @@ appcki
   // read https://material.angularjs.org/#/Theming/03_configuring_a_theme
   $mdThemingProvider.theme('default')
     .primaryPalette('red')
-    .accentPalette('orange');
+    .accentPalette('blue');
 })
 .config(['$routeProvider','$httpProvider',
   function($routeProvider, $httpProvider) {

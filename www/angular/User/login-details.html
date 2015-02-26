@@ -16,16 +16,12 @@
 -->
 
 
-<div layout-gt-sm="column" layout-fill layout-align="space-around center" >
-
-	<md-content hide-sm >
-	
-	</md-content>
-	<md-whiteframe class="md-whiteframe-z1" >
+<div layout-gt-sm="column" layout-fill  layout-align="space-around center" >
+	<md-whiteframe class="md-whiteframe-z1" layout-margin-gt-sm>
 		<md-content >	
 			<md-toolbar>
 				<h2 class="md-toolbar-tools">
-					<span>Uscki</span>
+					<span>Login</span>
 				</h2>
 			</md-toolbar>
 
@@ -36,7 +32,7 @@
 				</md-input-container>
 				
 				<md-input-container>
-					<label>Gebruikernaam</label>
+					<label>Wachtwoord</label>
 					<input ng-model="password" type="password">
 				</md-input-container>
 
@@ -46,6 +42,9 @@
 			</md-content>
 		</md-content>
 	</md-whiteframe>
+	<div hide-sm layout-margin-gt-sm>
+		<img src='img/logo.png' id='logo'  />
+	</div>
 </div>
 
 <!-- 
