@@ -2,11 +2,18 @@ var apiUrl = "http://localhost:4000";
 
 var appcki = angular.module('appcki', [
     'ngStorage',
-    'ngRoute'
+    'ngRoute',
+    'ngMaterial'
 ]);
 
-
-appcki.config(['$routeProvider','$httpProvider',
+appcki
+.config(function($mdThemingProvider) {
+  // read https://material.angularjs.org/#/Theming/03_configuring_a_theme
+  $mdThemingProvider.theme('default')
+    .primaryPalette('red')
+    .accentPalette('orange');
+})
+.config(['$routeProvider','$httpProvider',
   function($routeProvider, $httpProvider) {
 
     $routeProvider

@@ -14,24 +14,41 @@
 	<button ng-click="login()" > Inloggen </button>
 </form>
 -->
-	
-<div layout="row" layout-align="center center" layout-fill style='width:100%; height:100%; position:absolute;'>
 
- <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
-			
-	<form class="appcki-form">
-		<div>
-			<input type="text" ng-model="username" placeholder="Gebruikersnaam" />
-		</div>
-		<div>
-			<input type="password" ng-model="password" placeholder="Wachtwoord"/>
-		</div>
-		<div>
-			<input type="button" value="Inloggen" ng-click="login()" />
-		</div>
-	</form>
-</md-whiteframe>
-</div><!-- 
+
+<div layout-gt-sm="column" layout-fill layout-align="space-around center" >
+
+	<md-content hide-sm >
+	
+	</md-content>
+	<md-whiteframe class="md-whiteframe-z1" >
+		<md-content >	
+			<md-toolbar>
+				<h2 class="md-toolbar-tools">
+					<span>Uscki</span>
+				</h2>
+			</md-toolbar>
+
+			<md-content layout-padding>
+				<md-input-container>
+					<label>Gebruikernaam</label>
+					<input ng-model="username" >
+				</md-input-container>
+				
+				<md-input-container>
+					<label>Gebruikernaam</label>
+					<input ng-model="password" type="password">
+				</md-input-container>
+
+				<md-button class="md-primary right" ng-click="login()" />
+			    	Inloggen
+				</md-button>
+			</md-content>
+		</md-content>
+	</md-whiteframe>
+</div>
+
+<!-- 
 <div id="footer">
 			USCKI Incognito<br/>
 			<a href="#">Disclaimer & User Policy</a>
