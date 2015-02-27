@@ -21,16 +21,23 @@ appcki
         templateUrl: 'angular/User/login-details.html',
         controller: 'loginPageController'
       })
+      .when('/home', {
+          templateUrl: 'angular/Home/home.html',
+          controller: 'homePageCtrl'
+      })
+      .when('/agenda', {
+          templateUrl: 'angular/Agenda/overview.html',
+          controller: 'AgendaCtrl'
+      })
+
+
       .otherwise({
         redirectTo: '/login'
       });
 
       /*
           $routeProvider.
-          when('/', {
-              templateUrl: 'partials/home.html',
-              controller: 'HomeCtrl'
-          }).
+          .
           when('/signin', {
               templateUrl: 'partials/signin.html',
               controller: 'HomeCtrl'
@@ -44,7 +51,8 @@ appcki
           });
       */
 
-    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', 
+      function($q, $location, $localStorage) {
         return {
             'request': function (config) {
                 config.headers = config.headers || {};
@@ -55,7 +63,8 @@ appcki
             },
             'responseError': function(response) {
                 if(response.status === 401 || response.status === 403) {
-                    $location.path('/signin');
+
+                  $location.path('/signin');
                 }
                 return $q.reject(response);
             }
