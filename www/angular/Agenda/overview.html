@@ -1,0 +1,24 @@
+ <md-list>
+  <md-item ng-repeat="agenda in agendas">
+    <md-item-content>
+      <div class="md-tile-left">
+          <!-- <img ng-src="{{item.face}}" class="face" alt="{{item.who}}"> -->
+      </div>
+      <div class="md-tile-content">
+        <h3>{{agenda.shortdescription}}</h3>
+        <p>
+        	<span ng-if="agenda.who!=''">Wie: {{agenda.who}}.</span>
+        	<span ng-if="agenda.who!=''">Wat: {{agenda.what}}.</span>
+        	<span ng-if="agenda.who!=''">Waar: {{agenda.where}}.</span>
+        </p>
+
+        <p ng-if="agenda.categories.length >0">
+        	<span ng-repeat="category in agenda.categories"> {{category.menutitle}}</span>
+        </p>
+
+      </div>
+    </md-item-content>
+  </md-item>
+</md-list>
+
+

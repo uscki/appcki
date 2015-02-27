@@ -9,9 +9,9 @@ angular.module('appcki')
         };
 
         var getNewer = function(state, callback){
-            state = state || defaultState;
+           // state = state || defaultState;
 
-            $http.get(apiUrl + "/public/agenda/newer", {params:{ id: state.newest }})
+            $http.get(apiUrl + "/public/agenda/newer", {params:{ timestamp: state.newest }})
             .success(function(data){
 
                 callback(data);
@@ -21,10 +21,19 @@ angular.module('appcki')
         var getOlder = function(state, callback){
             state = state || defaultState;
 
-            $http.get(apiUrl + "/public/agenda/older", {params:{ id: state.older }});
+            $http.get(apiUrl + "/public/agenda/older", {params:{ timestamp: state.oldest }});
+        };
+
+        var createState = function(){
+            var today = new Date();
+            return {
+                newest: today.getTime(),
+                oldest: today.getTime()
+            };
         }
 
         return {
+            createState: createState,
             getNewer: getNewer,
             getOlder: getOlder
         };
