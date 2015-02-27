@@ -1,53 +1,41 @@
-
-<!--  Old form: 
-<form>
-	<label>
-		Gebruikernaam: 
-		<input type="text" ng-model="username"/>
-	</label>
-
-	<label>
-		Wachtwoord: 
-		<input type="password" ng-model="password"/>
-	</label>
-
-	<button ng-click="login()" > Inloggen </button>
-</form>
--->
-
-
-<div layout-gt-sm="column" layout-fill  layout-align="space-around center" >
-	<md-whiteframe class="md-whiteframe-z1" layout-margin-gt-sm>
-		<md-content >	
-			<md-toolbar>
-				<h2 class="md-toolbar-tools">
-					<span>Login</span>
-				</h2>
-			</md-toolbar>
-
-				<div class="md-toolbar-tools" ng-show="loginFailed">
-			    	<span class="md-flex"> Inloggen niet gelukt </span>
-				</div>
-			
-			<md-content layout-padding>
-				<md-input-container>
-					<label>Gebruikernaam</label>
-					<input ng-model="credentials.username" >
-				</md-input-container>
+<div style="position:absolute; width:100%; height:100%">
+	<div layout="column" layout-fill  layout-align="space-around center" >
+		<md-whiteframe class="md-whiteframe-z1" layout-margin>
+			<md-content >	
+				<md-toolbar>
+					<h2 class="md-toolbar-tools">
+						<span>Login</span>
+					</h2>
+				</md-toolbar>
 				
-				<md-input-container>
-					<label>Wachtwoord</label>
-					<input ng-model="credentials.password" type="password">
-				</md-input-container>
+				<form ng-submit="login()"> 
+					<md-content layout-padding>
+						<md-input-container>
+							<label>Gebruikernaam</label>
+							<input ng-model="credentials.username" >
+						</md-input-container>
+						
+						<md-input-container>
+							<label>Wachtwoord</label>
+							<input ng-model="credentials.password" type="password">
+						</md-input-container>
+					
+						<div layout="row" layout-align="end center">					
+							<md-button class="md-primary" ng-click="" />
+						    	Inloggen
+							</md-button>
+						</div>
 
-				<md-button class="md-primary" ng-click="login($event)" />
-			    	Inloggen
-				</md-button>
+					</md-content>
+				</form>
 			</md-content>
-		</md-content>
-	</md-whiteframe>
-	<div hide-sm layout-margin-gt-sm>
-		<img src='img/logo.png' id='logo'  />
+		</md-whiteframe>
+
+		<div layout-margin >
+			<img src='img/logo.png' id='logo'  />
+		</div>
+
+
 	</div>
 </div>
 

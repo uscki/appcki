@@ -1,6 +1,6 @@
 angular.module('appcki')
-	.controller("loginPageController", ['$scope', '$http','$location','UserService',
-        function($scope, $http, $location, UserService){	
+	.controller("loginPageController", ['$scope', '$http','$location','$mdDialog','UserService',
+        function($scope, $http, $location, $mdDialog, UserService){	
 
         $scope.credentials = {};
 
@@ -17,11 +17,19 @@ angular.module('appcki')
                     password: $scope.credentials.password
                 },
                 function(data){
-               //     $location.path('/home');
+                    $location.path('/home');
                 },
                 function(){
-                //    $scope.loginFailed = true;
-                 //   console.log("Login failed");
+                  alert = $mdDialog.alert({
+                    title: 'Inloggen mislukt',
+                    content: 'De gegevens kwamen niet overeen',
+                    ok: 'Sluiten'
+                  });
+                  $mdDialog
+                    .show( alert )
+                    .finally(function() {
+                      alert = undefined;
+                    });
                 }
             );
 
