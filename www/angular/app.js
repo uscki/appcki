@@ -3,7 +3,8 @@ var apiUrl = "http://localhost:4000";
 var appcki = angular.module('appcki', [
     'ngStorage',
     'ngRoute',
-    'ngMaterial'
+    'ngMaterial',
+    'ngMdIcons'
 ]);
 
 appcki

@@ -1,24 +1,30 @@
- <md-list>
-  <md-item ng-repeat="agenda in agendas">
-    <md-item-content>
-      <div class="md-tile-left">
-          <!-- <img ng-src="{{item.face}}" class="face" alt="{{item.who}}"> -->
-      </div>
-      <div class="md-tile-content">
-        <h3>{{agenda.shortdescription}}</h3>
-        <p>
-        	<span ng-if="agenda.who!=''">Wie: {{agenda.who}}.</span>
-        	<span ng-if="agenda.who!=''">Wat: {{agenda.what}}.</span>
-        	<span ng-if="agenda.who!=''">Waar: {{agenda.where}}.</span>
-        </p>
+<div layout="column" flex layout-fill>
+  <md-content>
+    <section ng-repeat="group in groups">
+      <md-subheader class="md-primary">
+        {{group.date}}
+      </md-subheader>
+      <md-item ng-repeat="agenda in group.agendas">
+        <md-item-content>
+          <div class="md-tile-left">
+            <!-- <ng-md-icon /> -->
+            <img ng-src="{{item.face}}" class="face" alt="{{item.who}}">
 
-        <p ng-if="agenda.categories.length >0">
-        	<span ng-repeat="category in agenda.categories"> {{category.menutitle}}</span>
-        </p>
-
-      </div>
-    </md-item-content>
-  </md-item>
-</md-list>
-
-
+          </div>
+          <div class="md-tile-content">
+            <h3>{{agenda.shortdescription}}</h3>
+            <p>
+              <span ng-if="agenda.who!=undefined">Wie: {{agenda.who}}.</span>
+              <span ng-if="agenda.what!=undefined">Wat: {{agenda.what}}.</span>
+              <span ng-if="agenda.where!=undefined">Waar: {{agenda.where}}.</span>
+            </p>
+            <!-- <p ng-if="agenda.categories.length >0">
+              <span ng-repeat="category in agenda.categories"> {{category.menutitle}}</span>
+            </p> -->
+          </div>
+        </md-item-content>
+      </md-item>
+    </md-list>
+    </section>
+  </md-content>
+</div>
