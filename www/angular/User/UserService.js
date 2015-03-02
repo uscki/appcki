@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appcki')
+angular.module('appcki.user')
     .factory('UserService', ['$http', '$localStorage','apiUrl', function($http, $localStorage,apiUrl){
         function changeUser(user) {
             angular.extend(currentUser, user);

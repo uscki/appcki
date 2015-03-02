@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('appcki')
+angular
+    .module('appcki.agenda')
     .factory('AgendaService', ['$http', 'apiUrl', function($http,apiUrl){
         
         var defaultState = {

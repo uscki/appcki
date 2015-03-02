@@ -116,7 +116,8 @@ input[type="search"] {
   bottom: 0;
   right: 0;
   border-radius: inherit;
-  pointer-events: none; }
+  pointer-events: none; 
+}
 
 .md-shadow-bottom-z-1, .md-button.md-raised:not([disabled]), .md-button.md-fab {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }

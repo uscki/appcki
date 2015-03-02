@@ -1,4 +1,4 @@
-angular.module('appcki')
+angular.module('appcki.user',[])
 	.controller("loginPageController", ['$scope', '$http','$location','$mdDialog','UserService',
         function($scope, $http, $location, $mdDialog, UserService){	
 

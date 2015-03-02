@@ -1,0 +1,80 @@
+	<div style="position:fixed; left:0; top:0; width:100%; z-index:3">
+		<md-toolbar class="md-tall">
+			<span flex></span>
+
+			<h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+			<span class="md-flex">Agenda</span>
+			</h2>
+
+			
+
+		</md-toolbar>
+
+	</div>
+
+	<div 	layout="column" 			
+			layout-fill
+			style="position:relative; width:400px;">
+
+<!--
+ 	    <md-toolbar class="md-tall">
+	      <span flex></span>
+	      <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+	        <span class="md-flex">Agenda</span>
+	      </h2>
+	    </md-toolbar>
+-->
+
+	<div style="height:128px;min-height:128px; max-height:128px;">
+		
+	</div>
+
+		<md-content layout-fill>
+			<appcki-agenda-overview action="action" >
+			</appcki-agenda-overview>
+		</md-content>
+
+	</div>
+
+	<div
+		ng-if="agenda != undefined"
+		style="
+			position:absolute; 
+			right:24px; 
+			top:96px;
+			z-index:5">
+		<appcki-agenda-fab agenda="agenda"></appcki-agenda-fab>	
+	</div>
+
+	<div 	layout="column" 
+			flex 
+			layout-fill
+			style="height:100%; min-width:500px;">
+		
+
+
+		<div style="
+			display: block;
+			position: relative;
+			overflow: auto;
+			z-index:4; 
+		">
+			<md-whiteframe 
+				style="margin:64px 120px 60px 16px;" 
+
+				class="md-whiteframe-z1"
+				layout="column"
+				ng-if="agenda != undefined"
+			>
+			
+					<md-content>
+						<h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+		        			<span class="md-flex">{{agenda.shortdescription}}</span>
+				    	</h2>						
+					</md-content>
+					<appcki-agenda-details agenda="agenda"></appcki-agenda-details>
+			</md-whiteframe>
+	 	</div>
+	 	
+	</div>
+

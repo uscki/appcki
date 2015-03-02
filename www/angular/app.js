@@ -1,6 +1,9 @@
 var apiUrl = "http://localhost:4000";
 
 var appcki = angular.module('appcki', [
+    'appcki.home',
+    'appcki.user',
+    'appcki.agenda',
     'ngStorage',
     'ngRoute',
     'ngMaterial',
@@ -27,9 +30,11 @@ appcki
           controller: 'homePageCtrl'
       })
       .when('/agenda', {
-          templateUrl: 'angular/Agenda/overview.html',
-          controller: 'AgendaCtrl'
+          templateUrl: 'angular/Agenda/agenda.html',
+          controller: 'AgendaPageCtrl',
+          reloadOnSearch: false
       })
+
 
 
       .otherwise({
