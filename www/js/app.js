@@ -7,8 +7,6 @@ var appcki = angular.module('appcki', [
     'appcki.agenda',
     'ngStorage',
     'ngRoute',
-    'ngMaterial',
-    'ngMdIcons'
 ]);
 
 appcki
@@ -24,14 +22,24 @@ appcki
     }
   });
 })
-.config(function($mdThemingProvider) {
-  // read https://material.angularjs.org/#/Theming/03_configuring_a_theme
-  $mdThemingProvider.theme('default')
-    .primaryPalette('red')
-    .accentPalette('blue');
+.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/agenda')
+
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'js/User/login-details.html',
+    controller: 'loginPageController'
+  })
+  $stateProvider.state('agenda', {
+    url: '/agenda',
+    templateUrl: 'js/Agenda/agenda-overview.html',
+    controller: 'appckiAgendaOverview'
+  })
+
+
 })
-.config(['$routeProvider','$httpProvider',
-  function($routeProvider, $httpProvider) {
+.config(['$httpProvider',
+  function( $httpProvider ) {
 /*
     $routeProvider
       .when('/login', {

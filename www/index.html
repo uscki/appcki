@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="appcki">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Appcki</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="lib/angular-material/angular-material.css" />
+    <link href="css/ionic.app.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <!-- ionic/angularjs js -->
@@ -19,9 +18,9 @@
     <script type="text/javascript" src="lib/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="lib/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="lib/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="lib/angular-material/angular-material.js"></script>
-    <script type="text/javascript" src="lib/angular-material/angular-material.js"></script>
-    <script type="text/javascript" src="lib/angular-material-icons/angular-material-icons.js"></script>
+<!--      <script type="text/javascript" src="lib/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="lib/angular-material/angular-material.js"></script> -->
+<!--     <script type="text/javascript" src="lib/angular-material-icons/angular-material-icons.js"></script> -->
 <!--    <script type="text/javascript" src="lib/hammerjs/hammer.js"></script> -->
     
     <script type="text/javascript" src="js/ngStorage.js"></script>
@@ -42,8 +41,8 @@
     <script type="text/javascript" src="js/config.js"></script>
 
   </head>
-   <body ng-view layout="row"> 
-
+   <body ng-app="appcki"> 
+     <ion-nav-view></ion-nav-view>
   </body>
 <!--   <body ng-app="starter">
 

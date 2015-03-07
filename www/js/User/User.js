@@ -1,12 +1,10 @@
 angular.module('appcki.user',[])
-	.controller("loginPageController", ['$scope', '$http','$location','$mdDialog','UserService',
-        function($scope, $http, $location, $mdDialog, UserService){	
+	.controller("loginPageController", ['$scope', '$http','$location','$ionicPopup','UserService',
+        function($scope, $http, $location, $ionicPopup, UserService){	
 
         $scope.credentials = {};
 
-		$scope.login = function(){
-
-           
+		$scope.login = function(){           
 			console.log("inloggen met: " 
 				+ $scope.credentials.username + ", " 
 				+ $scope.credentials.password);
@@ -17,19 +15,14 @@ angular.module('appcki.user',[])
                     password: $scope.credentials.password
                 },
                 function(data){
-                    $location.path('/home');
+                    $location.path('/agenda');
                 },
                 function(){
-                  alert = $mdDialog.alert({
-                    title: 'Inloggen mislukt',
-                    content: 'De gegevens kwamen niet overeen',
-                    ok: 'Sluiten'
-                  });
-                  $mdDialog
-                    .show( alert )
-                    .finally(function() {
-                      alert = undefined;
+                    var alertPopup = $ionicPopup.alert({
+                       title: 'Inloggen mislukt',
+                       template: 'De gegevens kwamen niet overeen'
                     });
+
                 }
             );
 
