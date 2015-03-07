@@ -1,0 +1,19 @@
+<span ng-if="agenda != undefined" >
+	<md-button 
+		class="md-fab" 
+		ng-click="agenda.subscribed = !agenda.subscribed" 
+		aria-label=""
+		>
+
+		<ng-md-icon 
+			ng-if="!agenda.subscribed" 
+			icon="create" 
+			style="fill: white" ></ng-md-icon>
+
+		<ng-md-icon 
+			ng-if="agenda.subscribed == true" 
+			icon="done" 
+			style="fill: white" ></ng-md-icon>
+	
+	</md-button>
+</span>

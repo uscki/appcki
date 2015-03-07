@@ -1,0 +1,14 @@
+{
+  "name": "appcki",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.14"
+  },
+  "dependencies": {
+    "angular-material": "~0.8.0",
+    "angular": "~1.3.13",
+    "angular-route": "~1.3.13",
+    "angular-material-icons": "~0.4.0",
+    "hammerjs": "~2.0.4"
+  }
+}

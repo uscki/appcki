@@ -1,4 +1,6 @@
-/www/angular/config.js
-platforms/
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
 node_modules/
-www/js/node_modules/
+platforms/
+plugins/

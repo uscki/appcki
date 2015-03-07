@@ -1,10 +1,48 @@
+/*body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
+*/
 html, body{
 	background: #eee;
 }
 
+@media screen and (min-width: 600px) {
+	.agendaOverview{
+		position:relative; 
+		width:400px;
+	}
+	.agendaFab{
+		position:absolute; 
+		right:24px; 
+		top:96px;
+		z-index:5
+	}
+	.agendaDetails{
+		height:100%; 
+		min-width:400px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+    [css rules for actual elements if conditon above applies]
+}
 #logo{
 	width:75px;
 }
+.avatar-frame{
+	
+	width: 50px;
+	height: 50px;
+	border-radius: 30px; 
+	overflow:hidden;
+	display: block;
+}
+.avatar-frame img{
+	min-width: 50px;
+	min-height: 50px;
+	width: 100%;
+}
+
 
 /*@CHARSET "UTF-8";
 

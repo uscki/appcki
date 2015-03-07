@@ -55,3 +55,10 @@
 
 ### 0.2.11 (Sep 17, 2014)
 * CB-7249 cordova-plugin-console documentation translation
+
+### 0.2.12 (Dec 02, 2014)
+* CB-7977 Mention `deviceready` in plugin docs
+* CB-7700 cordova-plugin-console documentation translation: cordova-plugin-console
+
+### 0.2.13 (Feb 04, 2015)
+* CB-8351 ios: Use argumentForIndex rather than NSArray extension

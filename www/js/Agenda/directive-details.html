@@ -1,0 +1,25 @@
+<span>
+<md-content>
+	<p>{{agenda.startdate | date: 'd-M-yyyy'}} {{agenda.starttime}} 
+- {{agenda.enddate | date: 'd-M-yyyy'}} {{agenda.endtime}}
+	</p>
+	<p>
+		{{agenda.longdescription}}
+	</p>
+
+
+
+<h3>Deelnemers ({{agenda.participants.length}}): </h3>
+
+	<md-content layout="row" layout-align="center center">
+		<div layout-padding ng-repeat="participant in agenda.participants">
+			<div  class="avatar-frame">
+				<appcki-photo-media 
+				mid="{{participant.person.photomediaid}}" 
+				size="small"> </appcki-photo-media>
+			</div>
+			<!-- {{participant.person.firstname}} -->
+		</div>
+	</md-content>
+</md-content>
+</span>
