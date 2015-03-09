@@ -9,6 +9,6 @@
     "angular": "~1.3.13",
     "angular-route": "~1.3.13",
     "angular-material-icons": "~0.4.0",
-    "hammerjs": "~2.0.4",
+    "hammerjs": "~2.0.4"
   }
 }

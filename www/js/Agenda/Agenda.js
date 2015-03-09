@@ -13,16 +13,26 @@ angular
 			$location.search('id', agenda.id);
 		}
 	}])*/
-	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$location','$filter','AgendaService','UserService',
-		function( $scope, $log, $http, $location, $filter, AgendaService, UserService){
+	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService',
+		function( $scope, $log, $http, $state, $filter, AgendaService, UserService){
 			
 			var dateFilter = $filter('date');
 
-			$scope.groups = [];
-			$scope.agendas = [];
+			$scope.items = [];
+
 			var state = AgendaService.createState();					
 			var previousDateString = 0;
 			state.newest -= 10000000000000;
+
+
+			$scope.getItemHeight = function(item){
+				return item.divider? 34: 55;
+			};
+			$scope.click = function(item){
+				if(!item.divider){
+					$state.go('agenda', { 'id': item.id });
+				}
+			};
 
 			AgendaService.getNewer(state, function(agendas){
 
@@ -35,16 +45,23 @@ angular
 							date:dateString,
 							agendas:[agenda]
 						};
-						$scope.groups[agenda.id] = group;
+						//$scope.groups[agenda.id] = group;
+						$scope.items.push({divider: true, label: dateString});
 						previousDateString=dateString;
 					}
 
-					$scope.agendas.push(agenda);
+					$scope.items.push(agenda);
 				}
 			});
 				
 			
 	}])
+	.controller("appckiAgendaDetails", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService',
+		function( $scope, $log, $http, $state, $filter, AgendaService, UserService){
+		
+	}])
+	;
+/*
 	.directive("appckiAgendaDetails", [ '$log', '$http','$location','$filter','$mdDialog','AgendaService','UserService',
 		function( $log, $http, $location, $filter, $mdDialog, AgendaService, UserService){
 			return{
@@ -73,4 +90,4 @@ angular
 				}
 
 			}
-	}]);
+	}]);*/

@@ -5,8 +5,18 @@
 
 	<ion-content>
 	 	<ion-list>
-			<ion-item collection-repeat="agenda in agendas" >
-				{{agenda.shortdescription}}
+			<ion-item 
+				collection-repeat="item in items" 
+				collection-item-height="getItemHeight(item)"
+				ng-class="{'item-divider': item.divider}"
+				ng-click="click(item)"
+				>
+				<span ng-if="item.divider">
+					{{item.label}}
+				</span>
+				<span ng-if="!item.divider">
+					<h2>{{item.shortdescription}}</h2>
+				</span>
 	  		</ion-item>
 		</ion-list>
 	</ion-content>

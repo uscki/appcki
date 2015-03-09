@@ -30,12 +30,16 @@ appcki
     templateUrl: 'js/User/login-details.html',
     controller: 'loginPageController'
   })
-  $stateProvider.state('agenda', {
+  $stateProvider.state('agenda-overview', {
     url: '/agenda',
     templateUrl: 'js/Agenda/agenda-overview.html',
     controller: 'appckiAgendaOverview'
   })
-
+  $stateProvider.state('agenda-details', {
+    url: '/agenda/:id',
+    templateUrl: 'js/Agenda/agenda-details.html',
+    controller: 'appckiAgendaDetails'
+  })
 
 })
 .config(['$httpProvider',

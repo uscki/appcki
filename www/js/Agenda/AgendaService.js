@@ -14,7 +14,6 @@ angular
 
             $http.get(apiUrl + "/public/agenda/newer", {params:{ timestamp: state.newest }})
             .success(function(data){
-
                 callback(data);
             });
         };
@@ -22,7 +21,19 @@ angular
         var getOlder = function(state, callback){
             state = state || defaultState;
 
-            $http.get(apiUrl + "/public/agenda/older", {params:{ timestamp: state.oldest }});
+            $http.get(apiUrl + "/public/agenda/older", {params:{ timestamp: state.oldest }})
+            .success(function(data){
+                callback(data);
+            });
+        };
+
+        var getDetails = function(state, callback){
+            state = state || defaultState;
+
+            $http.get(apiUrl + "/public/agenda/"+state.id)
+            .success(function(data){
+                callback(data);
+            });
         };
 
         var createState = function(){
@@ -36,7 +47,8 @@ angular
         return {
             createState: createState,
             getNewer: getNewer,
-            getOlder: getOlder
+            getOlder: getOlder,
+            getDetails:getDetails
         };
     }
 ]);
