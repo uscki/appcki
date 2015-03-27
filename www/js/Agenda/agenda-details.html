@@ -1,0 +1,23 @@
+
+	<ion-header-bar class="bar-positive">
+		<h1 class="title">{{agenda.shortdescription}}</h1>
+	</ion-header-bar>
+
+	<ion-content>
+		<p>{{agenda.startdate | date: 'd-M-yyyy'}} {{agenda.starttime}}  
+			- {{agenda.enddate | date: 'd-M-yyyy'}} {{agenda.endtime}}
+		</p>
+		<p>
+			{{agenda.longdescription}}
+		</p>
+
+		<h3>Deelnemers ({{agenda.participants.length}}): </h3>
+		<div layout-padding ng-repeat="participant in agenda.participants">
+			<div  class="avatar-frame">
+				<appcki-photo-media 
+				mid="{{participant.person.photomediaid}}" 
+				size="small"> </appcki-photo-media>
+			</div>
+			<!-- {{participant.person.firstname}} -->
+		</div>
+	</ion-content>

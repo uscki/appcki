@@ -1,24 +1,31 @@
-<ion-pane>
-	<ion-header-bar class="bar-assertive">
-		<h1 class="title">Agenda</h1>
-	</ion-header-bar>
+<ion-view class="masterDetail">
+	<ion-pane class="master">
+		<ion-header-bar class="bar-assertive">
+			<h1 class="title">Agenda</h1>
+		</ion-header-bar>
 
-	<ion-content>
-	 	<ion-list>
-			<ion-item 
-				collection-repeat="item in items" 
-				collection-item-height="getItemHeight(item)"
-				ng-class="{'item-divider': item.divider}"
-				ng-click="click(item)"
-				>
-				<span ng-if="item.divider">
-					{{item.label}}
-				</span>
-				<span ng-if="!item.divider">
-					<h2>{{item.shortdescription}}</h2>
-				</span>
-	  		</ion-item>
-		</ion-list>
-	</ion-content>
+		<ion-content>
+		 	<ion-list>
+				<ion-item 
+					collection-repeat="item in items" 
+					collection-item-height="getItemHeight(item)"
+					ng-class="{'item-divider': item.divider}"
 
-</ion-pane>
+					>
+					<span ng-if="item.divider">
+						{{item.label}}
+					</span>
+					<span ng-if="!item.divider" ui-sref="agenda.detail({id: item.id})">
+						<h2>{{item.shortdescription}}</h2>
+					</span>
+		  		</ion-item>
+			</ion-list>
+		</ion-content>
+	</ion-pane>
+
+	<div name="detail" class="detail"  ui-view ></div>
+
+	
+</ion-view>
+
+

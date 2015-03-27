@@ -30,16 +30,57 @@ appcki
     templateUrl: 'js/User/login-details.html',
     controller: 'loginPageController'
   })
-  $stateProvider.state('agenda-overview', {
+
+    .state('agenda', { 
+      url: '/agenda', 
+      templateUrl: 'js/Agenda/agenda-overview.html', 
+      controller: 'appckiAgendaOverview' 
+    })
+    .state('agenda.detail', { 
+      url: '/agenda/:id', 
+      views:{
+        'detail':{
+          templateUrl: 'js/Agenda/agenda-details.html',
+        controller: 'appckiAgendaDetails'}
+      },
+       
+    });
+  /*
+  .state('agendaOverview', {
+    url: '/agenda',
+    templateUrl: 'js/Agenda/agenda.html',
+    controller: 'appckiAgendaPage'
+  })  
+
+  .state('agendaOverview', {
     url: '/agenda',
     templateUrl: 'js/Agenda/agenda-overview.html',
     controller: 'appckiAgendaOverview'
   })
-  $stateProvider.state('agenda-details', {
+  .state('agendaDetails', {
     url: '/agenda/:id',
     templateUrl: 'js/Agenda/agenda-details.html',
     controller: 'appckiAgendaDetails'
   })
+  .state('agenda', {
+    url: '/agenda-split',
+    templateUrl: 'js/Agenda/agenda.html',
+    abstract: true
+  })
+  .state('agenda.agendaDetails', {
+    url: '/overview',
+    views: {
+      'agendaOverview': {
+        templateUrl: 'js/Agenda/agenda-overview.html',
+        controller: 'appckiAgendaOverview'
+      },
+      'agendaDetails': {
+        templateUrl: 'js/Agenda/agenda-details.html',
+        controller: 'appckiAgendaDetails'
+      }
+    }
+  })
+  */
 
 })
 .config(['$httpProvider',
@@ -102,6 +143,12 @@ appcki
 
   }]);
 
+appcki.run(['$rootScope',function($rootScope){
+  $rootScope.$on('$stateChangeStart', 
+  function(event, toState, toParams, fromState, fromParams){ 
+    $rootScope.bodyLayout = toState.name.match(/\.detail$/g) ? 'detailed':'';
+  })
+}]);
 
 
 appcki

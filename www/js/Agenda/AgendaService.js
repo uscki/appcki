@@ -27,10 +27,9 @@ angular
             });
         };
 
-        var getDetails = function(state, callback){
-            state = state || defaultState;
+        var getDetails = function(id, callback){
 
-            $http.get(apiUrl + "/public/agenda/"+state.id)
+            $http.get(apiUrl + "/public/agenda/"+id)
             .success(function(data){
                 callback(data);
             });

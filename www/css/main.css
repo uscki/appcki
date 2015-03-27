@@ -2,6 +2,20 @@ body {
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
 }
 
+@media screen and (max-width:700px) {
+	.masterDetail{
+		display: flex;
+		flex-flow: row wrap;
+	}
+	.masterDetail .master,
+	.masterDetail .detail{
+		 flex: 1 auto; 
+		width: 50%;
+	}
+	.masterDetail .master{}
+	.masterDetail .detail{}
+}
+
 /*
 html, body{
 	background: #eee;
