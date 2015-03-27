@@ -31,20 +31,17 @@ appcki
     controller: 'loginPageController'
   })
 
-    .state('agenda', { 
-      url: '/agenda', 
-      templateUrl: 'js/Agenda/agenda-overview.html', 
-      controller: 'appckiAgendaOverview' 
-    })
-    .state('agenda.detail', { 
-      url: '/agenda/:id', 
-      views:{
-        'detail':{
-          templateUrl: 'js/Agenda/agenda-details.html',
-        controller: 'appckiAgendaDetails'}
-      },
-       
-    });
+  .state('agendaOverview', { 
+    url: '/agenda', 
+    templateUrl: 'js/Agenda/agenda-overview.html', 
+    controller: 'appckiAgendaOverview' 
+  })
+  .state('agendaDetail', { 
+    url: '/agenda/:id', 
+    templateUrl: 'js/Agenda/agenda-details.html',
+    controller: 'appckiAgendaDetails'
+  });
+
   /*
   .state('agendaOverview', {
     url: '/agenda',

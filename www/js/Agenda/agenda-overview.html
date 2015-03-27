@@ -1,5 +1,5 @@
-<ion-view class="masterDetail">
-	<ion-pane class="master">
+<ion-view>
+	<ion-pane>
 		<ion-header-bar class="bar-assertive">
 			<h1 class="title">Agenda</h1>
 		</ion-header-bar>
@@ -10,22 +10,17 @@
 					collection-repeat="item in items" 
 					collection-item-height="getItemHeight(item)"
 					ng-class="{'item-divider': item.divider}"
-
 					>
 					<span ng-if="item.divider">
 						{{item.label}}
 					</span>
-					<span ng-if="!item.divider" ui-sref="agenda.detail({id: item.id})">
+					<span ng-if="!item.divider" ui-sref="agendaDetail({id: item.id})">
 						<h2>{{item.shortdescription}}</h2>
 					</span>
 		  		</ion-item>
 			</ion-list>
 		</ion-content>
-	</ion-pane>
-
-	<div name="detail" class="detail"  ui-view ></div>
-
-	
+	</ion-pane>	
 </ion-view>
 
 

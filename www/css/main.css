@@ -2,7 +2,7 @@ body {
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
 }
 
-@media screen and (max-width:700px) {
+/*@media screen and (max-width:700px) {
 	.masterDetail{
 		display: flex;
 		flex-flow: row wrap;
@@ -15,6 +15,7 @@ body {
 	.masterDetail .master{}
 	.masterDetail .detail{}
 }
+*/
 
 /*
 html, body{
