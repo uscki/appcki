@@ -2,19 +2,14 @@
 
 	<ion-content>
 		<ion-list>
-
-
-
-    <a ng-repeat="participant in agenda.participants" class="item item-avatar" ui-sref="app.person({{participant.person.id}})">
-		<appcki-photo-media 
-		mid="{{participant.person.photomediaid}}" 
-		size="small"> </appcki-photo-media>
+		    <a ng-repeat="participant in agenda.participants" class="item item-avatar" ui-sref="app.person({{participant.person.id}})">
+				<appcki-photo-media 
+					mid="{{participant.person.photomediaid}}" 
+					size="small"> </appcki-photo-media>
 
 				<h2>{{participant.person.firstname}} {{participant.person.lastname}}</h2>
 				<p>{{participant.note}}</p>
-    </a>
-
+    		</a>
 		</ion-list>
-	
 	</ion-content>
 </ion-view>

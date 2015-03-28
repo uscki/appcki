@@ -3,13 +3,14 @@
 angular
     .module('appcki.agenda')
     .factory('AgendaService', ['$http', 'apiUrl', function($http,apiUrl){
-        
+        var AgendaService  ={};
+
         var defaultState = {
             newest:-1,
             oldest:-1
         };
 
-        var getNewer = function(state, callback){
+        AgendaService.getNewer = function(state, callback){
            // state = state || defaultState;
 
             $http.get(apiUrl + "/public/agenda/newer", {params:{ timestamp: state.newest }})
@@ -18,7 +19,7 @@ angular
             });
         };
 
-        var getOlder = function(state, callback){
+        AgendaService.getOlder = function(state, callback){
             state = state || defaultState;
 
             $http.get(apiUrl + "/public/agenda/older", {params:{ timestamp: state.oldest }})
@@ -27,7 +28,7 @@ angular
             });
         };
 
-        var getDetails = function(id, callback){
+        AgendaService.getDetails = function(id, callback){
 
             $http.get(apiUrl + "/public/agenda/"+id)
             .success(function(data){
@@ -35,7 +36,7 @@ angular
             });
         };
 
-        var createState = function(){
+        AgendaService.createState = function(){
             var today = new Date();
             return {
                 newest: today.getTime(),
@@ -43,7 +44,7 @@ angular
             };
         };
 
-        var isSubscribed = function(agenda, me){
+        AgendaService.isSubscribed = function(agenda, me){
             for(var i=0; i < agenda.participants.length; i++){
                 var participant = agenda.participants[i];
                 if(participant.person.id == me.id){
@@ -51,16 +52,21 @@ angular
                 }
             }
             return false;
-        }   
+        };
 
-        var subscribe = function(id, note, callback){
+        
+
+        AgendaService.subscribe = function(id, note, callback){
             // ..
+            callback(true);
         };
 
-        var unSubscribe = function(id, callback){
+        AgendaService.unSubscribe = function(id, callback){
             // ..  
+            callback(true);
         };
-
+        return AgendaService;
+        /*
         return {
             createState: createState,
             getNewer: getNewer,
@@ -69,6 +75,6 @@ angular
             subscribe:subscribe,
             unSubscribe:unSubscribe,
             isSubscribed:isSubscribed
-        };
+        };*/
     }
 ]);
