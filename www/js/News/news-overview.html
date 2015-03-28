@@ -1,0 +1,15 @@
+<ion-view view-title="Nieuws" hide-back-button="true">   
+
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="item in items">
+				<span ui-sref="app.news-detail({id: item.id})">
+					<h2>
+						{{item.title}}
+					</h2>
+					<p> {{item.posteddate}} </p>
+				</span>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

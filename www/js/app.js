@@ -5,6 +5,7 @@ var appcki = angular.module('appcki', [
     'appcki.home',
     'appcki.user',
     'appcki.agenda',
+    'appcki.news',
     'ngStorage',
     'ngRoute',
 ]);
@@ -23,7 +24,7 @@ appcki
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/agenda');
+  $urlRouterProvider.otherwise('/news');
 
   $stateProvider.state('login', {
     url: '/login',
@@ -48,9 +49,17 @@ appcki
     url: '/agenda/participants/:id', 
     templateUrl: 'js/Agenda/agenda-participants.html',
     controller: 'appckiAgendaParticipants'
+  })
+  .state('app.news-overview', { 
+    url: '/news', 
+    templateUrl: 'js/News/news-overview.html',
+    controller: 'appckiNewsOverview'
+  })
+  .state('app.news-detail', { 
+    url: '/news/detail/:id', 
+    templateUrl: 'js/News/news-details.html',
+    controller: 'appckiNewsDetails'
   });
-
-
 })
 .config(['$httpProvider',
   function( $httpProvider ) {
