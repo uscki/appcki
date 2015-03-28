@@ -1,2 +1,10 @@
 /* Empty. Add your own CSS if you like */
 
+/* Articles */
+.article:nth-child(even) {
+	background-color: rgb(243,243,243);
+}
+
+.no-border {
+	border: none;
+}
