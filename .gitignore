@@ -5,3 +5,4 @@ node_modules/
 platforms/
 plugins/
 */config.js
+www/js/config.js

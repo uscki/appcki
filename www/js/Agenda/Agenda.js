@@ -29,26 +29,44 @@ angular
 							date:dateString,
 							agendas:[agenda]
 						};
-						//$scope.groups[agenda.id] = group;
 						$scope.items.push({divider: true, label: dateString});
 						previousDateString=dateString;
 					}
 					$scope.items.push(agenda);
 				}
-			});
-				
-			
+			});			
 	}])
 	.controller("appckiAgendaDetails", ['$scope', '$log', '$http','$state','$stateParams','$filter','AgendaService','UserService',
 		function( $scope, $log, $http, $state, $stateParams, $filter, AgendaService, UserService){
 		AgendaService.getDetails($stateParams.id, function(agenda){
 			$scope.agenda = agenda;
 
+			$scope.subscribe = function(){
+				AgendaService.subscribe(agenda.id, "", function(result){
+					if(result){
+						$scope.subscribed = true; 
+						AgendaService.getDetails($stateParams.id, function(agenda){ $scope.agenda = agenda; });
+					}
+				})
+			};
+
+			$scope.unSubscribe = function(){
+				AgendaService.unSubscribe(agenda.id, function(result){
+					
+					console.log(result);
+
+					if(result){
+						$scope.subscribed = false;
+						AgendaService.getDetails($stateParams.id, function(agenda){ $scope.agenda = agenda; });
+					}
+				});
+			}
+
 			UserService.me(function(me){
 				$scope.subscribed = AgendaService.isSubscribed(agenda, me);
 			});
 
-
+			
 
 		})
 	}])

@@ -57,12 +57,10 @@ angular
         
 
         AgendaService.subscribe = function(id, note, callback){
-            // ..
             callback(true);
         };
 
         AgendaService.unSubscribe = function(id, callback){
-            // ..  
             callback(true);
         };
         return AgendaService;

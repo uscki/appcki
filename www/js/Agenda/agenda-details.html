@@ -33,28 +33,23 @@
   </div>
 
   <div class="item tabs tabs-secondary tabs-icon-left">
-    <a class="tab-item" href="#">
+    <a class="tab-item" >
       <i class="icon ion-calendar"></i>
       Ical
     </a>
-    <a class="tab-item" href="#">
+    <a class="tab-item" ng-if="subscribed">
       <i class="icon ion-chatbox"></i>
       Notitie
     </a>
-    <a class="tab-item" href="#">
+    <a class="tab-item"  ng-if="!subscribed" ng-click="subscribe()">
       <i class="icon ion-plus-round"></i>
       Deelnemen
     </a>
-
-    <a class="tab-item" href="#">
+    <a class="tab-item" ng-if="subscribed" ng-click="unSubscribe()">
       <i class="icon ion-log-out"></i>
       Uitschrijven
     </a>
-
-
   </div>
-
-
 </div>
 
 
@@ -69,7 +64,8 @@
 		
 		<button class="button button-block button-dark" ui-sref="app.agenda-participants({id:agenda.id})">
 		{{agenda.participants.length}} Deelnemers
-		</button> -->
+		</button> 
+-->
 
 	</ion-content>
 
