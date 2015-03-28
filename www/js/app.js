@@ -23,7 +23,7 @@ appcki
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/news');
+  $urlRouterProvider.otherwise('/home');
 
   $stateProvider.state('login', {
     url: '/login',
@@ -34,7 +34,30 @@ appcki
   .state('app', { 
     templateUrl: 'js/App/app.html', 
   })
-  .state('app.agenda-overview', { 
+
+
+  .state('app.home', { 
+    templateUrl: 'js/Home/home.html',
+  })
+  .state('app.home.views',{
+    url: "/home",
+    views:{
+      'agenda':{
+        templateUrl: 'js/Agenda/agenda-overview.html', 
+        controller: 'appckiAgendaOverview' 
+      },
+      'news':{
+        templateUrl: 'js/News/news-overview.html',
+        controller: 'appckiNewsOverview'
+      }
+
+    }
+  })
+
+
+
+
+  .state('app.home.agenda-overview', { 
     url: '/agenda',
     templateUrl: 'js/Agenda/agenda-overview.html', 
     controller: 'appckiAgendaOverview' 

@@ -1,34 +1,9 @@
- <div layout="column">
+<ion-slide-box on-slide-changed="" >
+  <ion-slide>
+	  	<ion-nav-view name="agenda" > </ion-nav-view>
+  </ion-slide>
+  <ion-slide>
+ 	 <ion-nav-view name="news"> </ion-nav-view>
+  </ion-slide>
 
-	<md-tabs  md-selected="selectedIndex">
-	    <md-tab id="agenda">Agenda</md-tab>
-	    <md-tab id="news">Nieuws</md-tab>
-	</md-tabs>
-
-
-		<md-content flex ng-if="selectedIndex==0"> 
-			<md-toolbar>
-				<h2 class="md-toolbar-tools">
-					<span>Agenda</span>
-				</h2>
-			</md-toolbar>
-		
-				Proin venenatis lorem id pharetra blandit. Aenean eros velit, molestie at mollis aliquet, vulputate interdum nulla. Nulla feugiat, ex id lobortis gravida, lorem orci tristique leo, et pretium ipsum mauris eget arcu. Ut consectetur tellus sit amet erat accumsan lacinia. Duis finibus libero quis elit eleifend malesuada. Mauris faucibus nunc at erat finibus, eu aliquam nunc lobortis. Ut vel augue id mauris aliquet vulputate. Nunc varius commodo placerat. Ut consectetur tempus consequat. Sed dolor nisi, tempus luctus dapibus sed, viverra eu urna. Nulla quis congue libero, quis facilisis libero. Donec semper dapibus nulla, sed viverra velit condimentum non. Duis at orci sagittis, facilisis ligula vitae, suscipit odio. Sed mauris enim, suscipit accumsan purus quis, porttitor dictum tortor. In interdum quis nulla ac ultrices. 
-
-				Duis accumsan purus vitae quam condimentum bibendum. Fusce rhoncus, odio et congue sollicitudin, enim eros bibendum massa, id interdum ligula mi ac eros. Morbi quam lacus, laoreet ac mi eget, pharetra porttitor libero. Nam tincidunt quam leo, sed egestas ante posuere at. Aliquam cursus tempor risus, vel elementum quam faucibus vitae. Vivamus dictum feugiat ipsum sed eleifend. Suspendisse nec ante quam. Pellentesque a sagittis eros, ac laoreet dolor. In efficitur, turpis eu congue posuere, dui ligula tempus neque, ut cursus tortor arcu pellentesque tortor.
-        </md-content>
-
-		<md-content flex ng-if="selectedIndex==1"> 
-			<md-toolbar>
-				<h2 class="md-toolbar-tools">
-					<span>Nieuws</span>
-				</h2>
-			</md-toolbar>
-        
-				Duis accumsan purus vitae quam condimentum bibendum. Fusce rhoncus, odio et congue sollicitudin, enim eros bibendum massa, id interdum ligula mi ac eros. Morbi quam lacus, laoreet ac mi eget, pharetra porttitor libero. Nam tincidunt quam leo, sed egestas ante posuere at. Aliquam cursus tempor risus, vel elementum quam faucibus vitae. Vivamus dictum feugiat ipsum sed eleifend. Suspendisse nec ante quam. Pellentesque a sagittis eros, ac laoreet dolor. In efficitur, turpis eu congue posuere, dui ligula tempus neque, ut cursus tortor arcu pellentesque tortor.
-
-
-				Sed varius consequat tempus. Ut imperdiet ultrices faucibus. Morbi et dui sit amet nunc pretium efficitur. Morbi pharetra pharetra lorem eu dignissim. Etiam at risus faucibus, auctor nisl at, vulputate lorem. Nullam imperdiet, felis quis aliquet dictum, neque odio pretium lectus, vitae efficitur ipsum mauris ut dui. Morbi nec dignissim risus. Etiam leo ex, dignissim eu ex in, lacinia congue tellus. Quisque id porta felis. Nam pellentesque sollicitudin quam eu ultrices. Aenean varius arcu id justo imperdiet, eu efficitur mi rutrum. Suspendisse viverra venenatis tempor. Praesent ac mauris vel sapien rutrum auctor non nec nibh. Donec rhoncus ante ut sem feugiat placerat. Curabitur vitae metus fermentum, varius velit sed, viverra justo. Fusce id tincidunt sem, a lacinia dui. 
-        </md-content>
-
-</div>
+</ion-slide-box>

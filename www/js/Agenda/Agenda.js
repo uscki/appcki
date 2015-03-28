@@ -91,9 +91,12 @@ angular
 
 			UserService.me(function(me){
 				$scope.participation = AgendaService.getSubscription(agenda, me);
-				$scope.subscribed = $scope.participation != null;
+				$scope.subscribed = $scope.participation != null && $scope.participation != undefined;
 				$scope.data = {}
-				$scope.data.note = $scope.participation.note;
+
+				if($scope.participation){
+					$scope.data.note = $scope.participation.note;
+				}
 			});
 
 			//$scope.data = {}
