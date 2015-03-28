@@ -10,6 +10,7 @@
 					{{item.label}}
 				</span>
 				<span ng-if="!item.divider" ui-sref="app.agenda-detail({id: item.id})">
+					<div class="item-note">{{item.dayName}}</div>
 					<h2>{{item.shortdescription}}</h2>
 				</span>
 

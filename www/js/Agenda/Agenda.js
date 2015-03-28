@@ -7,9 +7,8 @@ angular
 
 			$scope.items = [];
 
-			var state = AgendaService.createState();					
-			var previousDateString = 0;
-			state.newest -= 10000000000000;
+			var state = AgendaService.createState();
+			//state.newest -= 10000000000000;
 
 			$scope.getItemHeight = function(item){
 				return item.divider? 34: 55;
@@ -18,20 +17,44 @@ angular
 				if(!item.divider){
 				}
 			};
-
+			
+			var oneWeek = 604800000;
+			var relWeekNrToSTring = function(nr) {
+				if (nr == 0) return "Deze week";
+				if (nr == 1) return "Volgende week";
+				if (nr == -1) return "Vorige week";
+				if (nr > 1) return "Over " + (nr+1) + " weken";
+				else return (nr*-1) + " weken geleden";
+			};
+			var weekdays = {
+				0:"ma",
+				1:"di",
+				2:"wo",
+				3:"do",
+				4:"vr",
+				5:"za",
+				6:"zo"
+			}
 			AgendaService.getNewer(state, function(agendas){
+				var now = new Date();
+				var previousWeekString = 0;
+				
 				for(var i=0; i < agendas.length; i++){
 					var agenda = agendas[i];
-					var dateString = dateFilter(agenda.startdate, 'd-M-yyyy');
-					
-					if(dateString != previousDateString){
-						var group = {
-							date:dateString,
-							agendas:[agenda]
-						};
-						$scope.items.push({divider: true, label: dateString});
-						previousDateString=dateString;
+
+					var then = new Date(agenda.startdate);
+					console.log(then.getTime());
+					var relWeekNr = Math.floor((then.getTime() - now.getTime()) / oneWeek);
+					if (then.getDay() > now.getDay()) relWeekNr -= 1;
+					var weekString = relWeekNrToSTring(relWeekNr);
+
+					if(weekString != previousWeekString){
+						$scope.items.push({divider: true, label: weekString});
+						previousWeekString=weekString;
 					}
+
+					agenda.dayName = weekdays[then.getDay()];
+
 					$scope.items.push(agenda);
 				}
 			});			
