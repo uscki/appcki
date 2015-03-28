@@ -18,7 +18,6 @@
 
   <div class="item item-body">
 
-
 <!--     <img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{agenda.posterid}}">
  -->
     <appcki-photo-media class="full-image" 
@@ -33,11 +32,11 @@
   </div>
 
   <div class="item tabs tabs-secondary tabs-icon-left">
-    <a class="tab-item" >
+    <a class="tab-item" href="{{icalUrl}}">
       <i class="icon ion-calendar"></i>
       Ical
     </a>
-    <a class="tab-item" ng-if="subscribed">
+    <a class="tab-item" ng-if="subscribed" ng-click="openNote()">
       <i class="icon ion-chatbox"></i>
       Notitie
     </a>
@@ -51,7 +50,6 @@
     </a>
   </div>
 </div>
-
 
 <!-- 
 		<h3>{{agenda.shortdescription}}</h3>

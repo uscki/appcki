@@ -1,4 +1,3 @@
-var apiUrl = "http://localhost:4000";
 
 var appcki = angular.module('appcki', [
     'ionic',
@@ -23,7 +22,7 @@ appcki
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/agenda');
+  $urlRouterProvider.otherwise('/agenda/detail/1');
 
   $stateProvider.state('login', {
     url: '/login',
