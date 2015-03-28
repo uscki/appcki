@@ -1,4 +1,3 @@
-var apiUrl = "http://localhost:4000";
 
 var appcki = angular.module('appcki', [
     'ionic',

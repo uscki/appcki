@@ -44,35 +44,36 @@ angular
             };
         };
 
-        AgendaService.isSubscribed = function(agenda, me){
+        AgendaService.getSubscription = function(agenda, me){
             for(var i=0; i < agenda.participants.length; i++){
                 var participant = agenda.participants[i];
                 if(participant.person.id == me.id){
-                    return true;
+                    return participant;
                 }
             }
-            return false;
+            return;
         };
 
         
 
-        AgendaService.subscribe = function(id, note, callback){
-            callback(true);
+        AgendaService.subscribe = function(id, note, callback){            
+            $http.get(apiUrl + "/agenda/subscribe/"+id, {params:{ note: note }})
+            .success(function(data){
+                callback(true);
+            });
         };
 
+        AgendaService.getIcalUrl = function(id){
+            return apiUrl + "/public/agenda-cal/" + id ;
+        }
+
         AgendaService.unSubscribe = function(id, callback){
-            callback(true);
+            $http.get(apiUrl + "/agenda/unSubscribe/"+id)
+            .success(function(data){
+                callback(true);
+            });        
         };
         return AgendaService;
-        /*
-        return {
-            createState: createState,
-            getNewer: getNewer,
-            getOlder: getOlder,
-            getDetails:getDetails,
-            subscribe:subscribe,
-            unSubscribe:unSubscribe,
-            isSubscribed:isSubscribed
-        };*/
+
     }
 ]);
