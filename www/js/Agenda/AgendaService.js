@@ -41,13 +41,34 @@ angular
                 newest: today.getTime(),
                 oldest: today.getTime()
             };
-        }
+        };
+
+        var isSubscribed = function(agenda, me){
+            for(var i=0; i < agenda.participants.length; i++){
+                var participant = agenda.participants[i];
+                if(participant.person.id == me.id){
+                    return true;
+                }
+            }
+            return false;
+        }   
+
+        var subscribe = function(id, note, callback){
+            // ..
+        };
+
+        var unSubscribe = function(id, callback){
+            // ..  
+        };
 
         return {
             createState: createState,
             getNewer: getNewer,
             getOlder: getOlder,
-            getDetails:getDetails
+            getDetails:getDetails,
+            subscribe:subscribe,
+            unSubscribe:unSubscribe,
+            isSubscribed:isSubscribed
         };
     }
 ]);

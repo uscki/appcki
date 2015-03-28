@@ -1,26 +1,89 @@
-<ion-view>
-	<ion-pane>
-	<ion-header-bar class="bar-positive">
-		<h1 class="title">{{agenda.shortdescription}}</h1>
-	</ion-header-bar>
+<ion-view view-title="Evenement">
+	<ion-content class="padding">
 
-	<ion-content>
+<div class="list card">
+
+  <div class="item">
+  	<div class="item-note">{{agenda.costs}}</div>
+    <h2>{{agenda.shortdescription}}</h2>
+    <p>
+    {{agenda.startdate | date: 'd-M-yyyy'}} &nbsp; {{agenda.starttime | limitTo: 5}} 
+
+    <span ng-if="agenda.endtime != undefined">- <span ng-if="agenda.startdate != agenda.enddate">{{agenda.enddate | date: 'd-M-yyyy'}}&nbsp;</span> {{agenda.endtime | limitTo: 5}}</span>
+    </p>
+    <p>
+    {{agenda.where}}
+    </p>
+  </div>
+
+  <div class="item item-body">
+
+
+<!--     <img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{agenda.posterid}}">
+ -->
+    <appcki-photo-media class="full-image" 
+		mid="{{agenda.posterid}}" size="normal"
+		> </appcki-photo-media>
+    <p>
+     {{agenda.longdescription}} 
+    </p>
+    <p>
+      <a ui-sref="app.agenda-participants({id:agenda.id})" class="subdued">{{agenda.participants.length}} Deelnemers</a>
+    </p>
+  </div>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item" href="#">
+      <i class="icon ion-calendar"></i>
+      Ical
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-chatbox"></i>
+      Notitie
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-plus-round"></i>
+      Deelnemen
+    </a>
+
+    <a class="tab-item" href="#">
+      <i class="icon ion-log-out"></i>
+      Uitschrijven
+    </a>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- 
+		<h3>{{agenda.shortdescription}}</h3>
 		<p>{{agenda.startdate | date: 'd-M-yyyy'}} {{agenda.starttime}}  
 			- {{agenda.enddate | date: 'd-M-yyyy'}} {{agenda.endtime}}
-		</p>
+		</p>		
 		<p>
 			{{agenda.longdescription}}
 		</p>
+		
+		<button class="button button-block button-dark" ui-sref="app.agenda-participants({id:agenda.id})">
+		{{agenda.participants.length}} Deelnemers
+		</button> -->
 
-		<h3>Deelnemers ({{agenda.participants.length}}): </h3>
-		<div layout-padding ng-repeat="participant in agenda.participants">
-			<div  class="avatar-frame">
-				<appcki-photo-media 
-				mid="{{participant.person.photomediaid}}" 
-				size="small"> </appcki-photo-media>
-			</div>
-			<!-- {{participant.person.firstname}} -->
-		</div>
 	</ion-content>
-	</ion-pane>
+
+
+<!-- <ion-footer-bar align-title="left" class="bar-assertive">
+  <div class="buttons">
+    <button class="button">Notitie</button>
+  </div>
+  <h1 class="title"></h1>
+  <div class="buttons" ng-click="doSomething()">
+    <button class="button">Deelnemen</button>
+  </div>
+</ion-footer-bar> -->
 </ion-view>
+
+
+

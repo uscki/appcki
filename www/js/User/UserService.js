@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('appcki.user')
-    .factory('UserService', ['$http', '$localStorage','apiUrl', function($http, $localStorage,apiUrl){
+    .factory('UserService', ['$http', '$localStorage','apiUrl', function($http, $localStorage, apiUrl){
         function changeUser(user) {
             angular.extend(currentUser, user);
         }
@@ -42,7 +42,11 @@ angular.module('appcki.user')
                 console.log(error);
                 
                 $http.post(apiUrl + '/auth', data)
-                    .success(success)
+                    .success(function(data){
+                        $localStorage.token = data.token;
+                        console.log(data);
+                        success(data);
+                    })
                     .error(error)
             },
             me: function(success, error) {
