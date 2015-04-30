@@ -8,3 +8,36 @@
 .no-border {
 	border: none;
 }
+
+div.custom-login div.background-login, div.custom-login div.eclipse-fadeout {
+	top: 0px;
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+}
+
+div.custom-login div.background-login {
+	background-color: #990000;
+	opacity: 1;
+	z-index: -1;
+}
+
+div.custom-login div.eclipse-fadeout{
+	background: -webkit-radial-gradient(center, ellipse,  
+		#fff 25%, #990000 75%); /* Chrome10+,Safari5.1+ */
+	opacity: 0.1;
+	z-index: 1;
+}
+
+div.custom-login form {
+	margin-top: 5vh;
+}
+
+div.custom-login .logo-login {
+	display: block;
+	margin-top: 5%;
+	height: 40vh;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-image: URL('../img/logo.svg');
+}

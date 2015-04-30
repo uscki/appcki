@@ -1,0 +1,103 @@
+
+div#logo{
+	margin-top: 100px;
+	margin-left: 100px;
+	text-align: center;
+	width: 10px;
+}
+
+img.logo-part{
+	position: absolute;
+	height: 50%;
+}
+
+img#logo-top{
+	transition: height 0.8s, margin 0.8s;
+}
+
+img.animating-part-top-x{
+    display: none; // Verwijderen als je hier mee verder gaat
+}
+
+img#logo-bottom, img.animating-part-top-y{
+	transition: height 0.8s,  margin-left 0.8s, margin-top 0.8s;	
+}
+
+img.animating-part-bottom, img.animating-part-top-y{
+	height: 30%;
+	margin-top: 10%;
+	margin-left: 10%;
+}
+
+ @-webkit-keyframes logo-top { 
+	from { 
+		-webkit-transform: rotateZ(0deg); 
+	} to { 
+		-webkit-transform: rotateZ(-360deg); 
+	} 
+}
+
+@keyframes logo-top{
+	from {
+		-moz-transform: rotateZ(0deg);
+		-ms-transform: rotateZ(0deg);
+		transform: rotateZ(0deg);
+	} 
+	to {
+		-moz-transform: rotateZ(-360deg);
+		-ms-transform: rotateZ(-360deg);
+		transform: rotateZ(-360deg); 
+	}
+}
+
+.animating-part-top{
+	-webkit-animation-name: logo-top; 
+	-webkit-animation-timing-function: linear; 
+	-webkit-animation-iteration-count: infinite; 
+	-webkit-animation-duration: 1s; 
+	animation-name: logo-top; 
+	animation-timing-function: linear; 
+	animation-iteration-count: infinite; 
+	animation-duration: 1s; 
+	-webkit-transform-style: preserve-3d; 
+	-moz-transform-style: preserve-3d; 
+	-ms-transform-style: preserve-3d; 
+	transform-style: preserve-3d;
+}
+
+ @-webkit-keyframes logo-y { 
+	from { 
+		-webkit-transform: rotateY(0deg); 
+	} to { 
+		-webkit-transform: rotateY(-360deg); 
+	} 
+}
+
+@keyframes logo-y{
+	from {
+		-moz-transform: rotateY(0deg);
+		-ms-transform: rotateY(0deg);
+		transform: rotateY(0deg);
+	} 
+	to {
+		-moz-transform: rotateY(-360deg);
+		-ms-transform: rotateY(-360deg);
+		transform: rotateY(-360deg); 
+	}
+}
+
+.animating-part-top-y{
+	-webkit-animation-name: logo-y; 
+	-webkit-animation-timing-function: linear; 
+	-webkit-animation-iteration-count: infinite; 
+	-webkit-animation-duration: 1s; 
+	animation-name: logo-y; 
+	animation-timing-function: linear; 
+	animation-iteration-count: infinite; 
+	animation-duration: 1s; 
+	-webkit-transform-style: preserve-3d; 
+	-moz-transform-style: preserve-3d; 
+	-ms-transform-style: preserve-3d; 
+	transform-style: preserve-3d;
+}
+
