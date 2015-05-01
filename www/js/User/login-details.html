@@ -1,11 +1,5 @@
 <ion-pane>
-  <!--<ion-header-bar class="bar-assertive">
-    <h1 class="title">Login</h1>
-  </ion-header-bar>-->
-  <!--<ion-content class="has-header">-->
   <ion-content scroll="false">
-  	
-		<!--<div class="list">-->
 		<div class="custom-login">
 			<!-- background elements -->
 			<div class="background-login"></div>
@@ -13,18 +7,10 @@
 		  	<div class="padding">
 			  	<!-- logo -->
 			  	<div class="logo-login" >
+			  	<div class="logo-login-sub"></div>
 				</div>
 				
-				<!-- form data -->
-				<!--<label class="item item-input item-floating-label">
-					<span class="input-label">Gebruikernaam</span>
-					<input type="text" placeholder="Gebruikernaam" ng-model="credentials.username" >
-				</label>
 
-				<label class="item item-input item-floating-label">
-					<span class="input-label">Wachtwoord</span>
-					<input type="password" placeholder="Wachtwoord" ng-model="credentials.password">
-				</label>-->
 				<form ng-submit="login()"> 
 					<div class="item item-input">
 						<input type="text" name="username" placeholder="Gebruikersnaam" ng-model="credentials.username"/>
@@ -36,65 +22,9 @@
 					<button class="button button-full button-positive" ng-click="">
 						Inloggen
 					</button>
-				</form>
 
-				
+				</form>
 			</div>
 		</div>
-
-		
-	
-
-
-
   </ion-content>
 </ion-pane>
-
-<!-- <div style="position:absolute; width:100%; height:100%">
-	<div layout="column" layout-fill  layout-align="space-around center" >
-		<md-whiteframe class="md-whiteframe-z1" layout-margin>
-			<md-content >	
-				<md-toolbar>
-					<h2 class="md-toolbar-tools">
-						<span>Login</span>
-					</h2>
-				</md-toolbar>
-				
-				<form ng-submit="login()"> 
-					<md-content layout-padding>
-						<md-input-container>
-							<label>Gebruikernaam</label>
-							<input ng-model="credentials.username" >
-						</md-input-container>
-						
-						<md-input-container>
-							<label>Wachtwoord</label>
-							<input ng-model="credentials.password" type="password">
-						</md-input-container>
-					
-						<div layout="row" layout-align="end center">					
-							<md-button class="md-primary" ng-click="" />
-						    	Inloggen
-							</md-button>
-						</div>
-
-					</md-content>
-				</form>
-			</md-content>
-		</md-whiteframe>
-
-		<div layout-margin >
-			<img src='img/logo.png' id='logo'  />
-		</div>
-
-
-	</div>
-</div> -->
-
-<!-- 
-<div id="footer">
-			USCKI Incognito<br/>
-			<a href="#">Disclaimer & User Policy</a>
-</div>
-<div id="wrapper"></div>
- -->

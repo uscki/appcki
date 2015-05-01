@@ -25,4 +25,34 @@ angular.module('appcki.user',[])
                 }
             );
 		};
+
+        $scope.toggle = function()
+        {
+
+           /* var e = $scope.logo.bottom;//$("#logo-bottom");
+            var t = $scope.logo.top;//$("#logo-top");
+            var y = $scope.logo.topY;//$("#logo-topY");
+            var x = $scope.logo.topX;//$("#logo-topX");
+            var c = "animating-part-bottom";
+            var ct = "animating-part-top";
+            if (e.hasClass(c))
+            {
+                e.removeClass(c);
+                t.removeClass(ct);
+                y.removeClass(ct + "-y");
+                x.removeClass(ct + "-x");
+            } else {
+                e.addClass(c);
+                t.addClass(ct);
+                y.addClass(ct + "-y");
+                x.addClass(ct + "-x");
+            }*/
+
+            var c = "animating-part-bottom";
+            $scope.logo.removeClass(c);
+
+            alert("reached");
+        };
+
+
 	}]);

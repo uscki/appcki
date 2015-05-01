@@ -26,7 +26,7 @@ div.custom-login div.eclipse-fadeout{
 	background: -webkit-radial-gradient(center, ellipse,  
 		#fff 25%, #990000 75%); /* Chrome10+,Safari5.1+ */
 	opacity: 0.1;
-	z-index: 1;
+	z-index: 0;
 }
 
 div.custom-login form {
@@ -37,7 +37,15 @@ div.custom-login .logo-login {
 	display: block;
 	margin-top: 5%;
 	height: 40vh;
+	background-image: URL("../img/bottom-01-transparant.svg");
 	background-size: 100% 100%;
-	background-repeat: no-repeat;
-	background-image: URL('../img/logo.svg');
 }
+
+div.custom-login .logo-login .logo-login-sub{
+	background-image: URL("../img/top-01.svg");
+	display: block;
+	margin: 0px;
+	height: 40vh;
+	background-size: 100% 100%;
+}
+
