@@ -43,7 +43,6 @@ angular
 					var agenda = agendas[i];
 
 					var then = new Date(agenda.startdate);
-					console.log(then.getTime());
 					var relWeekNr = Math.floor((then.getTime() - now.getTime()) / oneWeek);
 					if (then.getDay() > now.getDay()) relWeekNr -= 1;
 					var weekString = relWeekNrToSTring(relWeekNr);

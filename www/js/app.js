@@ -5,6 +5,7 @@ var appcki = angular.module('appcki', [
     'appcki.user',
     'appcki.agenda',
     'appcki.news',
+    'appcki.planner',
     'appcki.settings',
     'ngStorage',
     'ngRoute',
@@ -51,6 +52,10 @@ appcki
         templateUrl: 'js/News/news-overview.html',
         controller: 'appckiNewsOverview'
       },
+      'planner':{
+        templateUrl: 'js/Planner/planner-overview.html',
+        controller: 'appckiPlannerOverview'
+      },
       'settings':{
         templateUrl: 'js/Settings/settings-overview.html',
         controller: 'appckiSettingsOverview'
@@ -85,6 +90,16 @@ appcki
     templateUrl: 'js/News/news-details.html',
     controller: 'appckiNewsDetails'
   })
+  .state('app.planner-overview', { 
+    url: '/planner', 
+    templateUrl: 'js/Planner/planner-overview.html',
+    controller: 'appckiPlannerOverview'
+  })
+  .state('app.planner-detail', { 
+    url: '/planner/detail/:id', 
+    templateUrl: 'js/Planner/planner-details.html',
+    controller: 'appckiPlannerDetails'
+  })
   .state('app.settings-overview', {
     url: '/settings',
     templateUrl: 'js/Settings/settings-overview.html',
@@ -99,7 +114,7 @@ appcki
         return {
             'request': function (config) {
                 config.headers = config.headers || {};
-                console.log($localStorage);
+                // console.log($localStorage);
                 if ($localStorage.token) {
                     config.headers.Authorization = 'Bearer ' + $localStorage.token;
                 }

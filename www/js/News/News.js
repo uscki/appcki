@@ -2,6 +2,8 @@ angular
 	.module('appcki.news',[])
 	.controller("appckiNewsOverview", ['$scope', '$log', '$http','$state','$filter','NewsService','UserService',
 		function( $scope, $log, $http, $state, $filter, NewsService, UserService){
+
+
 			var dateFilter = $filter('date');
 
 			$scope.items = []; 
