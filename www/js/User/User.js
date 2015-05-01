@@ -15,7 +15,7 @@ angular.module('appcki.user',[])
                     password: $scope.credentials.password
                 },
                 function(data){
-                    $location.path('/agenda');
+                    $location.path('/home');
                 },
                 function(){
                     var alertPopup = $ionicPopup.alert({

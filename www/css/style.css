@@ -38,7 +38,9 @@ div.custom-login .logo-login {
 	margin-top: 5%;
 	height: 40vh;
 	background-image: URL("../img/bottom-01-transparant.svg");
-	background-size: 100% 100%;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 div.custom-login .logo-login .logo-login-sub{
@@ -46,6 +48,8 @@ div.custom-login .logo-login .logo-login-sub{
 	display: block;
 	margin: 0px;
 	height: 40vh;
-	background-size: 100% 100%;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 

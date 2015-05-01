@@ -5,6 +5,7 @@ var appcki = angular.module('appcki', [
     'appcki.user',
     'appcki.agenda',
     'appcki.news',
+    'appcki.settings',
     'ngStorage',
     'ngRoute',
 ]);
@@ -49,12 +50,14 @@ appcki
       'news':{
         templateUrl: 'js/News/news-overview.html',
         controller: 'appckiNewsOverview'
+      },
+      'settings':{
+        templateUrl: 'js/Settings/settings-overview.html',
+        controller: 'appckiSettingsOverview'
       }
 
     }
   })
-
-
 
 
   .state('app.home.agenda-overview', { 
@@ -81,6 +84,11 @@ appcki
     url: '/news/detail/:id', 
     templateUrl: 'js/News/news-details.html',
     controller: 'appckiNewsDetails'
+  })
+  .state('app.settings-overview', {
+    url: '/settings',
+    templateUrl: 'js/Settings/settings-overview.html',
+    controller: 'appckiSettingsOverview'
   });
 })
 .config(['$httpProvider',
