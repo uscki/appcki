@@ -1,45 +1,95 @@
 <ion-view view-title="Beschikbaarheid">
   <ion-content>
-    <ul class="list">
-      <li class="item item-toggle" ng-repeat="item in items" ng-class="{'item-divider':item.divider}">
-        
+    <div class="card">
+      <div class="item item-text-wrap">
+        <p>KNG-80</p>
+        <p>3/5 hebben gereageerd</p>
+        <p>Jij hebt nog niet gereageerd</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-text-wrap">
+        <p>Hier komt de agenda te staan.</p>
+      </div>
+    </div>
+
+    </div>
+    </div>
+
+    <!-- time slots voor deze afspraak -->
+    <div class="card">
+      <div ng-repeat="item in items" class="item" on-hold="openModal({{item.id}})" ng-class="{'item-divider': item.divider}">
         <span ng-if="item.divider">
-          {{item.label}}
+        {{item.label}}
         </span>
-        <span ng-if="!item.divider" ng-click="openModal()">
-          {{item.starttime | date: 'HH:mm'}}
+        <span ng-if="!item.divider" class="item-toggle">
+           {{item.starttime | date: 'HH:mm'}}
           <label class="toggle">
-            <input type="checkbox"></input>
-            <div class="track">
-             <div class="handle"></div>
-            </div>
+             <input type="checkbox">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
           </label>
+         
         </span>
-      </li>
-    </ul>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
 
-<script id="planner-modal.html" type="text/ng-template">
-  <div class="modal">
-    <ion-header-bar>
-      <h1 class="title">Edit Contact</h1>
+<script id="modal.html" type="text/ng-template">
+  <div class="modal" on-swipe-down="modal.hide()">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">{{modal.starttime | date: 'EEEE d MMMM yyyy HH:mm'}}</h1>
+      <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
     </ion-header-bar>
     <ion-content>
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="planner.name">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Info</span>
-          <input type="text" ng-model="planner.info">
-        </label>
+      <!-- Mensen die wel kunnen -->
+      <div class="card">
+        <div class="item item-text-wrap">
+         <h2>Mensen die wel kunnen:</h2>
+          <div class="list">
+            <div class="item item-avatar" ng-repeat="item in modal.kunnenwel">
+              <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
+              <h2>{{item}}</h2>
+              <p>Hier komt een opmerking als die bestaat, in ieder geval. Even checken hoe die om gaat met de wat langere opmerkingen</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="button button-full button-energized" ng-click="closeModal()">Done</button>
+     <!-- Mensen die niet kunnen -->
+      <div class="card">
+        <div class="item item-text-wrap">
+         <h2>Mensen die niet kunnen:</h2>
+          <div class="list">
+            <a class="item item-avatar" href="#" ng-repeat="item in modal.kunnenniet">
+              <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
+              <h2>{{item}}</h2>
+              <p>Hier komt een opmerking</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Opmerking -->
+      <div class="card">
+        <div class="item item-text-wrap">
+
+        <form ng-submit="newComment({{modal.id}})"> 
+          <div class="item item-input">
+            <input type="text" name="opmerking" placeholder="Opmerking"/>
+          </div>
+
+          <button class="button button-full button-positive" ng-click="">
+            Opmerking toevoegen
+          </button>
+
+        </form>
+        </div>
+      </div>
+
     </ion-content>
   </div>
 </script>
-
-

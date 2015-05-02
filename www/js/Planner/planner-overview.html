@@ -5,7 +5,7 @@
 			<ion-item class="article no-border" ng-repeat="item in items">
 				<span ui-sref="app.planner-detail({id: item.id})">
 					<h2>{{item.title}}</h2>
-					<p>{{item.actual_time}} </p>
+					<p>{{item.actual_time | date: 'd MMMM yyyy HH:mm'}} </p>
 					<p>{{item.location}}</p>
 					<p>{{item.responses}} gereageerd</p>
 					<p>Reactiestatus</p> 
