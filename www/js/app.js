@@ -45,22 +45,26 @@ appcki
   .state('app.home.views',{
     url: "/home",
     views:{
-      'agenda':{
-        templateUrl: 'js/Agenda/agenda-overview.html', 
-        controller: 'appckiAgendaOverview' 
-      },
       'news':{
         templateUrl: 'js/News/news-overview.html',
-        controller: 'appckiNewsOverview'
+        controller: 'appckiNewsOverview',
+        name: 'Nieuws'
       },
       'planner':{
         templateUrl: 'js/Planner/planner-overview.html',
-        controller: 'appckiPlannerOverview'
+        controller: 'appckiPlannerOverview',
+        name: 'Vergaderplanner'
       },
       'settings':{
         templateUrl: 'js/Settings/settings-overview.html',
-        controller: 'appckiSettingsOverview'
-      }
+        controller: 'appckiSettingsOverview',
+        'name' : 'Instellingen'
+      },
+      'agenda':{
+        templateUrl: 'js/Agenda/agenda-overview.html', 
+        controller: 'appckiAgendaOverview',
+        name: 'Agenda' 
+      },
     }
   })
 

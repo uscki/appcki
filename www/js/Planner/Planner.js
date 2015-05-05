@@ -16,7 +16,6 @@ angular
 					var meeting = meetings[i];
 					meeting.actual_time = (meeting.actual_time == null) ? "Nog niet gepland" : meeting.actual_time;
 					meeting.location = (meeting.location == null) ? "Nader te bepalen" : meeting.location;
-					console.log(meeting.agenda);
 					meeting.agenda = unescape(meeting.agenda);
 
 					UserService.me(function(me){
