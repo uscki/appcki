@@ -1,9 +1,13 @@
 <ion-view view-title="Beschikbaarheid">
   <ion-content>
     <div class="card">
+      <div class="item item-text-wrap item-divider">
+        <h2>{{meeting.title}}</h2>
+      </div>
       <div class="item item-text-wrap">
-        <p>{{meeting.location}}</p>
-        <p>{{meeting.actual_time | date: 'EEEE d MMMM yyyy @ HH:mm uur'}}
+        <p>Locatie: {{meeting.location}}</p>
+        <p>Datum: {{meeting.actual_time | date: 'EEEE d MMMM yyyy'}}</p>
+        <p>Tijd: {{meeting.actual_time | date: 'HH:mm uur'}}</p>
         <p>{{responded}}/{{participants}} hebben gereageerd</p>
         <p>{{hasSubscribedMessage}}</p>
       </div>
@@ -18,8 +22,10 @@
     </div>
 
     <div class="card" ng-if="meeting.agenda">
-      <div class="item item-text-wrap">
+      <div class="item item-text-wrap item-divider">
         <h2>Agenda:</h2>
+      </div>
+      <div class="item item-text-wrap">
         <ol type="1">
         <li ng-repeat="agendaItem in meeting.agenda track by $index">
           &nbsp;&nbsp;{{$index + 1}}.&nbsp;&nbsp;&nbsp;{{agendaItem}}
@@ -33,7 +39,7 @@
 
     <!-- time slots voor deze afspraak -->
     <div class="card">
-      <div ng-repeat="item in items" class="item" on-hold="openModal({{item.id}})" ng-class="{'item-divider': item.divider}">
+      <div ng-repeat="item in items" class="item" on-hold="openModal({{item.timeslotIndex}})" ng-class="{'item-divider': item.divider}">
         <span ng-if="item.divider">
         {{item.label}}
         </span>
@@ -78,11 +84,11 @@
         <div class="item item-text-wrap">
          <h2>Mensen die niet kunnen:</h2>
           <div class="list">
-            <a class="item item-avatar" href="#" ng-repeat="item in modal.unavailable">
+            <div class="item item-avatar" ng-repeat="item in modal.unavailable">
               <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
               <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
               <p>{{item.comment}}</p>
-            </a>
+            </div>
           </div>
         </div>
       </div>

@@ -31,8 +31,8 @@ angular
 	}])
 	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
 		function( $scope, $ionicModal, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
-			
-			
+
+			console.log($log);
 
 			/**
 			 * Get details vraagt gewoon alle timeslots op.
@@ -40,7 +40,7 @@ angular
 			 * worden opgevraagd wie er al gereageerd hebben, of mensen
 			 * comments hebben toegevoegd en al dat soort dingen
 			 */
-			PlannerService.getDetails(1, function(meeting){
+			PlannerService.getDetails($stateParams.id, function(meeting){
 				meeting.location = (meeting.location == null) ? "Nader te bepalen" : meeting.location;
 				
 				$scope.participants = meeting.participants.length;
@@ -56,6 +56,7 @@ angular
 
 				$scope.items = [];
 				var lastDate = 0;
+				var timeslotIndex = 0;
 
 				for(var i = 0; i < meeting.timeslots.length; i++)
 				{
@@ -69,17 +70,19 @@ angular
 					}
 
 					item.percentage = (item.unavailable.length / item.available.length * 100);
+					item.timeslotIndex = timeslotIndex;
 
 					$scope.items.push(item);
+					timeslotIndex++;
 				}
 			});
 			
 
-			$scope.openModal = function(id)
+			$scope.openModal = function(index)
 			{
-				var item = $scope.meeting.timeslots[id];
+				var item = $scope.meeting.timeslots[index];
 
-				$scope.starttime = item.starttime;
+				$scope.modal.starttime = item.starttime;
 
 				$scope.modal.available = PeopleAndCommentFromList(item.available);
 				$scope.modal.unavailable = PeopleAndCommentFromList(item.unavailable);
