@@ -2,15 +2,29 @@
   <ion-content>
     <div class="card">
       <div class="item item-text-wrap">
-        <p>KNG-80</p>
-        <p>3/5 hebben gereageerd</p>
-        <p>Jij hebt nog niet gereageerd</p>
+        <p>{{meeting.location}}</p>
+        <p>{{meeting.actual_time | date: 'EEEE d MMMM yyyy @ HH:mm uur'}}
+        <p>{{responded}}/{{participants}} hebben gereageerd</p>
+        <p>{{hasSubscribedMessage}}</p>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" ng-if="meeting.notes || meeting.plannotes">
+    <div class="item item-text-wrap item-divider">
+      <h2>Opmerking bij deze vergadering</h2>
+    </div>
+    <div class="item item-text-wrap" ng-if="meeting.notes">{{meeting.notes}}</div>
+    <div class="item item-text-wrap" ng-if="meeting.plannotes">{{meeting.plannotes}}</div>
+    </div>
+
+    <div class="card" ng-if="meeting.agenda">
       <div class="item item-text-wrap">
-        <p>Hier komt de agenda te staan.</p>
+        <h2>Agenda:</h2>
+        <ol type="1">
+        <li ng-repeat="agendaItem in meeting.agenda track by $index">
+          &nbsp;&nbsp;{{$index + 1}}.&nbsp;&nbsp;&nbsp;{{agendaItem}}
+        </li>
+        </0l>
       </div>
     </div>
 
@@ -50,10 +64,10 @@
         <div class="item item-text-wrap">
          <h2>Mensen die wel kunnen:</h2>
           <div class="list">
-            <div class="item item-avatar" ng-repeat="item in modal.kunnenwel">
+            <div class="item item-avatar" ng-repeat="item in modal.available">
               <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
-              <h2>{{item}}</h2>
-              <p>Hier komt een opmerking als die bestaat, in ieder geval. Even checken hoe die om gaat met de wat langere opmerkingen</p>
+              <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
+              <p>{{item.comment}}</p>
             </div>
           </div>
         </div>
@@ -64,10 +78,10 @@
         <div class="item item-text-wrap">
          <h2>Mensen die niet kunnen:</h2>
           <div class="list">
-            <a class="item item-avatar" href="#" ng-repeat="item in modal.kunnenniet">
+            <a class="item item-avatar" href="#" ng-repeat="item in modal.unavailable">
               <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
-              <h2>{{item}}</h2>
-              <p>Hier komt een opmerking</p>
+              <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
+              <p>{{item.comment}}</p>
             </a>
           </div>
         </div>
@@ -77,7 +91,7 @@
       <div class="card">
         <div class="item item-text-wrap">
 
-        <form ng-submit="newComment({{modal.id}})"> 
+        <form> 
           <div class="item item-input">
             <input type="text" name="opmerking" placeholder="Opmerking"/>
           </div>
