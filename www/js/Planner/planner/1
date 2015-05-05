@@ -1,0 +1,437 @@
+{
+  "id": 1,
+  "organizer_id": 1,
+  "duration": "180",
+  "actual_time": "2015-05-23T19:00:00.000Z",
+  "actual_slot": null,
+  "location": "Jan & Richards Casa",
+  "notes": "Bij het maken van de planner komt deze note.",
+  "reminder_time": null,
+  "title": "[AppCKI] Vergadering",
+  "interval": 180,
+  "startdate": "2015-05-06",
+  "enddate": "2015-05-12",
+  "starttime": "9:00:00.000Z",
+  "endtime": "17:00:00.000Z",
+  "agenda" : ["Opening","Eten","Programmeren","H.I.N.W.O.Z.L.","Sluiting"],
+  "plannotes": "Bij het werkelijke plannen krijg je deze note",
+  "notifypct": 100,
+  "timeslots": [
+    {
+      "id": 1,
+      "meeting_id": 1,
+      "starttime": "2015-05-23T17:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "meeting_id": 1,
+      "starttime": "2015-05-23T19:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "meeting_id": 1,
+      "starttime": "2015-05-23T21:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "meeting_id": 1,
+      "starttime": "2015-05-24T17:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "meeting_id": 1,
+      "starttime": "2015-05-24T19:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "meeting_id": 1,
+      "starttime": "2015-05-24T21:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "meeting_id": 1,
+      "starttime": "2015-05-29T17:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "meeting_id": 1,
+      "starttime": "2015-05-29T19:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "meeting_id": 1,
+      "starttime": "2015-05-29T21:00:00.000Z",
+      "available": [
+        {
+          "person_id": 1,
+          "comment": null
+        },
+        {
+          "person_id": 2,
+          "comment": "2 heeft altijd een opmerkgin uiteraard"
+        },
+        {
+          "person_id": 3,
+          "comment": null
+        }
+      ],
+      "unavailable": [
+        {
+          "person_id": 4,
+          "comment": "Sorry jongens, geen zin"
+        },
+        {
+          "person_id": 5,
+          "comment": "Wtf. Vergaderen? Whyyyy"
+        }
+      ]
+    }
+  ],
+  "noresponse": [
+    6
+  ],
+  "participants": [
+    {
+      "id": 1,
+      "firstname": "Richard",
+      "middlename": "The Baws",
+      "lastname": "Oosterlaken",
+      "firstletters": "R.T.B.",
+      "postalname": "Oosterlaken",
+      "address1": "Leeghwaterstraat 118",
+      "address2": "Drift 21",
+      "zipcode": "2871PL",
+      "city": "Schoonhoven",
+      "country": "Rusland",
+      "phonenumber": "0612345678",
+      "mobilenumber": "0612345678",
+      "gender": null,
+      "emailaddress": "rich@rd.nl",
+      "notes": null,
+      "homepageaddress": null,
+      "username": null,
+      "signature": null,
+      "birthdate": null,
+      "nickname": null,
+      "fbname": null,
+      "photomediaid": 71667
+    },
+    {
+      "id": 2,
+      "firstname": "Menno",
+      "middlename": null,
+      "lastname": "Veen",
+      "firstletters": "M.",
+      "postalname": "Veen",
+      "address1": "Drift 21",
+      "address2": null,
+      "zipcode": "1111AA",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "phonenumber": null,
+      "mobilenumber": null,
+      "gender": null,
+      "emailaddress": null,
+      "notes": null,
+      "homepageaddress": null,
+      "username": null,
+      "signature": null,
+      "birthdate": null,
+      "nickname": null,
+      "fbname": null,
+      "photomediaid": 71667
+    },
+    {
+      "id": 3,
+      "firstname": "Gangster",
+      "middlename": null,
+      "lastname": "Bakkema",
+      "firstletters": "G.",
+      "postalname": "Bakkema",
+      "address1": "Drift 21",
+      "address2": null,
+      "zipcode": "1111AA",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "phonenumber": null,
+      "mobilenumber": null,
+      "gender": null,
+      "emailaddress": null,
+      "notes": null,
+      "homepageaddress": null,
+      "username": null,
+      "signature": null,
+      "birthdate": null,
+      "nickname": null,
+      "fbname": null,
+      "photomediaid": 71667
+    },
+    {
+      "id": 4,
+      "firstname": "Yolo",
+      "middlename": null,
+      "lastname": "Swag",
+      "firstletters": "Y.O.L.O.",
+      "postalname": "Swag [Swagster]",
+      "address1": "Drift 21",
+      "address2": null,
+      "zipcode": "1111AA",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "phonenumber": null,
+      "mobilenumber": null,
+      "gender": null,
+      "emailaddress": null,
+      "notes": null,
+      "homepageaddress": null,
+      "username": null,
+      "signature": null,
+      "birthdate": null,
+      "nickname": null,
+      "fbname": null,
+      "photomediaid": 71667
+    },
+    {
+      "id": 5,
+      "firstname": "Maurice",
+      "middlename": "de",
+      "lastname": "Hond",
+      "firstletters": "M.",
+      "postalname": "de Hond",
+      "address1": "Drift 21",
+      "address2": null,
+      "zipcode": "1111AA",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "phonenumber": null,
+      "mobilenumber": null,
+      "gender": null,
+      "emailaddress": null,
+      "notes": null,
+      "homepageaddress": null,
+      "username": null,
+      "signature": null,
+      "birthdate": null,
+      "nickname": null,
+      "fbname": null,
+      "photomediaid": 71667
+    },
+    {
+      "id": 6,
+      "firstname": "Eddard",
+      "middlename": null,
+      "lastname": "Stark",
+      "firstletters": "E.",
+      "postalname": "Ned Stark",
+      "address1": "Winterfall",
+      "address2": null,
+      "zipcode": "1111AA",
+      "city": "North (but south of Wall)",
+      "country": "7 Kingdoms",
+      "phonenumber": null,
+      "mobilenumber": null,
+      "gender": "M",
+      "emailaddress": null,
+      "notes": null,
+      "homepageaddress": null,
+      "username": null,
+      "signature": null,
+      "birthdate": null,
+      "nickname": null,
+      "fbname": null,
+      "photomediaid": 71667
+    }
+  ]
+}
