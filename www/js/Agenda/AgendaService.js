@@ -13,18 +13,18 @@ angular
         AgendaService.getNewer = function(state, callback){
            // state = state || defaultState;
 
-            $http.get(apiUrl + "/public/agenda/newer", {params:{ timestamp: state.newest }})
+            $http.get(apiUrl + "agenda/overview")
             .success(function(data){
-                callback(data);
+                // callback(data);
             });
         };
 
         AgendaService.getOlder = function(state, callback){
             state = state || defaultState;
 
-            $http.get(apiUrl + "/public/agenda/older", {params:{ timestamp: state.oldest }})
+            $http.get(apiUrl + "agenda/overview")
             .success(function(data){
-                callback(data);
+                // callback(data);
             });
         };
 

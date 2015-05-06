@@ -6,22 +6,22 @@ angular
         var NewsService  ={};
 
         NewsService.getNewer = function(state, callback){
-            $http.get(apiUrl + "/public/news/newer", {params:{ id: state.newest }})
+            $http.get(apiUrl + "news/overview")
             .success(function(data){
-                callback(data);
+                callback(data.content);
             });
         };
 
         NewsService.getOlder = function(state, callback){
-            $http.get(apiUrl + "/public/news/older", {params:{ id: state.oldest }})
+            $http.get(apiUrl + "news/overview")
             .success(function(data){
-                callback(data);
+                callback(data.content);
             });
         };
 
         NewsService.getDetails = function(id, callback){
-
-            $http.get(apiUrl + "/public/news/"+id)
+            console.log('getting details');
+            $http.get(apiUrl + "news/get?newsId="+id)
             .success(function(data){
                 callback(data);
             });

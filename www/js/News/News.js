@@ -22,9 +22,8 @@ angular
 		function( $scope, $log, $http, $state, $stateParams, $filter, NewsService, UserService){
 			var dateFilter = $filter('date');
 
-			console.log($stateParams.id);
-
 			NewsService.getDetails($stateParams.id, function(article){
+				console.log("Firstname: " + article.person.firstname);
 				article.posteddate = dateFilter(article.posteddate, 'd-M-yyyy');
 				$scope.article = article;
 			});

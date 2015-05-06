@@ -12,7 +12,7 @@ angular
          * Maybe ordering by date would be cool, but hey =)
 		 */
         PlannerService.getMeetings = function(state, callback){
-        	$http.get('js/Planner/planner/overview')
+        	$http.get(apiUrl + 'meeting/mymeetings')
         	.success(function(data){
         		callback(data);
         	});
@@ -24,7 +24,7 @@ angular
          * and meeting_person because that makes things easier for us
          */
         PlannerService.getDetails = function(id, callback){
-        	$http.get('js/Planner/planner/' + id)
+        	$http.get(apiUrl + 'meeting/get?id=' + id)
         	.success(function(data){
         		callback(data);
         	});
