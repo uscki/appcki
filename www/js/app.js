@@ -6,6 +6,7 @@ var appcki = angular.module('appcki', [
     'appcki.agenda',
     'appcki.news',
     'appcki.planner',
+    'appcki.poll',
     'appcki.settings',
     'ngStorage',
     'ngRoute',
@@ -55,6 +56,11 @@ appcki
         controller: 'appckiPlannerOverview',
         name: 'Vergaderplanner'
       },
+      'poll':{
+        templateUrl: 'js/Poll/poll-overview.html',
+        controller: 'appckiPollOverview',
+        name: 'Poll'
+      },
       'settings':{
         templateUrl: 'js/Settings/settings-overview.html',
         controller: 'appckiSettingsOverview',
@@ -103,6 +109,11 @@ appcki
     url: '/planner/detail/:id', 
     templateUrl: 'js/Planner/planner-details.html',
     controller: 'appckiPlannerDetails'
+  })
+  .state('app.poll-overview', {
+    url: '/poll',
+    templateUrl: 'js/Poll/poll-overview.html',
+    controller: 'appckiPollOverview'
   })
   .state('app.settings-overview', {
     url: '/settings',
