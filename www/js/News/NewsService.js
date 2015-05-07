@@ -20,7 +20,6 @@ angular
         };
 
         NewsService.getDetails = function(id, callback){
-            console.log('getting details');
             $http.get(apiUrl + "news/get?id="+id)
             .success(function(data){
                 callback(data);

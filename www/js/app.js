@@ -106,7 +106,7 @@ appcki
     controller: 'appckiPlannerOverview'
   })
   .state('app.planner-detail', { 
-    url: '/planner/detail/:id', 
+    url: '/planner/detail/:id:invited:responded', 
     templateUrl: 'js/Planner/planner-details.html',
     controller: 'appckiPlannerDetails'
   })

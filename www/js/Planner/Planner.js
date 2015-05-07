@@ -4,58 +4,63 @@ angular
 		function( $scope, $log, $http, $state, $filter, PlannerService, UserService){
 
 			$scope.items = [];
-			
 
 			var state = PlannerService.createState();
-
-			/**
-			 * Vraagt de meetings op bij de planner service en verandert elementen
-			 * die null kunnen zijn in een passende text
-			 */
+			
 			PlannerService.getMeetings(state, function(meetingdata){
-				meetings = meetingdata.content
+				var meetings = meetingdata.content;
 
-				for(var i = 0; i < meetings.length; i++){
-					var meeting = meetings[i];
-					meeting.actual_time = (meeting.actual_time == null) ? "Nog niet gepland" : meeting.actual_time;
-					meeting.location = (meeting.location == null) ? "Nader te bepalen" : meeting.location;
-					meeting.agenda = unescape(meeting.agenda);
-
-					UserService.me(function(me){
-						meeting.userStatus = (meeting.haveResponded.indexOf(me.id) > -1) ? "Je hebt al gereageerd" : "Jij hebt nog niet gereageerd";
-					});
-
+				for(var i = 0; i < meetings.length; i++)
+				{
+					meeting = meetings[i];
+					meeting.invited = meeting.participants.length;
+					meeting.responded = meeting.slots[0].preferences.length;
+					meeting.userstatus = (status(meeting.person.id, meeting.slots[0].preferences)) ? "Je hebt al gereageerd" : "Jij hebt nog niet gereageerd";
 					$scope.items.push(meeting);
 				}
+
 			});
 
+			/**
+			  * Checks if the current user has responded to a 
+			  * meeting yet
+			  * @arg id 			Current user ID
+			  * @arg preferences 	List of preferences for the first slot
+			  *						of the meeting
+			  * @return				True iff person id is found in preferences,
+			  *						i.e. if person has responded
+			  */
+			function status(id, preferences)
+			{
+				console.log("reached with id " + id);
+				for(var i = 0; i < preferences.length; i++)
+				{
+					if(preferences[i].id === id)
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			
 
 
 	}])
 	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
 		function( $scope, $ionicModal, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
-			$scope.userpreference = {};
 
-			/**
-			 * Get details vraagt gewoon alle timeslots op.
-			 * Vervolgens moet eigenlijk voor al die timeslots ook
-			 * worden opgevraagd wie er al gereageerd hebben, of mensen
-			 * comments hebben toegevoegd en al dat soort dingen
-			 */
 			PlannerService.getDetails($stateParams.id, function(meeting){
-				meeting = meeting.meeting;
-				meeting.location = (meeting.location == null) ? "Nader te bepalen" : meeting.location;
 				
-				$scope.participants = meeting.participants.length;
-				// $scope.responded = $scope.participants - meeting.noresponse.length;
+				appckiPlannerOverview.status("hoi", []);
+
+				meeting = meeting.meeting;
+				
+				$scope.invited = $stateParams.invited;
+				$scope.responded = $stateParams.responded;
 				
 				$scope.meeting = meeting;
-
-				UserService.me(function(me){
-					$scope.participation = PlannerService.getMyResponse(meeting, me);
-					$scope.subscribed = $scope.participation != null && $scope.participation != undefined;
-					$scope.hasSubscribedMessage = ($scope.subscribed) ? "Je hebt al gereageerd" : "Jij hebt nog niet gereageerd";
-				});
 
 				$scope.items = [];
 				var lastDate = 0;
@@ -103,12 +108,7 @@ angular
 				$scope.modal.id = $scope.meeting.slots[index].id;
 
 				$scope.modal.starttime = item.starttime;
-
-				// $scope.modal.available = PeopleAndCommentFromList(item.participants);
-				/*$scope.modal.unavailable = PeopleAndCommentFromList(item.unavailable);*/
-
-				// Vanuit de API eigen comment ophalen en mogelijk maken
-				// comment toe te voegen
+				$scope.modal.preferences = item.preferences;
 
 				$scope.modal.show();
 			}
@@ -125,30 +125,6 @@ angular
 		        // The animation we want to use for the modal entrance
 		        animation: 'slide-in-up'
 		    });
-
-		    PeopleAndCommentFromList = function(list)
-		    {
-		    	result = [];
-
-		    	for(var i = 0; i < list.length; i++)
-		    	{
-		    		var item = {"comment" : list[i].comment};
-
-		    		participants = $scope.meeting.participants;
-		    		for(var j = 0; j < participants.length; j++)
-		    		{
-		    			if(participants[j].id == list[i].person_id)
-		    			{
-		    				item.person = participants[j];
-		    				break;
-		    			}
-		    		}
-
-		    		result.push(item);
-		    	}
-
-		    	return result;
-		    }
 
 		    pct2color = function(percent)
 		    {
