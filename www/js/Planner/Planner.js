@@ -15,7 +15,7 @@ angular
 					meeting = meetings[i];
 					meeting.invited = meeting.participants.length;
 					meeting.responded = meeting.slots[0].preferences.length;
-					meeting.userstatus = (status(meeting.person.id, meeting.slots[0].preferences)) ? "Je hebt al gereageerd" : "Jij hebt nog niet gereageerd";
+					meeting.userstatus = (status(meeting.person.id, meeting.slots[0].preferences)) ? "Je hebt al gereageerd" : "Geef ff fucks!";
 					$scope.items.push(meeting);
 				}
 
@@ -32,7 +32,6 @@ angular
 			  */
 			function status(id, preferences)
 			{
-				console.log("reached with id " + id);
 				for(var i = 0; i < preferences.length; i++)
 				{
 					if(preferences[i].id === id)
@@ -44,20 +43,16 @@ angular
 				return false;
 			}
 
-			
-
-
 	}])
-	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
-		function( $scope, $ionicModal, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
+	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
+		function( $scope, $ionicModal, $ionicPopup, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
+			$scope.userpreference = {};
 
 			PlannerService.getDetails($stateParams.id, function(meeting){
-				
-				appckiPlannerOverview.status("hoi", []);
 
 				meeting = meeting.meeting;
 				
-				$scope.invited = $stateParams.invited;
+				$scope.invited = meeting.slots[0].preferences.length;
 				$scope.responded = $stateParams.responded;
 				
 				$scope.meeting = meeting;
@@ -77,8 +72,31 @@ angular
 						$scope.items.push({divider: true, label: thisDate});
 					}
 
-					// item.percentage = (item.unavailable.length / item.available.length * 100);
-					item.pctcolor = pct2color(Math.random()*100);
+					item.cando = [];
+					item.nocando = [];
+
+					for(var j = 0; j < item.preferences.length; j++)
+					{
+						if(item.preferences[j].canattend)
+						{
+							item.cando.push(item.preferences[j]);
+						} else {
+							item.nocando.push(item.preferences[j]);
+						}
+
+						if(item.preferences[j].person.id === meeting.person.id)
+						{
+							item.canattend = item.preferences[j].canattend;
+						}
+					}
+
+					if(item.cando.length || item.nocando.length)
+					{
+						item.pctcolor = pct2color(item.cando.length / (item.cando.length + item.nocando.length) * 100);
+					} else {
+						item.pctcolor = "rgb(255, 0, 0)";
+					}
+					
 					item.timeslotIndex = timeslotIndex;
 
 					$scope.items.push(item);
@@ -92,6 +110,11 @@ angular
 
 				PlannerService.uploadComment($scope.modal.id, $scope.modal.comment, function(data){
 					console.log(data);
+				}, function(){
+					$ionicPopup.alert({
+                       title: 'Verbinding mislukt',
+                       template: 'Jouw comment kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
+                    });
 				});
 			}
 
@@ -99,7 +122,12 @@ angular
 			{
 				PlannerService.setPreference(id, $scope.userpreference[id], function(data){
 					console.log(data);
-				})
+				},function(){
+					$ionicPopup.alert({
+						title: 'Verbinding mislukt',
+                       	template: 'Jouw voorkeur voor dit tijdstip kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
+					})
+				});
 			}			
 
 			$scope.openModal = function(index)

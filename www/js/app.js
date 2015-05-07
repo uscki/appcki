@@ -106,7 +106,7 @@ appcki
     controller: 'appckiPlannerOverview'
   })
   .state('app.planner-detail', { 
-    url: '/planner/detail/:id:invited:responded', 
+    url: '/planner/detail/:id', 
     templateUrl: 'js/Planner/planner-details.html',
     controller: 'appckiPlannerDetails'
   })
@@ -153,7 +153,6 @@ appcki.run(['$rootScope',function($rootScope){
     $rootScope.bodyLayout = toState.name.match(/\.detail$/g) ? 'detailed':'';
   })
 }]);
-
 
 appcki
 .directive("appckiPhotoMedia",function(){

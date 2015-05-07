@@ -35,7 +35,8 @@ angular
 				5:"za",
 				6:"zo"
 			}
-			AgendaService.getNewer(state, function(agendas){
+			AgendaService.getNewer(state, function(agendasdata){
+				agendas = agendasdata.content;
 				var now = new Date();
 				var previousWeekString = 0;
 				
@@ -77,26 +78,13 @@ angular
 
 			$scope.unSubscribe = function(){
 				AgendaService.unSubscribe(agenda.id, function(result){
-					
-					console.log(result);
-
 					if(result){
 						$scope.subscribed = false;
-						$scope.data.note = "";
+						$scope.note = "";
 						AgendaService.getDetails($stateParams.id, function(agenda){ $scope.agenda = agenda; });
 					}
 				});
 			}
-
-			UserService.me(function(me){
-				$scope.participation = AgendaService.getSubscription(agenda, me);
-				$scope.subscribed = $scope.participation != null && $scope.participation != undefined;
-				$scope.data = {}
-
-				if($scope.participation){
-					$scope.data.note = $scope.participation.note;
-				}
-			});
 
 			//$scope.data = {}
 

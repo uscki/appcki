@@ -15,7 +15,7 @@ angular
 
             $http.get(apiUrl + "agenda/overview")
             .success(function(data){
-                // callback(data);
+                callback(data);
             });
         };
 
@@ -24,13 +24,13 @@ angular
 
             $http.get(apiUrl + "agenda/overview")
             .success(function(data){
-                // callback(data);
+                callback(data);
             });
         };
 
         AgendaService.getDetails = function(id, callback){
 
-            $http.get(apiUrl + "/public/agenda/"+id)
+            $http.get(apiUrl + "agenda/get?id="+id)
             .success(function(data){
                 callback(data);
             });
@@ -57,7 +57,7 @@ angular
         
 
         AgendaService.subscribe = function(id, note, callback){            
-            $http.get(apiUrl + "/agenda/subscribe/"+id, {params:{ note: note }})
+            $http.get(apiUrl + "/agenda/subscribe?id="+id+"&note="+note)
             .success(function(data){
                 callback(true);
             });
@@ -68,7 +68,7 @@ angular
         }
 
         AgendaService.unSubscribe = function(id, callback){
-            $http.get(apiUrl + "/agenda/unSubscribe/"+id)
+            $http.get(apiUrl + "/agenda/unsubscribe?id="+id)
             .success(function(data){
                 callback(true);
             });        

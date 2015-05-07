@@ -3,7 +3,7 @@
 	<ion-content>
 		<ion-list>
 			<ion-item class="article no-border" ng-repeat="item in items">
-				<span ui-sref="app.planner-detail({id: item.id, responded: item.responded, invited: item.invited})">
+				<span ui-sref="app.planner-detail({id: item.id})">
 					<h2>{{item.title}}</h2>
 					<p>{{item.actual_time | date: 'EEEE d MMMM yyyy HH:mm'}} </p>
 					<p>{{item.location}}</p>
