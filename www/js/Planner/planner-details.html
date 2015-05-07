@@ -44,14 +44,16 @@
         {{item.label}}
         </span>
         <span ng-if="!item.divider" class="item-toggle">
-           {{item.starttime | date: 'HH:mm'}}
-          <label class="toggle">
-             <input type="checkbox">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-          </label>
-         
+          <form>
+            <span class="current-response-box" style="background-color: {{item.pctcolor}}"></span>
+             {{item.starttime | date: 'HH:mm'}}
+            <label class="toggle">
+               <input type="checkbox" ng-checked='item.preferences.canattend' ng-click="setPreference({{item.id}})" ng-model="userpreference[item.id]">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+            </label>
+          </form>
         </span>
       </div>
     </div>
@@ -94,12 +96,12 @@
       </div>
 
       <!-- Opmerking -->
-      <div class="card">
+      <div class="card" >
         <div class="item item-text-wrap">
 
-        <form> 
+        <form ng-submit="postComment()">
           <div class="item item-input">
-            <input type="text" name="opmerking" placeholder="Opmerking"/>
+            <input type="text" name="opmerking" placeholder="Opmerking" value="{{item.preferences.notes}}" ng-model="modal.comment"/>
           </div>
 
           <button class="button button-full button-positive" ng-click="">

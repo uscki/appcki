@@ -4,6 +4,7 @@ angular
 		function( $scope, $log, $http, $state, $filter, PlannerService, UserService){
 
 			$scope.items = [];
+			
 
 			var state = PlannerService.createState();
 
@@ -33,6 +34,8 @@ angular
 	}])
 	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
 		function( $scope, $ionicModal, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
+			$scope.userpreference = {};
+
 			/**
 			 * Get details vraagt gewoon alle timeslots op.
 			 * Vervolgens moet eigenlijk voor al die timeslots ook
@@ -70,22 +73,39 @@ angular
 					}
 
 					// item.percentage = (item.unavailable.length / item.available.length * 100);
+					item.pctcolor = pct2color(Math.random()*100);
 					item.timeslotIndex = timeslotIndex;
 
 					$scope.items.push(item);
 					timeslotIndex++;
 				}
 			});
-			
+
+			$scope.postComment = function()
+			{
+				$scope.modal.hide();
+
+				PlannerService.uploadComment($scope.modal.id, $scope.modal.comment, function(data){
+					console.log(data);
+				});
+			}
+
+			$scope.setPreference = function(id)
+			{
+				PlannerService.setPreference(id, $scope.userpreference[id], function(data){
+					console.log(data);
+				})
+			}			
 
 			$scope.openModal = function(index)
 			{
 				var item = $scope.meeting.slots[index];
+				$scope.modal.id = $scope.meeting.slots[index].id;
 
 				$scope.modal.starttime = item.starttime;
 
-				/*$scope.modal.available = PeopleAndCommentFromList(item.available);
-				$scope.modal.unavailable = PeopleAndCommentFromList(item.unavailable);*/
+				// $scope.modal.available = PeopleAndCommentFromList(item.participants);
+				/*$scope.modal.unavailable = PeopleAndCommentFromList(item.unavailable);*/
 
 				// Vanuit de API eigen comment ophalen en mogelijk maken
 				// comment toe te voegen
@@ -128,5 +148,12 @@ angular
 		    	}
 
 		    	return result;
+		    }
+
+		    pct2color = function(percent)
+		    {
+		    	red = (percent < 50) ? 255 : 256 - (percent - 50) * 5.12;
+			    green = (percent > 50) ? 255 : percent * 5.12;
+			    return "rgb(" + Math.round(red) + "," + Math.round(green) + ",0)";
 		    }
 	}]);
