@@ -13,27 +13,9 @@ function($scope, $state, $ionicModal, $ionicNavBarDelegate, $log, $http, $locati
 		$ionicNavBarDelegate.title(currentView);
 	}
 
-	$scope.showSettings = function()
-	{
-		console.log("open settings dan!");
-	}
-
-	// Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('js/Settings/settings-overview.html', function($ionicModal) {
-        $scope.modal = $ionicModal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-    });
-
 }])
-.controller("appCtrl", ['$scope', '$state', '$ionicModal', '$location',
-function($scope, $state, $ionicModal, $location){
-
-	$scope.showSettingsMenu = $location.path() === '/home';
+.controller("appCtrl", ['$rootScope', '$scope', '$state', '$ionicModal', '$location',
+function($rootScope, $scope, $state, $ionicModal, $location){
 
 	$scope.showSettings = function()
 	{
