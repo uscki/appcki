@@ -46,85 +46,32 @@ angular
 	}])
 	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
 		function( $scope, $ionicModal, $ionicPopup, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
-			$scope.meetingdata;
-			$scope.userpreference = [];
 
-			PlannerService.getDetails($stateParams.id, function(meetingdata){
-				$scope.meetingdata = meetingdata;
-				meeting = meetingdata.meeting;
-				
-				$scope.invited = meeting.slots[0].preferences.length;
-				$scope.responded = $stateParams.responded;
-				
-				$scope.meeting = meeting;
-
-				$scope.items = [];
-				var lastDate = 0;
-				var timeslotIndex = 0;
-
-				for(var i = 0; i < meeting.slots.length; i++)
-				{
-					var item = meeting.slots[i];
-
-					var thisDate = $filter('date')(item.starttime, 'EEEE dd MMMM yyyy');
-					if( thisDate != lastDate)
-					{
-						lastDate = thisDate;
-						$scope.items.push({divider: true, label: thisDate});
-					}
-
-					item.cando = [];
-					item.nocando = [];
-
-					$scope.userpreference[item.id] = meetingdata.myPreferences[i].canattend;
-
-					for(var j = 0; j < item.preferences.length; j++)
-					{
-						if(item.preferences[j].canattend)
-						{
-							item.cando.push(item.preferences[j]);
-						} else {
-							item.nocando.push(item.preferences[j]);
-						}
-					}
-
-					if(item.cando.length || item.nocando.length)
-					{
-						item.pctcolor = pct2color(item.cando.length / (item.cando.length + item.nocando.length) * 100);
-					} else {
-						item.pctcolor = "rgb(255, 0, 0)";
-					}
-					
-					item.timeslotIndex = timeslotIndex;
-
-					$scope.items.push(item);
-					timeslotIndex++;
-				}
-
-			});
-
-			$scope.postComment = function()
-			{
-				$scope.modal.hide();
-
-				PlannerService.uploadComment($scope.modal.id, $scope.userpreference[$scope.modal.id], $scope.modal.comment, function(data){
-					console.log(data);
-				}, function(error){
-					console.log(error);
-					$ionicPopup.alert({
-                       title: 'Verbinding mislukt',
-                       template: 'Jouw comment kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
-                    });
-				});
-			}
+			// Load the modal from the given template URL
+		    $ionicModal.fromTemplateUrl('js/Planner/planner-modal.html', function($ionicModal) {
+		        $scope.modal = $ionicModal;
+		    }, {
+		        // Use our scope for the scope of the modal to keep it simple
+		        scope: $scope,
+		        
+		        // The animation we want to use for the modal entrance
+		        animation: 'slide-in-up'
+		    });
 
 			$scope.setPreference = function(id)
 			{
-				console.log($scope.userpreference);
-				PlannerService.setPreference(id, $scope.userpreference[id], function(data){
-					console.log(data);
+				if($scope.modal.isShown())
+				{
+					$scope.modal.hide();
+					var comment = $scope.modal.comment;
+				} else {
+					var comment = $scope.usercomment[id];
+				}
+
+				// Push data to server
+				PlannerService.setPreference(id, $scope.userpreference[id], comment, function(data){
+					populateState();
 				},function(error){
-					console.log(error);
 					$ionicPopup.alert({
 						title: 'Verbinding mislukt',
                        	template: 'Jouw voorkeur voor dit tijdstip kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
@@ -134,33 +81,123 @@ angular
 
 			$scope.openModal = function(index)
 			{
-				var item = $scope.meeting.slots[index];
-				$scope.modal.id = $scope.meeting.slots[index].id;
-				$scope.modal.comment = $scope.meetingdata.myPreferences[index].notes;
-
-				$scope.modal.starttime = item.starttime;
-				$scope.modal.preferences = item.preferences;
-
+				$scope.modal.item = $scope.meeting.slots[index];
+				$scope.modal.comment = unescape(($scope.preferences && $scope.preferences[index].notes) ? $scope.preferences[index].notes : "");
 				$scope.modal.show();
 			}
 
-  
-		    // Load the modal from the given template URL
-		    $ionicModal.fromTemplateUrl('modal.html', function($ionicModal) {
-		        $scope.modal = $ionicModal;
-		    }, {
+			/**
+			 * Populates the scope, but populateState sounds better
+			 */
+			populateState = function()
+			{
+				PlannerService.getDetails($stateParams.id, function(meetingdata){
+					// Save meeting data to scope
+					$scope.meeting = meetingdata.meeting;
+					$scope.preferences = meetingdata.myPreferences;
+					
+					// Calculate response
+					$scope.invited = $scope.meeting.participants.length;
+					$scope.responded = $scope.meeting.slots[0].preferences.length;
+					
+					// Prepare slots for scope
+					[$scope.slots, $scope.userpreference, $scope.usercomment] = prepareSlots($scope.meeting.slots, meetingdata.myPreferences);
+				});
+			}
 
-		        // Use our scope for the scope of the modal to keep it simple
-		        scope: $scope,
-		        
-		        // The animation we want to use for the modal entrance
-		        animation: 'slide-in-up'
-		    });
+			populateState();
 
-		    pct2color = function(percent)
+		    /**
+			 * Iterates through the slots in the meeting and
+			 * prepares the slots for the scope
+			 * @arg meetingslots 	The list of slots for the meeting
+			 * @arg preferences 	The current users personal preferences, if any
+			 * @arg list of two lists; the slots as prepared for the scope and the
+			 *						user preferences as prepared for the scope
+			 */
+			prepareSlots = function(meetingslots, preferences)
+			{
+				var slots = [];
+				var userpreference = {};
+				var usercomment = {};
+				var lastDate = "";
+				var index = 0;
+
+				for(var i = 0; i < meetingslots.length; i++)
+				{
+					var item = meetingslots[i];
+					userpreference[item.id] = (preferences[i]) ? preferences[i].canattend : false;
+					usercomment[item.id] = (preferences[i]) ? preferences[i].notes : null;
+					[item.cando, item.nocando] = getAvailability(item.preferences);
+
+					// Check if a divider is required
+					var thisDate = $filter('date')(item.starttime, 'EEEE dd MMMM yyyy');
+					if( thisDate != lastDate)
+					{
+						lastDate = thisDate;
+						slots.push({divider: true, label: thisDate});
+					}
+
+					item.pctcolor = availability2color(item.cando, item.nocando);
+					item.index = index;
+					index++;
+
+					slots.push(item);
+				}
+				
+				return [slots, userpreference, usercomment];
+			}
+
+			/**
+			 * Gives a list of people who are available and a list of
+			 * people who are unavailable for a certain timeslot.
+			 * @arg slotpreferences		The list of preferences for the slot
+			 * @return 	list of lists of people who are available or not available
+			 */
+			getAvailability = function(slotpreferences)
+			{
+				var cando = [];
+				var nocando = [];
+
+
+				for(var j = 0; j < slotpreferences.length; j++)
+				{
+					if(slotpreferences[j].canattend)
+					{
+						cando.push(slotpreferences[j]);
+					} else {
+						nocando.push(slotpreferences[j]);
+					}
+				}
+
+				return [cando, nocando];
+			}
+
+			/**
+			 * Prepares the agenda as it was saved in the database
+			 * for display
+			 * @arg agenda 			Input string for agenda as saved in DB
+			 * @return string formatted for display
+			 */
+			formatAgenda = function(agenda)
+			{
+				return agenda;
+			}
+
+		    /**
+		     * Returns an rgb color that indicates the percentage, with
+		     * 0% being completely red, 50% being yellow, 100% green and
+		     * all other percentages in between.
+		     * @arg cando	 	list of people who are available
+		     * @arg nocando		list of people who are unavailable
+		     * return 			String containing css-style rgb value
+		     */
+		    availability2color = function(cando, nocando)
 		    {
+				var percent = cando.length / (cando.length + nocando.length) * 100;
 		    	red = (percent < 50) ? 255 : 256 - (percent - 50) * 5.12;
 			    green = (percent > 50) ? 255 : percent * 5.12;
+			    
 			    return "rgb(" + Math.round(red) + "," + Math.round(green) + ",0)";
 		    }
 	}]);

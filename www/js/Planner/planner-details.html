@@ -1,113 +1,62 @@
 <ion-view view-title="Beschikbaarheid">
   <ion-content>
+
+    <!-- meta information about meeting -->
     <div class="card">
       <div class="item item-text-wrap item-divider">
         <h2>{{meeting.title}}</h2>
       </div>
       <div class="item item-text-wrap">
-        <p ng-if="meeting.location">Locatie: {{meeting.location}}</p>
-        <p ng-if="meeting.actual_time">Datum: {{meeting.actual_time | date: 'EEEE d MMMM yyyy'}}</p>
-        <p ng-if="meeting.actual_time">Tijd: {{meeting.actual_time | date: 'HH:mm uur'}}</p>
-        <p>{{responded}} van {{invited}} hebben gereageerd</p>
+        <p ng-if="meeting.location"><i class="icon ion-ios-location"></i>&nbsp;&nbsp;&nbsp;{{meeting.location}}</p>
+        <p ng-if="meeting.actual_time"><i class="icon ion-calendar"></i>&nbsp;&nbsp;{{meeting.actual_time | date: 'EEEE d MMMM yyyy'}}</p>
+        <p ng-if="meeting.actual_time"><i class="icon ion-clock"></i>&nbsp;&nbsp;{{meeting.actual_time | date: 'HH:mm uur'}}</p>
+        <p><i class="icon ion-ios-people"></i>&nbsp;&nbsp;{{responded}} van {{invited}} hebben gereageerd</p>
         <p>{{hasSubscribedMessage}}</p>
       </div>
     </div>
 
+    <!-- notes (hidden if empty) -->
     <div class="card" ng-if="meeting.notes || meeting.plannotes">
-    <div class="item item-text-wrap item-divider">
-      <h2>Opmerking bij deze vergadering</h2>
-    </div>
-    <div class="item item-text-wrap" ng-if="meeting.notes">{{meeting.notes}}</div>
-    <div class="item item-text-wrap" ng-if="meeting.plannotes">{{meeting.plannotes}}</div>
+      <div class="item item-text-wrap item-divider">
+        <h2>Opmerking bij deze vergadering</h2>
+      </div>
+      <div class="item item-text-wrap" ng-if="meeting.notes">{{meeting.notes}}</div>
+      <div class="item item-text-wrap" ng-if="meeting.plannotes">{{meeting.plannotes}}</div>
     </div>
 
+    <!-- Agenda (hidden if empty) -->
     <div class="card" ng-if="meeting.agenda">
       <div class="item item-text-wrap item-divider">
         <h2>Agenda:</h2>
       </div>
       <div class="item item-text-wrap">
-       {{meeting.agenda}}
+        {{meeting.agenda}}
       </div>
-    </div>
-
-    </div>
     </div>
 
     <!-- time slots voor deze afspraak -->
     <div class="card">
-      <div class="item" ng-if="meeting.actual_time">De vergadering is al gepland!</div>
-      <div ng-repeat="item in items"  ng-if="!meeting.actual_time" class="item" on-hold="openModal({{item.timeslotIndex}})" ng-class="{'item-divider': item.divider}">
-        <span ng-if="item.divider">
-        {{item.label}}
+      <div class="item" ng-if="meeting.actual_time">
+        De vergadering is al gepland!
+      </div>
+
+      <div ng-repeat="slot in slots"  ng-if="!meeting.actual_time" class="item" on-hold="openModal({{slot.index}})" ng-class="{'item-divider': item.divider}">
+        <span ng-if="slot.divider">
+          {{slot.label}}
         </span>
-        <span ng-if="!item.divider" class="item-toggle">
-          <form>
-            <span class="current-response-box" style="background-color: {{item.pctcolor}}"></span>
-             {{item.starttime | date: 'HH:mm'}}
+        
+        <span ng-if="!slot.divider" class="item-toggle">
+            <span class="current-response-box" style="background-color: {{slot.pctcolor}}"></span>
+            {{slot.starttime | date: 'HH:mm'}}
             <label class="toggle">
-               <input type="checkbox" ng-click="setPreference({{item.id}})" ng-model="userpreference[item.id]">
-               <div class="track">
-                 <div class="handle"></div>
-               </div>
+              <input type="checkbox" ng-click="setPreference({{slot.id}})" ng-model="userpreference[slot.id]">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
             </label>
-          </form>
         </span>
       </div>
     </div>
+
   </ion-content>
 </ion-view>
-
-<script id="modal.html" type="text/ng-template">
-  <div class="modal" on-swipe-down="modal.hide()">
-    <ion-header-bar class="bar-dark">
-      <h1 class="title">{{modal.starttime | date: 'EEEE d MMMM yyyy HH:mm'}}</h1>
-      <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
-    </ion-header-bar>
-    <ion-content>
-      <!-- Mensen die wel kunnen -->
-      <div class="card">
-        <div class="item item-text-wrap"
-         <h2>Mensen die wel kunnen:</h2>
-          <div class="list">
-            <div class="item item-avatar" ng-repeat="item in modal.preferences" ng-if="item.canattend">
-              <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
-              <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
-              <p>{{item.notes}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-     <!-- Mensen die niet kunnen -->
-      <div class="card">
-        <div class="item item-text-wrap">
-         <h2>Mensen die niet kunnen:</h2>
-          <div class="list">
-            <div class="item item-avatar" ng-repeat="item in modal.preferences" ng-if="!item.canattend">
-              <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
-              <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
-              <p>{{item.notes}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Opmerking -->
-      <div class="card" >
-        <div class="item item-text-wrap">
-        <form ng-submit="postComment()">
-          <div class="item item-input">
-            <input type="text" name="opmerking" placeholder="Opmerking" ng-model="modal.comment"/>
-          </div>
-
-          <button class="button button-full button-positive" ng-click="">
-            Opmerking toevoegen
-          </button>
-
-        </form>
-        </div>
-      </div>
-
-    </ion-content>
-  </div>
-</script>
