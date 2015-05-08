@@ -46,11 +46,12 @@ angular
 	}])
 	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
 		function( $scope, $ionicModal, $ionicPopup, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
-			$scope.userpreference = {};
+			$scope.meetingdata;
+			$scope.userpreference = [];
 
-			PlannerService.getDetails($stateParams.id, function(meeting){
-
-				meeting = meeting.meeting;
+			PlannerService.getDetails($stateParams.id, function(meetingdata){
+				$scope.meetingdata = meetingdata;
+				meeting = meetingdata.meeting;
 				
 				$scope.invited = meeting.slots[0].preferences.length;
 				$scope.responded = $stateParams.responded;
@@ -75,6 +76,8 @@ angular
 					item.cando = [];
 					item.nocando = [];
 
+					$scope.userpreference[item.id] = meetingdata.myPreferences[i].canattend;
+
 					for(var j = 0; j < item.preferences.length; j++)
 					{
 						if(item.preferences[j].canattend)
@@ -82,11 +85,6 @@ angular
 							item.cando.push(item.preferences[j]);
 						} else {
 							item.nocando.push(item.preferences[j]);
-						}
-
-						if(item.preferences[j].person.id === meeting.person.id)
-						{
-							item.canattend = item.preferences[j].canattend;
 						}
 					}
 
@@ -102,15 +100,17 @@ angular
 					$scope.items.push(item);
 					timeslotIndex++;
 				}
+
 			});
 
 			$scope.postComment = function()
 			{
 				$scope.modal.hide();
 
-				PlannerService.uploadComment($scope.modal.id, $scope.modal.comment, function(data){
+				PlannerService.uploadComment($scope.modal.id, $scope.userpreference[$scope.modal.id], $scope.modal.comment, function(data){
 					console.log(data);
-				}, function(){
+				}, function(error){
+					console.log(error);
 					$ionicPopup.alert({
                        title: 'Verbinding mislukt',
                        template: 'Jouw comment kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
@@ -120,20 +120,23 @@ angular
 
 			$scope.setPreference = function(id)
 			{
+				console.log($scope.userpreference);
 				PlannerService.setPreference(id, $scope.userpreference[id], function(data){
 					console.log(data);
-				},function(){
+				},function(error){
+					console.log(error);
 					$ionicPopup.alert({
 						title: 'Verbinding mislukt',
                        	template: 'Jouw voorkeur voor dit tijdstip kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
 					})
 				});
-			}			
+			}		
 
 			$scope.openModal = function(index)
 			{
 				var item = $scope.meeting.slots[index];
 				$scope.modal.id = $scope.meeting.slots[index].id;
+				$scope.modal.comment = $scope.meetingdata.myPreferences[index].notes;
 
 				$scope.modal.starttime = item.starttime;
 				$scope.modal.preferences = item.preferences;

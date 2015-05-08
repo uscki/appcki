@@ -34,29 +34,30 @@ angular
            return 0;
         };
 
-        PlannerService.uploadComment = function(id, comment, callback, error)
+        PlannerService.uploadComment = function(id, preference, comment, callback, error)
         {
             // Escape spaces
             comment = comment.split(" ").join("%20");
-            $http.get(apiUrl + 'meeting/set-slot?id='+id+'&notes=\''+comment+'\'')
+            $http.get(apiUrl + 'meeting/set-slot?id='+id+'&canAttend='+preference+'&notes=\''+comment+'\'')
             .success(function(data)
             {
                 callback(data);
             })
             .error(function(data){
-                error();
+                error(data);
             });
         };
 
         PlannerService.setPreference = function(id, preference, callback, error)
         {
+            console.log(apiUrl + 'meeting/set-slot?id='+id+'&canAttend='+preference);
             $http.get(apiUrl + 'meeting/set-slot?id='+id+'&canAttend='+preference)
             .success(function(data)
             {
                 callback(data);
             })
             .error(function(data){
-                error();
+                error(data);
             });
         }
 

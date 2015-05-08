@@ -45,7 +45,7 @@
             <span class="current-response-box" style="background-color: {{item.pctcolor}}"></span>
              {{item.starttime | date: 'HH:mm'}}
             <label class="toggle">
-               <input type="checkbox" ng-checked='item.canattend' ng-click="setPreference({{item.id}})" ng-model="userpreference[item.id]">
+               <input type="checkbox" ng-click="setPreference({{item.id}})" ng-model="userpreference[item.id]">
                <div class="track">
                  <div class="handle"></div>
                </div>
@@ -95,10 +95,9 @@
       <!-- Opmerking -->
       <div class="card" >
         <div class="item item-text-wrap">
-
         <form ng-submit="postComment()">
           <div class="item item-input">
-            <input type="text" name="opmerking" placeholder="Opmerking" value="{{item.preferences.notes}}" ng-model="modal.comment"/>
+            <input type="text" name="opmerking" placeholder="Opmerking" ng-model="modal.comment"/>
           </div>
 
           <button class="button button-full button-positive" ng-click="">
