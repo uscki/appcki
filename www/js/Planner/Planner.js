@@ -101,7 +101,13 @@ angular
 					$scope.responded = $scope.meeting.slots[0].preferences.length;
 					
 					// Prepare slots for scope
-					[$scope.slots, $scope.userpreference, $scope.usercomment] = prepareSlots($scope.meeting.slots, meetingdata.myPreferences);
+					// [$scope.slots, $scope.userpreference, $scope.usercomment] = prepareSlots($scope.meeting.slots, meetingdata.myPreferences);
+					// Chrome fix:
+					var preparedSlots = prepareSlots($scope.meetingdata.slots, meetingdata.myPreferences);
+
+					$scope.slots = preparedSlots[0];
+					$scope.userpreference = preparedSlots[1];
+					$scope.usercomment = preparedSlots[2];
 				});
 			}
 
@@ -128,7 +134,14 @@ angular
 					var item = meetingslots[i];
 					userpreference[item.id] = (preferences[i]) ? preferences[i].canattend : false;
 					usercomment[item.id] = (preferences[i]) ? preferences[i].notes : null;
-					[item.cando, item.nocando] = getAvailability(item.preferences);
+
+
+					//[item.cando, item.nocando] = getAvailability(item.preferences);
+					// Chrome fix:
+					var availability = getAvailability(item.preferences);
+
+					item.cando = availability[0];
+					item.nocando = availability[1];
 
 					// Check if a divider is required
 					var thisDate = $filter('date')(item.starttime, 'EEEE dd MMMM yyyy');
