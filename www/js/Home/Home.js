@@ -1,6 +1,6 @@
 angular.module('appcki.home',[])
-.controller("homePageCtrl", ['$scope', '$state', '$ionicNavBarDelegate', '$log', '$http','$location','UserService',
-function($scope, $state, $ionicNavBarDelegate, $log, $http, $location, UserService){
+.controller("homePageCtrl", ['$scope', '$state', '$ionicModal', '$ionicNavBarDelegate', '$log', '$http','$location','UserService',
+function($scope, $state, $ionicModal, $ionicNavBarDelegate, $log, $http, $location, UserService){
 
 	/**
 	 * Method to set the title in the nav bar to the title of
@@ -12,5 +12,43 @@ function($scope, $state, $ionicNavBarDelegate, $log, $http, $location, UserServi
 		var currentView = $state.current.views[views[$index]].name;
 		$ionicNavBarDelegate.title(currentView);
 	}
+
+	$scope.showSettings = function()
+	{
+		console.log("open settings dan!");
+	}
+
+	// Load the modal from the given template URL
+    $ionicModal.fromTemplateUrl('js/Settings/settings-overview.html', function($ionicModal) {
+        $scope.modal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+    });
+
+}])
+.controller("appCtrl", ['$scope', '$state', '$ionicModal', '$location',
+function($scope, $state, $ionicModal, $location){
+
+	$scope.showSettingsMenu = $location.path() === '/home';
+
+	$scope.showSettings = function()
+	{
+		$scope.modal.show();
+	}
+
+	// Load the modal from the given template URL
+    $ionicModal.fromTemplateUrl('js/Settings/settings-overview.html', function($ionicModal) {
+        $scope.modal = $ionicModal;
+    }, {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope,
+        
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-right'
+    });
 
 }]);

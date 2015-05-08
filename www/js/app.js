@@ -35,7 +35,8 @@ appcki
   })
 
   .state('app', { 
-    templateUrl: 'js/App/app.html', 
+    templateUrl: 'js/App/app.html',
+    controller: 'appCtrl'
   })
 
 
@@ -46,6 +47,11 @@ appcki
   .state('app.home.views',{
     url: "/home",
     views:{
+      'agenda':{
+        templateUrl: 'js/Agenda/agenda-overview.html', 
+        controller: 'appckiAgendaOverview',
+        name: 'Agenda' 
+      },
       'news':{
         templateUrl: 'js/News/news-overview.html',
         controller: 'appckiNewsOverview',
@@ -60,17 +66,7 @@ appcki
         templateUrl: 'js/Poll/poll-overview.html',
         controller: 'appckiPollOverview',
         name: 'Poll'
-      },
-      'settings':{
-        templateUrl: 'js/Settings/settings-overview.html',
-        controller: 'appckiSettingsOverview',
-        'name' : 'Instellingen'
-      },
-      'agenda':{
-        templateUrl: 'js/Agenda/agenda-overview.html', 
-        controller: 'appckiAgendaOverview',
-        name: 'Agenda' 
-      },
+      }
     }
   })
 
