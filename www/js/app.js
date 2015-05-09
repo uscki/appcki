@@ -119,9 +119,9 @@ appcki
 })
 .config(['$httpProvider',
   function( $httpProvider ) {
-    // https://github.com/angular/angular.js/pull/1454
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+ //   $httpProvider.defaults.useXDomain = true;
+ //   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', 
       function($q, $location, $localStorage) {
@@ -130,13 +130,14 @@ appcki
                 config.headers = config.headers || {};
                 // console.log($localStorage);
                 if ($localStorage.token) {
-                    config.headers.Authorization = 'Bearer ' + $localStorage.token;
+                    config.headers['X-AUTH-TOKEN'] = $localStorage.token;
                 }
                 return config;
             },
             'responseError': function(response) {
-                if(response.status === 401 || response.status === 403) {
-
+              console.log(response);
+                if(response.status === 0 || response.status === 401 || response.status === 403) {
+                  delete $localStorage.token;
                   $location.path('/login');
                 }
                 return $q.reject(response);

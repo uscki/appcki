@@ -26,7 +26,7 @@ angular.module('appcki.user')
         function getUserFromToken() {
             var token = $localStorage.token;
             var user = {};
-            if (typeof token !== 'undefined') {
+            if (typeof token !== 'undefined' && token !==null) {
                 var encoded = token.split('.')[1];
                 user = JSON.parse(urlBase64Decode(encoded));
             }
@@ -35,19 +35,22 @@ angular.module('appcki.user')
 
         var currentUser = getUserFromToken();
 
-        $http.defaults.useXDomain = true;
-
         return {
             getUserFromToken: getUserFromToken,
             signin: function(data, success, error) {
                 console.log(data);
+
                // console.log(error);
                 
-                $http.post(apiUrl + 'login', data)
+                $http({
+                        url: apiUrl + 'login',
+                        method: "GET",
+                        params: data
+                     })
                     .success(function(data, status, headers, config){
-                        console.log(headers)
-                        //$localStorage.token = data.token;
-                        console.log(data);
+                        var token = headers("X-AUTH-TOKEN");
+                        console.log("token = ["+token+"]");
+                        $localStorage.token = token;
                         success(data);
                     })
                     .error(error)
