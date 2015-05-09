@@ -101,7 +101,7 @@ angular
 					$scope.responded = $scope.meeting.slots[0].preferences.length;
 					
 					// Prepare slots for scope
-					[$scope.slots, $scope.userpreference, $scope.usercomment] = prepareSlots($scope.meeting.slots, meetingdata.myPreferences);
+					prepareSlots($scope.meeting.slots, meetingdata.myPreferences);
 				});
 			}
 
@@ -128,7 +128,11 @@ angular
 					var item = meetingslots[i];
 					userpreference[item.id] = (preferences[i]) ? preferences[i].canattend : false;
 					usercomment[item.id] = (preferences[i]) ? preferences[i].notes : null;
-					[item.cando, item.nocando] = getAvailability(item.preferences);
+
+					getAvailability(item.preferences, function(cando, nocando){
+						item.cando = cando; 
+						item.nocando = nocando;
+					});
 
 					// Check if a divider is required
 					var thisDate = $filter('date')(item.starttime, 'EEEE dd MMMM yyyy');
@@ -145,7 +149,9 @@ angular
 					slots.push(item);
 				}
 				
-				return [slots, userpreference, usercomment];
+				$scope.slots = slots;
+				$scope.userpreference = userpreference;
+				$scope.usercomment = usercomment;
 			}
 
 			/**
@@ -154,7 +160,7 @@ angular
 			 * @arg slotpreferences		The list of preferences for the slot
 			 * @return 	list of lists of people who are available or not available
 			 */
-			getAvailability = function(slotpreferences)
+			getAvailability = function(slotpreferences, callback)
 			{
 				var cando = [];
 				var nocando = [];
@@ -170,7 +176,7 @@ angular
 					}
 				}
 
-				return [cando, nocando];
+				callback(cando, nocando);
 			}
 
 			/**
