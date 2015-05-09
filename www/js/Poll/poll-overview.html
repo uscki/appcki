@@ -7,19 +7,20 @@
 			</div>
 		</div>
 
-		<div class="card">
-			<div class="list">
-				<label class="item item-radio item-text-wrap" ng-repeat="item in options" on-hold="vote({{item.id}})">
-					<div class="item-content">
-						<div>{{item.name}}</div>
-						<div style="height: 1em">
-							<span style="display: block; margin-top: 0.4em;margin-right: 5px; height: 10px; width:{{item.results.length / votes * 100}}%; background-color: {{item.color}}; float: left"></span>
-							<span class="small" style="float: left">({{item.results.length}})</span>
-						</div>
+		<div class="card">		
+			<ion-list can-swipe="false">
+				<ion-item click-for-options ng-repeat="item in options">
+					<div>{{item.name}}</div>
+					<div style="height: 1em">
+						<span style="display: block; margin-top: 0.4em;margin-right: 5px; height: 10px; width:{{item.results.length / votes * 100}}%; background-color: {{item.color}}; float: left"></span>
+						<span class="small" style="float: left">({{item.results.length}})</span>
 					</div>
-					<span class="radio-icon ion-checkmark"></span>
-				</label>
-			</div>
+					<ion-option-button class="button-balanced" ng-click="vote({{item.id}})">
+						Stem
+					</ion-option-button>
+				</ion-item>
+			</ion-list>
+
 		</div>
 	</ion-content>
 </ion-view>

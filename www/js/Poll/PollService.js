@@ -43,7 +43,6 @@ angular
 
         PollService.vote = function(id, callback)
         {
-            console.log("Voting for " + id);
             $http.get(apiUrl + "poll/vote?id=" + id)
             .success(function(data){
                 callback(data);
