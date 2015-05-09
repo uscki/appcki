@@ -28,7 +28,7 @@
         <h2>Mensen die niet kunnen:</h2>
         <div class="list">
           <div class="item item-avatar" ng-repeat="item in modal.item.preferences" ng-if="!item.canattend">
-            <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
+            <img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{item.person.photomediaid}}">
             <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
             <p>{{item.notes}}</p>
           </div>

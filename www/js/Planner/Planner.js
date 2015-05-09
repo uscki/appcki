@@ -81,6 +81,7 @@ angular
 
 			$scope.openModal = function(index)
 			{
+				console.log($scope);
 				$scope.modal.item = $scope.meeting.slots[index];
 				$scope.modal.comment = unescape(($scope.preferences && $scope.preferences[index].notes) ? $scope.preferences[index].notes : "");
 				$scope.modal.show();
