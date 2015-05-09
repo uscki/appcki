@@ -35,15 +35,18 @@ angular.module('appcki.user')
 
         var currentUser = getUserFromToken();
 
+        $http.defaults.useXDomain = true;
+
         return {
             getUserFromToken: getUserFromToken,
             signin: function(data, success, error) {
-                console.log(success);
-                console.log(error);
+                console.log(data);
+               // console.log(error);
                 
-                $http.post(apiUrl + '/auth', data)
-                    .success(function(data){
-                        $localStorage.token = data.token;
+                $http.post(apiUrl + 'login', data)
+                    .success(function(data, status, headers, config){
+                        console.log(headers)
+                        //$localStorage.token = data.token;
                         console.log(data);
                         success(data);
                     })

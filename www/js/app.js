@@ -123,6 +123,9 @@ appcki
 })
 .config(['$httpProvider',
   function( $httpProvider ) {
+    // https://github.com/angular/angular.js/pull/1454
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', 
       function($q, $location, $localStorage) {
@@ -166,3 +169,4 @@ appcki
     template: '<img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{mid}}&size={{size}}" />'
   };
 });
+
