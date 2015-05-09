@@ -14,23 +14,9 @@ function($scope, $state, $ionicModal, $ionicNavBarDelegate, $log, $http, $locati
 	}
 
 }])
-.controller("appCtrl", ['$rootScope', '$scope', '$state', '$ionicModal', '$location',
-function($rootScope, $scope, $state, $ionicModal, $location){
-
-	$scope.showSettings = function()
-	{
-		$scope.modal.show();
-	}
-
-	// Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('js/Settings/settings-overview.html', function($ionicModal) {
-        $scope.modal = $ionicModal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-right'
-    });
-
+.controller("appCtrl", ['$rootScope', '$scope', '$state', '$ionicModal', '$ionicSideMenuDelegate', '$location',
+function($rootScope, $scope, $state, $ionicModal, $ionicSideMenuDelegate, $location){
+	$scope.toggleLeft = function() {
+		$ionicSideMenuDelegate.toggleLeft();
+	};
 }]);

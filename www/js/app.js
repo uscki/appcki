@@ -42,7 +42,7 @@ appcki
 
   .state('app.home', { 
     templateUrl: 'js/Home/home.html',
-    controller: 'homePageCtrl'
+    controller: 'homePageCtrl',
   })
   .state('app.home.views',{
     url: "/home",
