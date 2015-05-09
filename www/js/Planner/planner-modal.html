@@ -1,0 +1,54 @@
+<ion-modal-view on-swipe-down="modal.hide()">
+  
+
+  <ion-header-bar class="bar-dark">
+    <h1 class="title">{{modal.item.starttime | date: 'EEEE d MMMM yyyy HH:mm'}}</h1>
+    <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+  </ion-header-bar>
+  
+
+  <ion-content>
+    <!-- Mensen die wel kunnen -->
+    <div class="card">
+      <div class="item item-text-wrap">
+      <h2>Mensen die wel kunnen:</h2>
+      <div class="list">
+        <div class="item item-avatar" ng-repeat="item in modal.item.preferences" ng-if="item.canattend">
+          <img src="http://primalgirl.com/wp-content/uploads/2012/06/coconut.jpg">
+          <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
+          <p>{{item.notes}}</p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensen die niet kunnen -->
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h2>Mensen die niet kunnen:</h2>
+        <div class="list">
+          <div class="item item-avatar" ng-repeat="item in modal.item.preferences" ng-if="!item.canattend">
+            <img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{item.person.photomediaid}}">
+            <h2>{{item.person.firstname}} {{item.person.middlename}} {{item.person.lastname}}</h2>
+            <p>{{item.notes}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opmerking -->
+    <div class="card" >
+      <div class="item item-text-wrap">
+        <form ng-submit="setPreference(modal.item.id)">
+          <div class="item item-input">
+            <input type="text" name="opmerking" placeholder="Opmerking" ng-model="modal.comment"/>
+          </div>
+
+          <button class="button button-full button-positive" ng-click="">
+            Opmerking toevoegen
+          </button>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

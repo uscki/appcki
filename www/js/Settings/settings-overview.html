@@ -1,8 +1,16 @@
-<ion-view view-title="Settings" hide-back-button="true">   
-
+<ion-view hide-back-button="true">   
+	<ion-header-bar class="bar-assertive">
+		<h1 class="title">Instellingen</h1>
+		<div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+	</ion-header-bar>
+	
 	<ion-content>
-		<div class="padding">
-			<button class="button button-full button-positive" ng-click="logout()">Uitloggen</button>
+		<div class="card">
+			<div class="item item-text-wrap">
+				<h2>Account</h2>
+				<p>Je bent ingelogd als {{user.firstname}} {{user.middlename}} {{user.lastname}}</p>
+				<button class="button button-full button-positive" ng-click="logout()">Log mij uit</button>
+			</div>
 		</div>
 	</ion-content>
-</ion-view>
+<ion-view

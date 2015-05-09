@@ -9,6 +9,11 @@
 	border: none;
 }
 
+/*****************************************************
+******************************************************
+*************** LOGIN PAGE ***************************
+******************************************************
+*****************************************************/
 div.custom-login div.background-login, div.custom-login div.eclipse-fadeout {
 	top: 0px;
 	height: 100vh;
@@ -53,6 +58,7 @@ div.custom-login .logo-login .logo-login-sub{
 	background-position: center;
 }
 
+/* planner box that indicates availability by color */
 .current-response-box{
 	display: block;
 	float: left;

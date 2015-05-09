@@ -1,18 +1,20 @@
-<ion-slide-box does-continue="true" on-slide-changed="slideChange($index)" active-slide="4">
- 
+<ion-slide-box does-continue="true" on-slide-changed="slideChange($index)">
+
   <ion-slide>
- 	 <ion-nav-view name="news"> </ion-nav-view>
+    <ion-nav-view name="agenda"> </ion-nav-view>
   </ion-slide>
+
   <ion-slide>
- 	 <ion-nav-view name="planner"> </ion-nav-view>
+    <ion-nav-view name="news"> </ion-nav-view>
   </ion-slide>
+
+  <ion-slide>
+    <ion-nav-view name="planner"> </ion-nav-view>
+  </ion-slide>
+
   <ion-slide>
     <ion-nav-view name="poll"> </ion-nav-view>
   </ion-slide>
-  <ion-slide>
-  	<ion-nav-view name="settings"> </ion-nav-view>
-  </ion-slide>
-   <ion-slide>
-    <ion-nav-view name="agenda" > </ion-nav-view>
-  </ion-slide>
+
 </ion-slide-box>
+
