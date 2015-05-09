@@ -11,7 +11,7 @@ angular.module('appcki.user',[])
 
             UserService.signin(
                 {
-                    emailaddress: $scope.credentials.username,
+                    username: $scope.credentials.username,
                     password: $scope.credentials.password
                 },
                 function(data){
