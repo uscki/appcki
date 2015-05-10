@@ -1,19 +1,12 @@
 <ion-view view-title="Quotes-list">
 	<ion-content>
-		<ion-list can-swipe="true" allow-drag="true" can-drag="true" on-drag-left="swipeRight()">
-			<ion-item ng-repeat="item in items">
-				{{item.quote}}
-				<ion-option-button class="bar-balanced">
-
-				</ion-option-button>
-				<ion-option-button class="bar-assertive"></ion-option-button>
-			</ion-item>
-		</ion-list>
+		<div class="card" ng-repeat="item in items" style="width:150%; left:-25%;">
+		Dit is een kaart
+		</div>
 		<div class="bar bar-positive">SEPARATOR</div>
 		<ion-list can-swipe="true">
 			<ion-item class="item item-complex item-right-editable item-left-editable" ng-repeat="item in items">
-				<div class="item-options invisible">Hoho
-				</div>
+				
 					
 				<div class="item-content ng-binding">
 				Item!

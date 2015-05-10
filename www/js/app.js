@@ -47,8 +47,7 @@ appcki
     templateUrl: 'js/App/app.html',
     controller: 'appCtrl'
   })
-
-
+    
   .state('app.home', { 
     templateUrl: 'js/Home/home.html',
     controller: 'homePageCtrl',
@@ -139,11 +138,6 @@ appcki
     url: '/quote/add',
     templateUrl: 'js/Quote/quote-add.html',
     controller: 'appckiQuoteAdd'
-  })
-  .state('app.settings-overview', {
-    url: '/settings',
-    templateUrl: 'js/Settings/settings-overview.html',
-    controller: 'appckiSettingsOverview'
   });
 })
 .config(['$httpProvider',

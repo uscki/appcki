@@ -11,7 +11,9 @@
 		</ion-nav-bar>  
 		<ion-nav-view></ion-nav-view>
 	</ion-side-menu-content>
-	<ion-side-menu side="left">
-		<ion-nav-view name="settings" ng-include="settings"> </ion-nav-view>
+	<ion-side-menu side="left" ui-view="settings">
+		<ion-view hide-back-button="true" ng-controller="appckiSettingsOverview" ng-include="'js/Settings/settings-overview.html'">   
+			
+		<ion-view>
 	</ion-side-menu>
 </ion-side-menus>

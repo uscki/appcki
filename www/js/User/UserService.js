@@ -56,7 +56,7 @@ angular.module('appcki.user')
                     .error(error)
             },
             me: function(success, error) {
-                $http.get(apiUrl + '/me').success(success).error(error)
+                $http.get(apiUrl + '/me').success(function(data){success(data)}).error(function(data){error(data)});
             },
             logout: function(success) {
                 changeUser({});

@@ -1,17 +1,11 @@
 angular
 	.module('appcki.settings',[])
-	.controller("appckiSettingsOverview", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService',
-		function( $scope, $log, $http, $state, $filter, $location, UserService){
-			$scope.logout = function(){          
-				/**
-				 * Ik weet niet wat deze functie doet, maar als ik het weg haal, werkt 
-				 * het uitloggen niet meer.
-				 */
-				UserService.me(
-					{
-					}
-				);
+	.controller("appckiSettingsOverview", ['$scope', '$localStorage', '$log', '$http','$state','$filter','$location', 'UserService',
+		function( $scope, $localStorage, $log, $http, $state, $filter, $location, UserService){
 
+			$scope.user = UserService.getUserFromToken($localStorage.token);
+
+			$scope.logout = function(){          
 				UserService.logout(
 					function(){
 						$location.path('/login');
