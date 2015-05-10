@@ -3,6 +3,7 @@ angular
 	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService',
 		function( $scope, $log, $http, $state, $filter, AgendaService, UserService){
 
+			
 			var dateFilter = $filter('date');
 
 			$scope.items = [];

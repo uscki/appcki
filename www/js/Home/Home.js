@@ -1,19 +1,22 @@
 angular.module('appcki.home',[])
-.controller("homePageCtrl", ['$scope', '$state', '$ionicNavBarDelegate', '$log', '$http','$location','UserService',
-function($scope, $state, $ionicNavBarDelegate, $log, $http, $location, UserService){
-
-	$scope.activeSlide = 0;
+.controller("homePageCtrl", ['$scope', '$state', '$ionicNavBarDelegate', '$ionicSlideBoxDelegate', '$log', '$http','$location','UserService',
+function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $log, $http, $location, UserService){
 
 	/**
 	 * Method to set the title in the nav bar to the title of
 	 * the view that is being shown
 	 */
-	$scope.slideChange = function($index)
+	$scope.slideChange = function()
 	{
+		var i = $ionicSlideBoxDelegate.currentIndex();
 		var views = Object.keys($state.current.views);
-		var currentView = $state.current.views[views[$index]].name;
+		var currentView = $state.current.views[views[i]].name;
 		$ionicNavBarDelegate.title(currentView);
 	}
+
+	$scope.$on('$ionicView.beforeEnter', function(){
+		$scope.slideChange();
+	});
 
 
 }])
