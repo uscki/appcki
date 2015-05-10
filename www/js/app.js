@@ -7,9 +7,11 @@ var appcki = angular.module('appcki', [
     'appcki.news',
     'appcki.planner',
     'appcki.poll',
+    'appcki.quote',
     'appcki.settings',
     'ngStorage',
     'ngRoute',
+    'ngAnimate',
 ]);
 
 appcki
@@ -66,6 +68,11 @@ appcki
         templateUrl: 'js/Poll/poll-overview.html',
         controller: 'appckiPollOverview',
         name: 'Poll'
+      },
+      'quote':{
+        templateUrl : 'js/Quote/quote-overview.html',
+        controller: 'appckiQuoteOverview',
+        name: 'Quotes'
       }
     }
   })
@@ -110,6 +117,21 @@ appcki
     url: '/poll',
     templateUrl: 'js/Poll/poll-overview.html',
     controller: 'appckiPollOverview'
+  })
+  .state('app.quote-overview', {
+    url: '/quote',
+    templateUrl: 'js/Quote/quote-overview.html',
+    controller: 'appckiQuoteOverview'
+  })
+  .state('app.quote-list', {
+    url: '/quote/list',
+    templateUrl: 'js/Quote/quote-list.html',
+    controller: 'appckiQuoteList'
+  })
+  .state('app.quote-add', {
+    url: '/quote/add',
+    templateUrl: 'js/Quote/quote-add.html',
+    controller: 'appckiQuoteAdd'
   })
   .state('app.settings-overview', {
     url: '/settings',
