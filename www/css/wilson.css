@@ -1,0 +1,29 @@
+.wilson-page{
+	background: #000;
+	color: #00ff00;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.wilson-page p,
+.wilson-page h1,
+.wilson-page h2,
+.wilson-page h3{
+	color: #00ff00;
+	text-align: center;
+	margin-top: 10px;
+}
+.wilson{
+	width: 200px;
+	height: 220px;
+	background: url('../img/wilson.png');
+	background-size: 100%;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	transform: translate(-100px, -110px);
+
+}

@@ -1,6 +1,7 @@
 
 var appcki = angular.module('appcki', [
     'ionic',
+    'appcki.wilson',
     'appcki.home',
     'appcki.user',
     'appcki.agenda',
@@ -28,7 +29,13 @@ appcki
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/wilson');
+
+  $stateProvider.state('wilson', {
+    url: '/wilson',
+    templateUrl: 'js/Wilson/wilson.html',
+    controller: 'wilsonPageController'
+  });
 
   $stateProvider.state('login', {
     url: '/login',
