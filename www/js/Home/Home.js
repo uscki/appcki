@@ -14,7 +14,7 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $log, $ht
 		$ionicNavBarDelegate.title(currentView);
 	}
 
-	$scope.$on('$ionicView.beforeEnter', function(){
+	$scope.$on('$ionicView.enter', function(){
 		$scope.slideChange();
 	});
 
