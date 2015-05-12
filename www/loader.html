@@ -3,6 +3,8 @@
 <head>
 	<title>loader demo</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="logoar.css"/>
+	<link type="text/css" rel="stylesheet" href="loader2.css"/>
 	<style type="text/css">
 	.loader{
 		width: 150px;
@@ -46,13 +48,25 @@
 	</style>
 </head>
 <body>
-<div style="margin-left:45%; margin-top:200px;" class='loader '></div>
+<div style="margin-left:45%; margin-top:100px;" class='loader '></div>
+<div style="width: 150px; height: 150px;margin-left:45%; margin-top:50px;" class="logoader"></div>
+<div style="width: 150px; height: 150px;margin-left:45%; margin-top:50px;" class="loader2"></div>
 
 <script type="text/javascript">
 	$(".loader").click(function(){
 		$(this).toggleClass("loading");
 
 	});
+
+	$(".logoader").click(function(){
+		$(this).toggleClass("logo-loading");
+	});
+
+	$(".loader2").click(function(){
+		$(this).toggleClass("loading");
+
+	});
+
 </script>
 </body>
 </html>
