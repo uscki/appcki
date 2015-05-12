@@ -2,27 +2,30 @@
 
 	<ion-content>
 			<div class="card padding" style="text-align: center">
-				<h2>{{quote.quote}}</h2>
+				<div class="item item-text-wrap"><h2>{{quote.quote}}</h2></div>
 			</div>
-			<div class="quote-bar item padding">
-				<div class="float-left quote-bar-container">
-					<div class="quote-bar-inner quote-bar-left" style="width: 30%">
-						30
+			<div class="card">
+				<div class="item">
+					<div style="display: block; margin-bottom: 5px;">
+						<p class="float-left">Stemverhouding:</p><p class="float-right">({{total}} stemmen)</p>
+					</div>
+					<div class="quote-bar">
+						<div class="quote-bar-inner quote-bar-left" style="width: {{favorPct}}%">
+							{{allInFavor}}
+						</div>
+						<div class="quote-bar-inner quote-bar-right" style="width: {{againstPct}}%">
+							{{allAgainst}}
+						</div>
+					</div>
+					<div style="margin-top: 5em; text-align: center" ng-if="!voted">
+						<button class="button button-icon icon ion-plus-circled" style="color: #008800" ng-click="vote(true)"></button>
+						<button class="button button-icon icon ion-minus-circled" style="color: #DB1818" ng-click="vote(false)"></button>
 					</div>
 				</div>
-				<div class="float-left quote-bar-container" >
-					<div class="quote-bar-inner quote-bar-right" style="width: 70%">
-						70
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<button class="button button-icon icon ion-plus-circled float-left" style="color: green"></button>
-				<button class="button button-icon icon ion-minus-circled float-right" style="color: red"></button>
 			</div>
 		<div class="button-bar padding item">
 		<button class="button button-full button-positive" ui-sref="app.quote-list()" style="margin-right: 5px">Meer bekijken</button>
-		<button class="button button-full button-positive" style="margin-left: 5px">Andere quote</button>
+		<button class="button button-full button-positive" ng-click="random()" style="margin-left: 5px">Andere quote</button>
 		</div>
 	</ion-content>
 </ion-view>

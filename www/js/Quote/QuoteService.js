@@ -20,7 +20,15 @@ angular
             .success(function(data){
                 callback(data);
             });
-        };       
+        };
+
+        QuoteService.getDetails = function(id, callback)
+        {
+            $http.get(apiUrl + "quote/get?id=" + id)
+            .success(function(data){
+                callback(data)
+            });
+        }       
 
         QuoteService.createState = function(){
             return 0;

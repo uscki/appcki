@@ -79,8 +79,11 @@ div.custom-login .logo-login .logo-login-sub{
 	float: right;
 }
 
-.quote-bar-container{
-	width: 50%;
+.quote-bar{
+	display: block;
+	width: 100%;
+	margin-top: 30px;
+	text-align: center;
 }
 
 .quote-bar .quote-bar-inner{
@@ -89,19 +92,20 @@ div.custom-login .logo-login .logo-login-sub{
 	color: white; 
 	display: block; 
 	padding: 2px 10px 2px 10px;
-	margin: auto 3px;
 	box-shadow: 1px 3px 15px #888888;
 }
 
 .quote-bar .quote-bar-left{
-	float: right;
-	background-color: green;
+	float: left;
+	background-color: #008800;
 	text-align: right;
 	border-radius: 10px 0px 0px 10px;
+	border-right: 1px solid white;
 }
 
 .quote-bar .quote-bar-right{
 	float: left;
-	background-color: red;
+	background-color: #DB1818;
 	border-radius: 0px 10px 10px 0px;
+	border-left: 1px solid white;
 }
