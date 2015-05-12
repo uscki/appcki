@@ -15,12 +15,25 @@
 						<span style="display: block; margin-top: 0.4em;margin-right: 5px; height: 10px; width:{{item.results.length / votes * 100}}%; background-color: {{item.color}}; float: left"></span>
 						<span class="small" style="float: left">({{item.results.length}})</span>
 					</div>
-					<ion-option-button class="button-balanced" ng-click="vote({{item.id}})">
+					<ion-option-button class="button-balanced" ng-click="vote({{item.id}})" ng-if="!voted">
 						Stem
 					</ion-option-button>
 				</ion-item>
 			</ion-list>
 
+		</div>
+
+		<div class="card">
+			<div class="item item-text-wrap">
+				<h2>Todo's@appcki</h2>
+			</div>
+
+			<div class="item item-text-wrap">
+				<ion-list>
+					<ion-item>Poll archief bekijken</ion-item>
+					<ion-item>$scope.voted zetten op waarde die klopt (API update afwachten)</ion-item>
+				</ion-list>
+			</div>
 		</div>
 	</ion-content>
 </ion-view>

@@ -9,6 +9,9 @@ var appcki = angular.module('appcki', [
     'appcki.planner',
     'appcki.poll',
     'appcki.quote',
+    'appcki.roephoek',
+    'appcki.captioncontest',
+    'appcki.leden',
     'appcki.settings',
     'ngStorage',
     'ngRoute',
@@ -79,6 +82,21 @@ appcki
         templateUrl : 'js/Quote/quote-overview.html',
         controller: 'appckiQuoteOverview',
         name: 'Quotes'
+      },
+      'leden':{
+        templateUrl : 'js/Leden/leden-overview.html',
+        controller: 'appckiLedenOverview',
+        name: 'Leden'
+      },
+      'captioncontest':{
+        templateUrl : 'js/Captioncontest/captioncontest-overview.html',
+        controller: 'appckiCaptioncontestOverview',
+        name: 'Captioncontest'
+      },
+      'roephoek':{
+        templateUrl : 'js/Roephoek/roephoek-overview.html',
+        controller: 'appckiRoephoekOverview',
+        name: 'Roephoek'
       }
     }
   })
@@ -138,7 +156,28 @@ appcki
     url: '/quote/add',
     templateUrl: 'js/Quote/quote-add.html',
     controller: 'appckiQuoteAdd'
-  });
+  })
+  .state('app.leden-overview', {
+    url: '/leden',
+    templateUrl: 'js/Leden/leden-overview.html',
+    controller: 'appckiLedenOverview'
+  })
+  .state('app.leden-details', {
+    url: '/leden/detail/:id',
+    templateUrl: 'js/Leden/leden-details.html',
+    controller: 'appckiLedenDetails'
+  })
+  .state('app.roephoek', {
+    url: '/roephoek',
+    templateUrl: 'js/Roephoek/roephoek-overview.html',
+    controller: 'appckiRoephoekOverview'
+  })
+  .state('app.captioncontest', {
+    url: '/captioncontest',
+    templateUrl: 'js/Captioncontest/captioncontest-overview.html',
+    controller: 'appckiCaptioncontestOverview'
+  })
+;
 })
 .config(['$httpProvider',
   function( $httpProvider ) {

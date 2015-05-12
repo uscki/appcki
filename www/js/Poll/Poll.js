@@ -12,17 +12,12 @@ angular
 					// Grab the buttons and their width
 					var buttons = element[0].querySelector('.item-options');
 
-					if (!buttons) {
-						console.log('There are no option buttons');
-						return;
-					}
 					var buttonsWidth = buttons.offsetWidth;
 
 					ionic.requestAnimationFrame(function() {
 						content.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';
 
 						if (!buttons.classList.contains('invisible')) {
-							console.log('close');
 							content.style[ionic.CSS.TRANSFORM] = '';
 							setTimeout(function() {
 								buttons.classList.add('invisible');
@@ -42,6 +37,8 @@ angular
 			
 			$scope.votes = 0;
 
+			// TODO: see if user voted (wait for API update)
+			$scope.voted = true;
 			PollService.getActivePoll($state, function(data){
 				PollService.getDetails(data.id, function(polldata){
 					$scope.poll = polldata.poll;

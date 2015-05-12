@@ -1,6 +1,6 @@
 <ion-view view-title="Vergaderplanner" hide-back-button="true">   
 	<ion-content>
-		<ion-list>
+		<ion-list ng-if="items.length">
 			<ion-item class="article no-border" ng-repeat="item in items">
 				<span ui-sref="app.planner-detail({id: item.id})">
 					<h2>{{item.title}}</h2>
@@ -11,5 +11,8 @@
 				</span>
 			</ion-item>
 		</ion-list>
+		<div class="card" ng-if="!items.length">
+			<div class="item item-text-wrap">Er zijn momenteel geen vergaderplanners waar jij aan deel neemt.</div>
+		</div>
 	</ion-content>
 </ion-view>

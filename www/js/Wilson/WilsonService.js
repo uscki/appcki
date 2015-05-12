@@ -9,7 +9,6 @@ angular
 			return {
 				"name" : "Wilson", 
 				"hp": 100,
-				
 			};
 		}
 
