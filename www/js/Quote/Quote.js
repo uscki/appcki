@@ -15,8 +15,9 @@ angular
 				$scope.allInFavor = data.pos;
 				$scope.allAgainst = data.neg;
 				$scope.total = $scope.allInFavor + $scope.allAgainst;
-				$scope.favorPct = $scope.allInFavor / $scope.total * 90;
-				$scope.againstPct = $scope.allAgainst / $scope.total * 90;
+				$scope.favorPct = Math.max(5, Math.min(95, $scope.allInFavor / $scope.total * 100));
+				$scope.againstPct = 100;
+				if($scope.total == 0) { $scope.favorPct = 50;}
 				
 			}
 			

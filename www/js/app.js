@@ -32,7 +32,7 @@ appcki
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/wilson');
 
   $stateProvider.state('wilson', {
     url: '/wilson',
