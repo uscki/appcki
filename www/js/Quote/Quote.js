@@ -25,7 +25,6 @@ angular
 			{
 				$scope.voted = false;
 				QuoteService.getRandom(state, function(data){
-					console.log(data);
 					populateScope(data);
 				});
 			}

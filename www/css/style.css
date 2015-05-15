@@ -1,5 +1,10 @@
 /* Empty. Add your own CSS if you like */
 
+body {
+	// Just like on a phone!
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
+
 /* Articles */
 .article:nth-child(even) {
 	background-color: rgb(243,243,243);

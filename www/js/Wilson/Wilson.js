@@ -16,12 +16,8 @@ angular.module('appcki.wilson',[])
     template: "<div class='wilson'> </div>",
     link: function (scope, element) {
 
-
-    	console.log(element);
-
     	var firstOk = false;
     	element.bind('click', function(e){ 
-    		console.log("click" + e);
 
     		var x = Math.floor(((e.pageX - e.target.offsetLeft) + (width*blockSize/2)) / blockSize);
     		var y = Math.floor(((e.pageY - e.target.offsetTop) + (height*blockSize/2)) / blockSize);
@@ -36,8 +32,6 @@ angular.module('appcki.wilson',[])
     		}else{
     		//	firstOk = false;
     		}
-    		console.log(x); 
-    		console.log(y); 
     	});
 
 
