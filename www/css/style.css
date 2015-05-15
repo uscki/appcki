@@ -1,7 +1,6 @@
 /* Empty. Add your own CSS if you like */
 
 body {
-	// Just like on a phone!
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
 }
 
@@ -112,4 +111,34 @@ div.custom-login .logo-login .logo-login-sub{
 	/*float: left;*/
 	background-color: #DB1818;
 	border-radius: 10px 10px 10px 10px;
+}
+
+/** Header **/
+ion-nav-bar .title-light{
+	color: #BAADAD;
+	size: .9em;
+	margin-left: 10%;
+}
+
+ion-nav-bar .title-current{
+	/*background-color: orange;*/
+	margin: auto;
+}
+
+ion-nav-bar .title-small{
+	color: #BAADAD;
+	/*border: 1px solid black;*/
+	font-size: .9em;
+	position: relative;
+}
+
+ion-nav-bar .title-small.title-prev{
+	margin-left: -5%;
+	float: left;
+	display: none;
+}
+
+ion-nav-bar .title-small.title-next{
+	float: right;
+	margin-right: 20px;
 }

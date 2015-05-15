@@ -8,10 +8,26 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $log, $ht
 	 */
 	$scope.slideChange = function()
 	{
-		var i = $ionicSlideBoxDelegate.currentIndex();
 		var views = Object.keys($state.current.views);
+
+		var i = $ionicSlideBoxDelegate.currentIndex();
+		var next = (i == views.length-1) ? 0 : i+1;
+		var prev = (i == 0) ? views.length-1 : i-1;
+		/*console.log("Length: " + views.length);
+		console.log("Index: " + i);
+		console.log("Previous: " + prev);
+		console.log("Next: " + next);*/
+		
 		var currentView = $state.current.views[views[i]].name;
-		$ionicNavBarDelegate.title(currentView);
+		var nextView = $state.current.views[views[next]].name;
+		var prevView = $state.current.views[views[prev]].name;
+
+		var title = '<span class="title-small title-prev">' + prevView + '</span>';
+		title += '<span class="title-small title-next">' + nextView + '</span>';
+		title += '<div class="title-current">' + currentView + '</div>';
+
+		$ionicNavBarDelegate.title(title);
+
 	}
 
 	$scope.$on('$ionicView.enter', function(){
