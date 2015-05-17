@@ -1,7 +1,7 @@
 {
   "name": "appcki",
   "version": "1.0.0",
-  "description": "appcki: An Ionic project",
+  "description": "Wilson",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
