@@ -1,7 +1,9 @@
 angular.module('appcki.home',[])
-.controller("homePageCtrl", ['$scope', '$state', '$ionicNavBarDelegate', '$ionicSlideBoxDelegate', '$log', '$http','$location','UserService',
-function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $log, $http, $location, UserService){
+.controller("homePageCtrl", ['$scope', '$state', '$ionicNavBarDelegate', '$ionicSlideBoxDelegate', '$ionicPosition', '$ionicGesture', '$log', '$http','$location','UserService',
+function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPosition, $ionicGesture, $log, $http, $location, UserService){
 
+	var element = angular.element(document.querySelector("#main-slide-box"));
+	console.log(element);
 	/**
 	 * Method to set the title in the nav bar to the title of
 	 * the view that is being shown
@@ -22,9 +24,11 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $log, $ht
 		var nextView = $state.current.views[views[next]].name;
 		var prevView = $state.current.views[views[prev]].name;
 
-		var title = '<span class="title-small title-prev">' + prevView + '</span>';
+		var title = '<div id="header-title-bar">';
+		title += '<span class="title-small title-prev">' + prevView + '</span>';
 		title += '<span class="title-small title-next">' + nextView + '</span>';
 		title += '<div class="title-current">' + currentView + '</div>';
+		title += '</div>';
 
 		$ionicNavBarDelegate.title(title);
 
@@ -33,6 +37,34 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $log, $ht
 	$scope.$on('$ionicView.enter', function(){
 		$scope.slideChange();
 	});
+
+	var myDrag = function(e){
+		var x = e.gesture.deltaX;
+		var titleBar = angular.element(document.querySelector('#header-title-bar'));
+		titleBar.removeClass('resetting');
+		transformTitleBar(titleBar, x);
+	}
+
+	var myDragEnd = function(e)
+	{
+		var titleBar = angular.element(document.querySelector('#header-title-bar'));
+		titleBar.addClass('resetting');
+		transformTitleBar(titleBar, 0);
+	}
+
+	var transformTitleBar = function(titleBar, x)
+	{
+		var transformation = "translate(" + x + "px, 0px)";
+		titleBar.css('transform', transformation);
+	}
+
+	$scope.$on('$destroy', function(){
+		$ionicGesture.off(dragGesture, 'drag', myDrag);
+		$ionicGesture.off(dragEndGesture, 'dragend', myDragEnd);
+	});
+
+	var dragGesture = $ionicGesture.on('drag', myDrag, element);
+	var dragEndGesture = $ionicGesture.on('dragend', myDragEnd, element);
 
 
 }])

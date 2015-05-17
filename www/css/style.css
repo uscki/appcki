@@ -114,9 +114,12 @@ div.custom-login .logo-login .logo-login-sub{
 }
 
 /** Header **/
+ion-nav-bar #header-title-bar.resetting{
+	transition: transform .2s ease-in-out;
+}
+
 ion-nav-bar .title-light{
 	color: #BAADAD;
-	size: .9em;
 	margin-left: 10%;
 }
 
