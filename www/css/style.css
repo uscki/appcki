@@ -13,6 +13,85 @@ body {
 	border: none;
 }
 
+/**
+ * logo class
+ */
+.logo{
+	position: relative;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.logo-login{
+	margin-top: 5%;
+}
+
+.logo-40vh{
+	height: 40vh;
+	width: 40vh;
+	display: block;
+}
+
+.logo::before, .logo::after{
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	transition: 0.2s;
+}
+
+.logo::before{
+	background: url('../img/top-01.svg') no-repeat;
+	background-size: 100%;
+}
+
+.logo::after{
+	background: url('../img/bottom-01-transparant.svg') no-repeat;
+	background-size: 100%;
+}
+
+/** Logo animation top-turn **/
+@-webkit-keyframes logo-y { 
+	from { 
+		-webkit-transform: rotateY(0deg); 
+	} to { 
+		-webkit-transform: rotateY(-360deg); 
+	} 
+}
+
+@keyframes logo-y{
+	from {
+		-moz-transform: rotateY(0deg);
+		-ms-transform: rotateY(0deg);
+		transform: rotateY(0deg);
+	} 
+	to {
+		-moz-transform: rotateY(-360deg);
+		-ms-transform: rotateY(-360deg);
+		transform: rotateY(-360deg); 
+	}
+}
+
+.logo-animating-topturn::before
+{
+	-webkit-animation-name: logo-y; 
+	-webkit-animation-timing-function: linear; 
+	-webkit-animation-iteration-count: infinite; 
+	-webkit-animation-duration: 1s; 
+	animation-name: logo-y; 
+	animation-timing-function: linear; 
+	animation-iteration-count: infinite; 
+	animation-duration: 1s; 
+	-webkit-transform-style: preserve-3d; 
+	-moz-transform-style: preserve-3d; 
+	-ms-transform-style: preserve-3d; 
+	transform-style: preserve-3d;
+}
+
 /*****************************************************
 ******************************************************
 *************** LOGIN PAGE ***************************
@@ -42,25 +121,9 @@ div.custom-login form {
 	margin-top: 5vh;
 }
 
-div.custom-login .logo-login {
-	display: block;
-	margin-top: 5%;
-	height: 40vh;
-	background-image: URL("../img/bottom-01-transparant.svg");
-	background-size: auto 100%;
-	background-repeat: no-repeat;
-	background-position: center;
-}
 
-div.custom-login .logo-login .logo-login-sub{
-	background-image: URL("../img/top-01.svg");
-	display: block;
-	margin: 0px;
-	height: 40vh;
-	background-size: auto 100%;
-	background-repeat: no-repeat;
-	background-position: center;
-}
+
+
 
 /* planner box that indicates availability by color */
 .current-response-box{

@@ -4,10 +4,16 @@ angular.module('appcki.user',[])
 
         $scope.credentials = {};
 
+        var animation = 'logo-animating-topturn';
+
 		$scope.login = function(){           
 			console.log("inloggen met: " 
 				+ $scope.credentials.username + ", " 
 				+ $scope.credentials.password);
+
+            // Make logo spin
+            var el = angular.element(document.querySelector('.logo-login'));
+            el.addClass(animation);
 
             UserService.signin(
                 {
@@ -18,6 +24,7 @@ angular.module('appcki.user',[])
                     $location.path('/home');
                 },
                 function(){
+                    el.removeClass(animation);
                     var alertPopup = $ionicPopup.alert({
                        title: 'Inloggen mislukt',
                        template: 'De gegevens kwamen niet overeen'
