@@ -187,23 +187,22 @@ ion-nav-bar .title-light{
 }
 
 ion-nav-bar .title-current{
-	/*background-color: orange;*/
 	margin: auto;
 }
 
 ion-nav-bar .title-small{
 	color: #BAADAD;
-	/*border: 1px solid black;*/
-	position: relative;
 }
 
 ion-nav-bar .title-small.title-prev{
-	margin-left: -5%;
 	float: left;
-	display: none;
 }
 
 ion-nav-bar .title-small.title-next{
 	float: right;
 	margin-right: 20px;
+}
+
+ion-nav-bar .title-small.title-next2next{
+	position: absolute;
 }

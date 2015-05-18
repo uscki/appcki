@@ -1,8 +1,7 @@
 angular
 	.module('appcki.planner',[])
-	.controller("appckiPlannerOverview", ['$scope', '$log', '$http','$state','$filter','PlannerService', 'UserService',
-		function( $scope, $log, $http, $state, $filter, PlannerService, UserService){
-
+	.controller("appckiPlannerOverview", ['$scope', '$state','$filter','PlannerService', 'UserService',
+		function( $scope, $state, $filter, PlannerService, UserService){
 			$scope.items = [];
 
 			var state = PlannerService.createState();
@@ -44,11 +43,11 @@ angular
 			}
 
 	}])
-	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup', '$log', '$http','$state','$stateParams','$filter','PlannerService', 'UserService',
-		function( $scope, $ionicModal, $ionicPopup, $log, $http, $state, $stateParams, $filter, PlannerService, UserService){
+	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup','$state','$stateParams','$filter','PlannerService',
+		function( $scope,$ionicModal, $ionicPopup, $state, $stateParams, $filter, PlannerService){
 
 			// Load the modal from the given template URL
-		    $ionicModal.fromTemplateUrl('js/Planner/planner-modal.html', function($ionicModal) {
+	    	$ionicModal.fromTemplateUrl('js/Planner/planner-modal.html', function($ionicModal) {
 		        $scope.modal = $ionicModal;
 		    }, {
 		        // Use our scope for the scope of the modal to keep it simple
@@ -57,6 +56,11 @@ angular
 		        // The animation we want to use for the modal entrance
 		        animation: 'slide-in-up'
 		    });
+			//Cleanup the modal when we're done with it!
+			$scope.$on('$destroy', function() {
+				$scope.modal.remove();
+			});
+			
 
 			$scope.setPreference = function(id)
 			{
@@ -81,7 +85,6 @@ angular
 
 			$scope.openModal = function(index)
 			{
-				console.log($scope);
 				$scope.modal.item = $scope.meeting.slots[index];
 				$scope.modal.comment = unescape(($scope.preferences && $scope.preferences[index].notes) ? $scope.preferences[index].notes : "");
 				$scope.modal.show();

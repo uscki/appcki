@@ -1,4 +1,3 @@
-
 var appcki = angular.module('appcki', [
     'ionic',
     'appcki.wilson',
@@ -127,7 +126,7 @@ appcki
     templateUrl: 'js/News/news-details.html',
     controller: 'appckiNewsDetails'
   })
-  .state('app.planner-overview', { 
+  .state('app.home.planner-overview', { 
     url: '/planner', 
     templateUrl: 'js/Planner/planner-overview.html',
     controller: 'appckiPlannerOverview'

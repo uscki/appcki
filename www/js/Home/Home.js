@@ -3,6 +3,9 @@ angular.module('appcki.home',[])
 function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPosition, $ionicGesture, $log, $http, $location, UserService){
 
 	var element = angular.element(document.querySelector("#main-slide-box"));
+	var maxDragLeft = 0;
+	var maxDragRight = 0;
+	var titleBarWidth = 0;
 	
 	/**
 	 * Method to set the title in the nav bar to the title of
@@ -13,21 +16,26 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 		var views = Object.keys($state.current.views);
 
 		var i = $ionicSlideBoxDelegate.currentIndex();
-		var next = (i == views.length-1) ? 0 : i+1;
+		var next = (i+1) % views.length;
 		var prev = (i == 0) ? views.length-1 : i-1;
+		var next2next = (i+2) % views.length;
 		
 		var currentView = $state.current.views[views[i]].name;
 		var nextView = $state.current.views[views[next]].name;
 		var prevView = $state.current.views[views[prev]].name;
+		var next2nextView = $state.current.views[views[next2next]].name;
 
 		var title = '<div id="header-title-bar">';
 		title += '<span class="title-small title-prev">' + prevView + '</span>';
 		title += '<span class="title-small title-next">' + nextView + '</span>';
 		title += '<span class="title-current">' + currentView + '</span>';
+		title += '<span class="title-small title-next2next">' + next2nextView + '</span>';
 		title += '</div>';
 
 		$ionicNavBarDelegate.title(title);
 
+		calculateMaxDrag();
+		setOuterTitlePositions();
 	}
 
 	$scope.$on('$ionicView.enter', function(){
@@ -41,6 +49,15 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 	var myDrag = function(e){
 		var x = e.gesture.deltaX;
 		transformTitleBar(x, false);
+	}
+
+	/**
+	 * Function that is called when content drag starts
+	 * @param e 	drag event
+	 */
+	var myDragStart = function(e)
+	{
+
 	}
 
 	/**
@@ -68,15 +85,7 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 		} else {
 			titleBar.removeClass('resetting');
 		}
-
-		// Request element widths from title bar
-		totalWidth = titleBar[0].offsetWidth;
-		nextWidth = document.querySelector('#header-title-bar .title-next').offsetWidth;
-		curWidth = document.querySelector('#header-title-bar .title-current').offsetWidth;
-
-		// Calculate how far the titles can be dragged
-		var maxDragLeft = totalWidth - nextWidth - 20;
-		var maxDragRight = totalWidth - curWidth - 20;
+		
 		x = (x < -maxDragLeft) ? -maxDragLeft : x;
 		x = (x > maxDragRight) ? maxDragRight : x;
 		
@@ -85,15 +94,52 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 		titleBar.css('transform', transformation);
 	}
 
+	var setOuterTitlePositions = function()
+	{
+		var prevTitle = angular.element(document.querySelector('#header-title-bar .title-prev'));
+		var prevWidth = prevTitle[0].offsetWidth;
+		var curTitleWidth = document.querySelector('#header-title-bar .title-current').offsetWidth;
+
+		var nextTitle = angular.element(document.querySelector('#header-title-bar .title-next2next'));
+		var nextTitleWidth = nextTitle[0].offsetWidth;
+
+
+		var left = "-" + maxDragRight + "px";
+		var right = (titleBarWidth - curTitleWidth - nextTitleWidth - 20 + maxDragLeft) + "px";
+		prevTitle.css('margin-left', left);
+		nextTitle.css('margin-left', right);
+	}
+
+	/**
+	 * Calculates the maximum distance the title bar can be dragged
+	 * in either direction and sets the values in the controller
+	 */
+	var calculateMaxDrag = function()
+	{
+		var titleBar = angular.element(document.querySelector('#header-title-bar'));
+
+		// Request element widths from title bar
+		titleBarWidth = titleBar[0].offsetWidth;
+		var nextWidth = document.querySelector('#header-title-bar .title-next').offsetWidth;
+		var curWidth = document.querySelector('#header-title-bar .title-current').offsetWidth;
+
+		// Calculate how far the titles can be dragged
+		maxDragLeft = titleBarWidth - nextWidth - 20;
+		maxDragRight = titleBarWidth - curWidth - 20;
+	}
+
+
 	// Remove event listeners on document destroy
 	$scope.$on('$destroy', function(){
 		$ionicGesture.off(dragGesture, 'drag', myDrag);
 		$ionicGesture.off(dragEndGesture, 'dragend', myDragEnd);
+		$ionicGesture.off(dragStartGesture, 'dragstart', myDragStart);
 	});
 
 	// Event listeners for dragging the content
 	var dragGesture = $ionicGesture.on('drag', myDrag, element);
 	var dragEndGesture = $ionicGesture.on('dragend', myDragEnd, element);
+	var dragStartGesture = $ionicGesture.on('dragstart', myDragStart, element);
 
 
 }])
