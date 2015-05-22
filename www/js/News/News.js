@@ -1,7 +1,7 @@
 angular
 	.module('appcki.news',[])
-	.controller("appckiNewsOverview", ['$scope', '$log', '$http','$state','$filter','NewsService','UserService',
-		function( $scope, $log, $http, $state, $filter, NewsService, UserService){
+	.controller("appckiNewsOverview", ['$scope', '$log', '$http','$state','$filter','NewsService','UserService', 'DateHelper',
+		function( $scope, $log, $http, $state, $filter, NewsService, UserService, DateHelper){
 
 
 			var dateFilter = $filter('date');
@@ -13,13 +13,14 @@ angular
 			NewsService.getOlder(state, function(articles){
 				for(var i=0; i < articles.length; i++){
 					var article = articles[i];
-					article.posteddate = dateFilter(article.posteddate, 'd-M-yyyy');
+					article.posteddateFormatted = dateFilter(article.posteddate, 'd-M-yyyy');
+					article.postedtimeago = DateHelper.difference(article.posteddate);
 					$scope.items.push(article);
 				}
 			});
 	}])
-	.controller("appckiNewsDetails", ['$scope', '$log', '$http','$state','$stateParams','$filter','NewsService','UserService',
-		function( $scope, $log, $http, $state, $stateParams, $filter, NewsService, UserService){
+	.controller("appckiNewsDetails", ['$scope', '$log', '$http','$state','$stateParams','$filter','NewsService','UserService', 'DateHelper',
+		function( $scope, $log, $http, $state, $stateParams, $filter, NewsService, UserService, DateHelper){
 			var dateFilter = $filter('date');
 			NewsService.getDetails($stateParams.id, function(article){
 				article.posteddate = dateFilter(article.posteddate, 'd-M-yyyy');

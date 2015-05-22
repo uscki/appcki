@@ -1,5 +1,6 @@
 var appcki = angular.module('appcki', [
     'ionic',
+    'appcki.helper',
     'appcki.wilson',
     'appcki.home',
     'appcki.user',
@@ -99,7 +100,6 @@ appcki
       }
     }
   })
-
 
   .state('app.home.agenda-overview', { 
     url: '/agenda',

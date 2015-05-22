@@ -1,7 +1,7 @@
 angular
-	.module('appcki.planner',[])
-	.controller("appckiPlannerOverview", ['$scope', '$state','$filter','PlannerService', 'UserService',
-		function( $scope, $state, $filter, PlannerService, UserService){
+	.module('appcki.planner',['appcki.helper'])
+	.controller("appckiPlannerOverview", ['$scope', '$state','$filter','PlannerService', 'UserService', 'DateHelper',
+		function( $scope, $state, $filter, PlannerService, UserService, DateHelper){
 			$scope.items = [];
 
 			var state = PlannerService.createState();
@@ -14,6 +14,7 @@ angular
 					meeting = meetings[i];
 					meeting.invited = meeting.participants.length;
 					meeting.responded = meeting.slots[0].preferences.length;
+					meeting.actual_time = DateHelper.full(meeting.actual_time);
 					meeting.userstatus = (status(meeting.person.id, meeting.slots[0].preferences)) ? "Je hebt al gereageerd" : "Geef ff fucks!";
 					$scope.items.push(meeting);
 				}
@@ -43,8 +44,8 @@ angular
 			}
 
 	}])
-	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup','$state','$stateParams','$filter','PlannerService',
-		function( $scope,$ionicModal, $ionicPopup, $state, $stateParams, $filter, PlannerService){
+	.controller("appckiPlannerDetails", ['$scope', '$ionicModal', '$ionicPopup','$state','$stateParams','$filter','PlannerService', 'DateHelper',
+		function( $scope,$ionicModal, $ionicPopup, $state, $stateParams, $filter, PlannerService, DateHelper){
 
 			// Load the modal from the given template URL
 	    	$ionicModal.fromTemplateUrl('js/Planner/planner-modal.html', function($ionicModal) {
@@ -58,7 +59,6 @@ angular
 		    });
 			//Cleanup the modal when we're done with it!
 			$scope.$on('$destroy', function() {
-				$scope.modal.remove();
 			});
 			
 
@@ -99,6 +99,10 @@ angular
 					// Save meeting data to scope
 					$scope.meeting = meetingdata.meeting;
 					$scope.preferences = meetingdata.myPreferences;
+					if($scope.meeting.actual_time)
+					{
+						$scope.meeting.actual_time_date = DateHelper.dateFull($scope.meeting.actual_time);
+					}
 					
 					// Calculate response
 					$scope.invited = $scope.meeting.participants.length;
@@ -143,11 +147,12 @@ angular
 					if( thisDate != lastDate)
 					{
 						lastDate = thisDate;
-						slots.push({divider: true, label: thisDate});
+						slots.push({divider: true, label: DateHelper.full(item.starttime)});
 					}
 
 					item.pctcolor = availability2color(item.cando, item.nocando);
 					item.index = index;
+					item.starttimefull = DateHelper.full(item.starttime);
 					index++;
 
 					slots.push(item);
@@ -181,17 +186,6 @@ angular
 				}
 
 				callback(cando, nocando);
-			}
-
-			/**
-			 * Prepares the agenda as it was saved in the database
-			 * for display
-			 * @arg agenda 			Input string for agenda as saved in DB
-			 * @return string formatted for display
-			 */
-			formatAgenda = function(agenda)
-			{
-				return agenda;
 			}
 
 		    /**

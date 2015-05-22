@@ -8,7 +8,7 @@
       </div>
       <div class="item item-text-wrap">
         <p ng-if="meeting.location"><i class="icon ion-ios-location"></i>&nbsp;&nbsp;&nbsp;{{meeting.location}}</p>
-        <p ng-if="meeting.actual_time"><i class="icon ion-calendar"></i>&nbsp;&nbsp;{{meeting.actual_time | date: 'EEEE d MMMM yyyy'}}</p>
+        <p ng-if="meeting.actual_time"><i class="icon ion-calendar"></i>&nbsp;&nbsp;{{meeting.actual_time_date}}</p>
         <p ng-if="meeting.actual_time"><i class="icon ion-clock"></i>&nbsp;&nbsp;{{meeting.actual_time | date: 'HH:mm uur'}}</p>
         <p><i class="icon ion-ios-people"></i>&nbsp;&nbsp;{{responded}} van {{invited}} hebben gereageerd</p>
         <p>{{hasSubscribedMessage}}</p>
