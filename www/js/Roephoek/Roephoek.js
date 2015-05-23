@@ -37,7 +37,7 @@ angular
 					for(var i = 0; i < data.content.length; i++) {
 						var item = data.content[i];
 						item.when = DateHelper.difference(item.timestamp);
-						$scope.items.push(item);
+						$scope.items.unshift(item);
 					}
 				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');

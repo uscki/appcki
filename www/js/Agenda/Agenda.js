@@ -15,56 +15,66 @@ angular
 				}
 			};
 			
-			var newest;
+			$scope.lowerLast = false;
+			var newest = 0;
 			var prevBottomDividerString;
-			AgendaService.getNewer(newest, function(agendasdata){
-				var agendas = agendasdata.content;
-				newest = agendas[agendas.length-1].id;
+			$scope.loadNewer = function() {
+				AgendaService.getNewer(newest, function(agendasdata){
+					$scope.lowerLast = agendasdata.last;
+					var agendas = agendasdata.content;
+					newest = agendas[agendas.length-1].id;
 
-				for(var i=0; i < agendas.length; i++){
-					var then = new Date(agendas[i].startdate);
-					var dividerString = DateHelper.difference(then);
+					for(var i=0; i < agendas.length; i++){
+						var then = new Date(agendas[i].startdate);
+						var dividerString = DateHelper.difference(then);
 
-					if(dividerString != prevBottomDividerString){
-						$scope.items.push({divider: true, label: dividerString});
-						prevBottomDividerString = dividerString;
+						if(dividerString != prevBottomDividerString){
+							$scope.items.push({divider: true, label: dividerString});
+							prevBottomDividerString = dividerString;
+						}
+
+						agenda.dayName = DateHelper.days[thenDay];
+
+						$scope.items.push(agenda);
 					}
 
-					agenda.dayName = DateHelper.days[thenDay];
+					if (prevTopDividerString == undefined) {
+						prevTopDividerString = $scope.items[0].label; //get the upper dividerString.
+						oldest = agendas[0].id;
+					}
+				}, function(){
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+				}));
+			};
 
-					$scope.items.push(agenda);
-				}
-
-				if (prevTopDividerString == undefined) {
-					prevTopDividerString = $scope.items[0].label;
-					oldest = agendas[0].id;
-				}
-			});		
-
+			$scope.upperLast = false;
 			var oldest;
 			var prevTopDividerString;
-			AgendaService.getOlder(oldest, function(agendasdata){
-				var agendas = agendasdata.content;
-				oldest = agendas[agendas.length-1].id;
+			$scope.loadOlder = function() {
+				AgendaService.getOlder(oldest, function(agendasdata){
+					$scope.upperLast = agendasdata.last;
+					var agendas = agendasdata.content;
+					oldest = agendas[agendas.length-1].id;\
 
-				if (prevTopDividerString == undefined) {
-					$scope.items.shift();
-				}
+					$scope.items.shift(); //remove the top divider.
 
-				for(var i=0; i < agendas.length; i++){
-					var then = new Date(agendas[i].startdate);
-					var dividerString = DateHelper.difference(then);
+					for(var i=0; i < agendas.length; i++){
+						var then = new Date(agendas[i].startdate);
+						var dividerString = DateHelper.difference(then);
 
-					if(dividerString != prevTopDividerString){
-						$scope.items.push({divider: true, label: prevTopDividerString});
-						prevTopDividerString = dividerString;
+						if(dividerString != prevTopDividerString){
+							$scope.items.unshift({divider: true, label: prevTopDividerString});
+							prevTopDividerString = dividerString;
+						}
+
+						agenda.dayName = DateHelper.days[thenDay];
+
+						$scope.items.unshift(agenda);
 					}
+				});
+			};
 
-					agenda.dayName = DateHelper.days[thenDay];
-
-					$scope.items.unshift(agenda);
-				}
-			});		
+			$scope.loadNewer();
 	}])
 	.controller("appckiAgendaDetails", ['$scope', '$log', '$ionicPopup','$state','$stateParams','$filter','AgendaService','UserService',
 		function( $scope, $log, $ionicPopup, $state, $stateParams, $filter, AgendaService, UserService){		
