@@ -38,7 +38,7 @@ angular
 			$scope.votes = 0;
 
 			// TODO: see if user voted (wait for API update)
-			$scope.voted = true;
+			$scope.voted = false;
 			PollService.getActivePoll($state, function(data){
 				PollService.getDetails(data.id, function(polldata){
 					$scope.poll = polldata.poll;

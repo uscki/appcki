@@ -21,6 +21,7 @@ angular.module('appcki.user',[])
                     password: $scope.credentials.password
                 },
                 function(data){
+                    el.removeClass(animation);
                     $location.path('/home');
                 },
                 function(){
