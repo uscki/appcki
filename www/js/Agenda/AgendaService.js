@@ -3,7 +3,7 @@
 angular
     .module('appcki.agenda')
     .factory('AgendaService', ['$http', 'apiUrl', function($http,apiUrl){
-        var AgendaService  ={};
+        var AgendaService  = {};
 
 
         AgendaService.getOlder = function(id, callback, finish)
