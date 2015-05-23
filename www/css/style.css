@@ -212,6 +212,6 @@ ion-nav-bar .title-small.title-next2next{
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
-	background-color: white;
-	text-align: center;
+	/*background-color: white;*/
+	text-align: right;
 }

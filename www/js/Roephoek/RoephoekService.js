@@ -39,10 +39,10 @@ angular
             });
         }
 
-        RoephoekService.post = function(name, message, callback)
+        RoephoekService.post = function(name, message, callback, error)
         {
-            name = escape(name);
-            message = escape(message);
+            name = name;
+            message = message;
             $http({
                 url: apiUrl + "shoutbox/shout", 
                 method: "GET",
@@ -52,7 +52,7 @@ angular
                 callback(data);
             })
             .error(function(data){
-                callback(data);
+                error(data);
             });
         }
         

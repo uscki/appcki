@@ -1,40 +1,12 @@
 <ion-view view-title="Roephoek" hide-back-button="true">   
 	<ion-content>
-		<!-- <div class="card">
-			<div class="item item-text-wrap">
-				<h2>Todo's@appcki</h2>
-			</div>
-			<div class="item item-text-wrap">
-				<ion-list>
-					<ion-item>Bovenaan veld voor zelf te kiezen naam (max 26 tekens) en bericht (max 161 tekens)</ion-item>
-					<ion-item>Laatste 8 berichten ophalen, naam en tijd plaatsen in bold en bericht er onder</ion-item>
-					<ion-item>Bij naar beneden scrollen volgende 8 ophalen (paging gebruiken)</ion-item>
-				</ion-list>
-			</div>
-		</div> -->
-	<!-- 	<div class="card">
-			<div class="item">
-				<form ng-submit="shout()">
-					<div class="item item-input">
-						<input type="text" name="username" placeholder="Naam" ng-model="shoutbox.name"/>
-					</div>
-					<div class="item item-input">
-						<input type="text" placeholder="Boodschap" ng-model="shoutbox.message">
-					</div>
-					<button class="button button-full button-positive" ng-click="">
-						Voeg toe!
-					</button>
-
-				</form>
-			</div>
-		</div> -->
 		 <ion-refresher
 		    pulling-text="Ja! Nog een beetje en ik ververs!"
 		    on-refresh="doRefresh()">
 		  </ion-refresher>
 		<ion-list>
 			<ion-item ng-repeat="item in items">
-				<b>{{item.nickname}} ({{item.when}})</b>
+				<p>{{item.nickname}} ({{item.when}})</p>
 				<p>{{item.message}}</p>
 			</ion-item>
 		</ion-list>
@@ -46,11 +18,7 @@
 		</ion-infinite-scroll>
 	</ion-content>
 	<div class="message-box-bottom padding">
-		<!-- <form ng-submit="shout()">
-			<input class="float-left" type="text" placeholder="Boodschap" ng-model="shoutbox.message"/>
-			<button class="button button-positive float-right" ng-click="">Roep</button>
-		</form> -->
-		<a class="button button-icon icon ion-android-hangout" ng-click="openShout()"></a>
+		<a class="button button-icon icon ion-android-hangout padding" ng-click="openShout()"></a>
 	</div>
 	
 </ion-view>
