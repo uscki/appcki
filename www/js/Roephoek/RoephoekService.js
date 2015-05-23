@@ -5,37 +5,38 @@ angular
     .factory('RoephoekService', ['$http', 'apiUrl', function($http,apiUrl){
         var RoephoekService  ={};
 
-
         /**
          * Returns all the polls in the archive
          * API should order them new to old
          */
-        RoephoekService.getOverview = function(state, page, callback)
+        RoephoekService.getOlder = function(id, callback, finish)
         {
 
             $http({
-                url: "shoutbox/overview", 
+                url: apiUrl + "shoutbox/older", 
                 method: "GET",
-                params: {page: page, sort: "id,desc"}
+                params: {id: id, page: 0, sort: "id,desc"}
             })
-        	success(function(data){
+        	.success(function(data){
         		callback(data);
-        	});
+        	})
+            .finally(function(){
+                finish();
+            });
         }
 
 
-        RoephoekService.getNewer = function(state, page, callback)
+        RoephoekService.getNewer = function(id, callback, finish)
         {
-        /*
-            state.id = last id
-        */
             $http({
-                url: "shoutbox/newer", 
+                url: apiUrl + "shoutbox/newer", 
                 method: "GET",
-                params: {id: state.id, page: page, sort: "id,desc"}
+                params: {id: id, page: 0, sort: "id,asc"}
             })
-            success(function(data){
+            .success(function(data){
                 callback(data);
+            }).finally(function(){
+                finish();
             });
         }
 
@@ -43,9 +44,8 @@ angular
         {
             name = escape(name);
             message = escape(message);
-//            $http.get(apiUrl + "shoutbox/post?name=" + name + "&message=" + message)
             $http({
-                url: "shoutbox/shout", 
+                url: apiUrl + "shoutbox/shout", 
                 method: "GET",
                 params: {nickname: name, message:message}
             })

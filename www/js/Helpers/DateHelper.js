@@ -6,7 +6,7 @@ angular.module('appcki.helper')
         var DateHelper = {};
 
         var days = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
-        var d = ["zo", "ma", "di", "wo", "do", "vr", "za"];
+        var dayShort = ["zo", "ma", "di", "wo", "do", "vr", "za"];
 
         var month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
         var m = ["jan", "feb", "mar", "apr", "mei", "jun", "jul", "aug", "sept", "okt", "nov", "dec"];
@@ -95,7 +95,7 @@ angular.module('appcki.helper')
             var date = splitDate(d);
              return "%s %s %s %d"
             .sprintf(
-                    d[date.dayOfWeek], 
+                    dayShort[date.dayOfWeek], 
                     date.day,
                     m[date.month],
                     date.year
@@ -181,7 +181,6 @@ angular.module('appcki.helper')
                 var plural = (q == 1) ? "" : "en";
                 result = dir.sprintf("%d maand%s".sprintf(q, plural));
             } else {
-                console.log(diff + "\n" + new Date(d));
                 var q = Math.round(diff / year);
                 result = dir.sprintf("%d jaar".sprintf(q));
             }

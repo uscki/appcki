@@ -22,8 +22,7 @@ angular
 		function( $scope, $log, $http, $state, $stateParams, $filter, NewsService, UserService, DateHelper){
 			var dateFilter = $filter('date');
 			NewsService.getDetails($stateParams.id, function(article){
-				article.posteddateShort = DateHelper.dateShort(article.posteddate);
-				article.timediff = DateHelper.difference(article.posteddate);
+				article.posteddateShort = DateHelper.dateNumbers(article.posteddate);
 				$scope.article = article;
 			});
 	}]);

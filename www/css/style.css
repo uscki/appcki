@@ -206,3 +206,12 @@ ion-nav-bar .title-small.title-next{
 ion-nav-bar .title-small.title-next2next{
 	position: absolute;
 }
+
+/** SHOUTBOX!!!!!!!**/
+.message-box-bottom {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background-color: white;
+	text-align: center;
+}
