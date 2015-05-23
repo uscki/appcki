@@ -1,15 +1,11 @@
 angular
 	.module('appcki.agenda',[])
-	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService',
-		function( $scope, $log, $http, $state, $filter, AgendaService, UserService){
+	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService','DateHelper',
+		function( $scope, $log, $http, $state, $filter, AgendaService, UserService, DateHelper){
 
-			
 			var dateFilter = $filter('date');
 
 			$scope.items = [];
-
-			var state = AgendaService.createState();
-			//state.newest -= 10000000000000;
 
 			$scope.getItemHeight = function(item){
 				return item.divider? 34: 55;
@@ -19,46 +15,56 @@ angular
 				}
 			};
 			
-			var oneWeek = 604800000;
-			var relWeekNrToSTring = function(nr) {
-				if (nr == 0) return "Deze week";
-				if (nr == 1) return "Volgende week";
-				if (nr == -1) return "Vorige week";
-				if (nr > 1) return "Over " + (nr+1) + " weken";
-				else return (nr*-1) + " weken geleden";
-			};
-			var weekdays = {
-				0:"ma",
-				1:"di",
-				2:"wo",
-				3:"do",
-				4:"vr",
-				5:"za",
-				6:"zo"
-			}
-			AgendaService.getNewer(state, function(agendasdata){
-				agendas = agendasdata.content;
-				var now = new Date();
-				var previousWeekString = 0;
-				
+			var newest;
+			var prevBottomDividerString;
+			AgendaService.getNewer(newest, function(agendasdata){
+				var agendas = agendasdata.content;
+				newest = agendas[agendas.length-1].id;
+
 				for(var i=0; i < agendas.length; i++){
-					var agenda = agendas[i];
+					var then = new Date(agendas[i].startdate);
+					var dividerString = DateHelper.difference(then);
 
-					var then = new Date(agenda.startdate);
-					var relWeekNr = Math.floor((then.getTime() - now.getTime()) / oneWeek);
-					if (then.getDay() > now.getDay()) relWeekNr -= 1;
-					var weekString = relWeekNrToSTring(relWeekNr);
-
-					if(weekString != previousWeekString){
-						$scope.items.push({divider: true, label: weekString});
-						previousWeekString=weekString;
+					if(dividerString != prevBottomDividerString){
+						$scope.items.push({divider: true, label: dividerString});
+						prevBottomDividerString = dividerString;
 					}
 
-					agenda.dayName = weekdays[then.getDay()];
+					agenda.dayName = DateHelper.days[thenDay];
 
 					$scope.items.push(agenda);
 				}
-			});			
+
+				if (prevTopDividerString == undefined) {
+					prevTopDividerString = $scope.items[0].label;
+					oldest = agendas[0].id;
+				}
+			});		
+
+			var oldest;
+			var prevTopDividerString;
+			AgendaService.getOlder(oldest, function(agendasdata){
+				var agendas = agendasdata.content;
+				oldest = agendas[agendas.length-1].id;
+
+				if (prevTopDividerString == undefined) {
+					$scope.items.shift();
+				}
+
+				for(var i=0; i < agendas.length; i++){
+					var then = new Date(agendas[i].startdate);
+					var dividerString = DateHelper.difference(then);
+
+					if(dividerString != prevTopDividerString){
+						$scope.items.push({divider: true, label: prevTopDividerString});
+						prevTopDividerString = dividerString;
+					}
+
+					agenda.dayName = DateHelper.days[thenDay];
+
+					$scope.items.unshift(agenda);
+				}
+			});		
 	}])
 	.controller("appckiAgendaDetails", ['$scope', '$log', '$ionicPopup','$state','$stateParams','$filter','AgendaService','UserService',
 		function( $scope, $log, $ionicPopup, $state, $stateParams, $filter, AgendaService, UserService){		

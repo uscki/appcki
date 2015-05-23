@@ -2,6 +2,11 @@
 <ion-view view-title="Agenda" hide-back-button="true">   
 
 	<ion-content>
+		<ion-refresher 
+			ng-if="!upperLast"
+		    pulling-text="Wil je terug in de tijd?"
+		    on-refresh="loadOlder()">
+		</ion-refresher>
 		<ion-list>
 			<ion-item 
 				ng-repeat="item in items"
@@ -14,8 +19,13 @@
 					<div class="item-note">{{item.dayName}}</div>
 					<h2>{{item.shortdescription}}</h2>
 				</span>
-
 			</ion-item>
 		</ion-list>
+		<ion-infinite-scroll
+			ng-if="!lowerLast"
+			icon="ion-loading-c"
+			distance="1%"
+			on-infinite="loadNewer()">
+		</ion-infinite-scroll>
 	</ion-content>
 </ion-view>

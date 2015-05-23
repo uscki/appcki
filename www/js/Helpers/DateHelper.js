@@ -141,7 +141,7 @@ angular.module('appcki.helper')
                 var result = "nu";
                 return result;
             } else if (diff < 0) {
-                dir = "over %s"
+                dir = "Over %s"
                 diff *= -1;
             } else {
                 dir = "%s geleden";
