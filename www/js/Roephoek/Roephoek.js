@@ -1,24 +1,14 @@
 angular
 	.module('appcki.roephoek',[])
-	.controller("appckiRoephoekOverview", ['$scope', '$ionicPopup', '$ionicScrollDelegate', 'RoephoekService', 'DateHelper',
-		function( $scope, $ionicPopup, $ionicScrollDelegate, RoephoekService, DateHelper){
+	.controller("appckiRoephoekOverview", ['$scope', '$ionicPopup', '$ionicScrollDelegate', 'RoephoekService', 'UserService', 'DateHelper',
+		function( $scope, $ionicPopup, $ionicScrollDelegate, RoephoekService, UserService, DateHelper){
 			var page = 0;
 			$scope.last = false;
 			var newestId;
 			var oldestId = -1;
+			$scope.shout = {};
 
 			$scope.items = [];
-
-			/*RoephoekService.getOverview(page, function(data){
-				console.log(data);
-				$scope.last = data.last;
-				newestId = data.content[0].id;
-				for(var i = 0; i < data.content.length; i++) {
-					var item = data.content[i];
-					item.when = DateHelper.difference(item.timestamp);
-					$scope.items.push(item);
-				}
-			}), function(){};*/
 
 			$scope.doRefresh = function(){
 				var items = [];
@@ -57,9 +47,10 @@ angular
 
 			$scope.openShout = function(){
 				console.log("ay");
+				$scope.shout.name = UserService.fullname();
 			  $ionicPopup.show({
-			     template: '<textarea ng-model="data.note" style="height:80px;"> </textarea>',
-			     title: 'Roep',
+			     template: '<input type="text" ng-model="shout.name" placeholder="Naam" maxlength="26"/><textarea ng-model="shout.message" maxlength="161" style="height:80px;" placeholder="Bericht"> </textarea>',
+			     title: 'WatRoepJeMeNou',
 			     subTitle: '',
 			     scope: $scope,
 			     buttons: [
@@ -68,14 +59,21 @@ angular
 			         text: '<b>Roep!</b>',
 			         type: 'button-positive',
 			         onTap: function(e) {
-			             return $scope.data.note;
+			             return $scope.shout;
 			         }
 			       },
 			     ]
 			   }).then(function(res) {
-			   	console.log($scope.data.note);
+			   	console.log($scope.shout);
 			   	console.log(res);
-			   	RoephoekService.shout(agenda.id, res, function(result){});
+			   	RoephoekService.post($scope.shout.name, $scope.shout.message, function(d){
+			   		$scope.doRefresh();
+			   	}, function(d){
+					var alertPopup = $ionicPopup.alert({
+                       title: 'Mislukt',
+                       template: 'Je roep kon niet worden verstuurd. Controleer of je alles hebt ingevuld en ga zitten balen, tot het we werkt!'
+                    });
+			   	});
 			   });			
 			};
 	}]);

@@ -30,13 +30,50 @@ angular.module('appcki.user')
                 var encoded = token.split('.')[1];
                 user = JSON.parse(urlBase64Decode(encoded));
             }
+            console.log(user);
             return user;
         }
+
+        function getUserFullName()
+        {
+            var user = getUserFromToken();
+            var name = "%s ".sprintf(user.firstname);
+            if(user.middlename)
+            {
+                name += "%s ".sprintf(user.middlename);
+            }
+            name += "%s".sprintf(user.lastname);
+
+            return name;
+        }
+
+        function getUserFirstName()
+        {
+            var user = getUserFromToken();
+            return user.firstname;
+        }
+
+        function getUserLastName()
+        {
+            var user = getUserFromToken;
+            if(user.middlename)
+            {
+                var name = "%s %s".sprintf(user.middlename, user.lastname);
+            } else {
+                var name = user.lastname;
+            }
+
+            return name;
+        }
+
 
         var currentUser = getUserFromToken();
 
         return {
             getUserFromToken: getUserFromToken,
+            fullname: getUserFullName,
+            firstname : getUserFirstName,
+            lastname : getUserLastName,
             signin: function(data, success, error) {
                 console.log(data);
 
@@ -56,7 +93,7 @@ angular.module('appcki.user')
                     .error(error)
             },
             me: function(success, error) {
-                $http.get(apiUrl + '/me').success(function(data){success(data)}).error(function(data){error(data)});
+                $http.get(apiUrl + '/user/current').success(function(data){success(data)}).error(function(data){error(data)});
             },
             logout: function(success) {
                 changeUser({});
