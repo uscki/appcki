@@ -10,13 +10,22 @@ angular
 
 			var state = NewsService.createState();					
 
-			NewsService.getOlder(state, function(articles){
-				for(var i=0; i < articles.length; i++){
-					var article = articles[i];
-					article.postedtimeago = DateHelper.difference(article.posteddate);
-					$scope.items.push(article);
-				}
-			});
+			$scope.last = false;
+			$scope.loadOlder = function(){
+				NewsService.getOlder(state, function(data){
+					$scope.last = data.last;
+					var articles = data.content;
+					for(var i=0; i < articles.length; i++){
+						var article = articles[i];
+						article.postedtimeago = DateHelper.difference(article.posteddate);
+						$scope.items.push(article);
+					}
+				}, function(){
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+				});
+			};
+
+			$scope.loadOlder();
 	}])
 	.controller("appckiNewsDetails", ['$scope', '$log', '$http','$state','$stateParams','$filter','NewsService','UserService', 'DateHelper',
 		function( $scope, $log, $http, $state, $stateParams, $filter, NewsService, UserService, DateHelper){
