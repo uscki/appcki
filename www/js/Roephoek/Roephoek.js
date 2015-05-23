@@ -6,28 +6,28 @@ angular
 			$scope.last = false;
 			var newestId;
 			var oldestId = -1;
-			$scope.shout = {};
+			
 
 			$scope.items = [];
 
 			$scope.doRefresh = function(){
 				var items = [];
 				RoephoekService.getNewer(newestId, function(data){
+					newestId = data.content[0].id || newestId;
 					for(var i = data.content.length; i > 0; i--)
 					{
 						var item = data.content[i-1];
 						item.when = DateHelper.difference(item.timestamp);
 						$scope.items.unshift(item);
 					}
-
-				}, function(){
+				},
+				function(){
 					$scope.$broadcast('scroll.refreshComplete');
 				});
 			}
 
 			$scope.loadMoreData = function()
 			{
-				console.log("Laden...");
 				RoephoekService.getOlder(oldestId, function(data){
 					$scope.last = data.last;
 					
@@ -46,7 +46,7 @@ angular
 			}
 
 			$scope.openShout = function(){
-				console.log("ay");
+				$scope.shout = {};
 				$scope.shout.name = UserService.fullname();
 			  $ionicPopup.show({
 			     template: '<input type="text" ng-model="shout.name" placeholder="Naam" maxlength="26"/><textarea ng-model="shout.message" maxlength="161" style="height:80px;" placeholder="Bericht"> </textarea>',
@@ -64,16 +64,14 @@ angular
 			       },
 			     ]
 			   }).then(function(res) {
-			   	console.log($scope.shout);
-			   	console.log(res);
-			   	RoephoekService.post($scope.shout.name, $scope.shout.message, function(d){
-			   		$scope.doRefresh();
-			   	}, function(d){
-					var alertPopup = $ionicPopup.alert({
-                       title: 'Mislukt',
-                       template: 'Je roep kon niet worden verstuurd. Controleer of je alles hebt ingevuld en ga zitten balen, tot het we werkt!'
-                    });
-			   	});
+					RoephoekService.post($scope.shout.name, $scope.shout.message, function(d){
+						$scope.doRefresh();
+					}, function(d){
+						var alertPopup = $ionicPopup.alert({
+							title: 'Mislukt',
+							template: 'Je roep kon niet worden verstuurd. Controleer of je alles hebt ingevuld en ga zitten balen, tot het we werkt!'
+						});
+					});
 			   });			
 			};
 	}]);

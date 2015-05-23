@@ -30,7 +30,6 @@ angular.module('appcki.user')
                 var encoded = token.split('.')[1];
                 user = JSON.parse(urlBase64Decode(encoded));
             }
-            console.log(user);
             return user;
         }
 
