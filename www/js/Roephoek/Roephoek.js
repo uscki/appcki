@@ -61,13 +61,18 @@ angular
 			$scope.openShout = function(){
 				$scope.shout = {};
 				$scope.shout.name = UserService.fullname();
+				var cancelled = false;
 			  $ionicPopup.show({
 			     template: '<input type="text" ng-model="shout.name" placeholder="Naam" maxlength="26"/><textarea ng-model="shout.message" maxlength="161" style="height:80px;" placeholder="Bericht"> </textarea>',
 			     title: 'WatRoepJeMeNou',
 			     subTitle: '',
 			     scope: $scope,
 			     buttons: [
-			       { text: 'Annuleren' },
+			       { text: 'Annuleren',
+			       	 onTap: function(e) {
+			       	 	return cancelled = true;
+			       	 }
+			       },
 			       {
 			         text: '<b>Roep!</b>',
 			         type: 'button-positive',
@@ -77,14 +82,18 @@ angular
 			       },
 			     ]
 			   }).then(function(res) {
-					RoephoekService.post($scope.shout.name, $scope.shout.message, function(d){
-						$scope.doRefresh();
-					}, function(d){
-						var alertPopup = $ionicPopup.alert({
-							title: 'Mislukt',
-							template: 'Je roep kon niet worden verstuurd. Controleer of je alles hebt ingevuld en ga zitten balen, tot het we werkt!'
+			   		console.log($scope.cancelled);
+			   		if(!cancelled)
+			   		{
+						RoephoekService.post($scope.shout.name, $scope.shout.message, function(d){
+							$scope.doRefresh();
+						}, function(d){
+							var alertPopup = $ionicPopup.alert({
+								title: 'Mislukt',
+								template: 'Je roep kon niet worden verstuurd. Controleer of je alles hebt ingevuld en ga zitten balen, tot het we werkt!'
+							});
 						});
-					});
+					}
 			   });			
 			};
 
