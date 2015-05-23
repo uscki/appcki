@@ -11,7 +11,6 @@ angular
          */
         RoephoekService.getOlder = function(id, callback, finish)
         {
-
             $http({
                 url: apiUrl + "shoutbox/older", 
                 method: "GET",

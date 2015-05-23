@@ -5,43 +5,47 @@ angular
     .factory('AgendaService', ['$http', 'apiUrl', function($http,apiUrl){
         var AgendaService  ={};
 
-        var defaultState = {
-            newest:-1,
-            oldest:-1
-        };
 
-        AgendaService.getNewer = function(state, callback){
-           // state = state || defaultState;
+        AgendaService.getOlder = function(id, callback, finish)
+        {
 
-            $http.get(apiUrl + "agenda/overview")
+            $http({
+                url: apiUrl + "agenda/older", 
+                method: "GET",
+                params: {id: id, page: 0, sort: "startdate,starttime,desc"}
+            })
             .success(function(data){
                 callback(data);
+            })
+            .finally(function(){
+                finish();
             });
-        };
+        }
 
-        AgendaService.getOlder = function(state, callback){
-            state = state || defaultState;
 
-            $http.get(apiUrl + "agenda/overview")
+        AgendaService.getNewer = function(id, callback, finish)
+        {
+            $http({
+                url: apiUrl + "agenda/newer", 
+                method: "GET",
+                params: {id: id, page: 0, sort: "startdate,starttime,asc"}
+            })
             .success(function(data){
                 callback(data);
+            }).finally(function(){
+                finish();
             });
-        };
+        }
 
         AgendaService.getDetails = function(id, callback){
-
-            $http.get(apiUrl + "agenda/get?id="+id)
+            $http({
+                url: apiUrl + "agenda/get", 
+                method: "GET",
+                params: {id: id}
+            })
             .success(function(data){
                 callback(data);
             });
-        };
-
-        AgendaService.createState = function(){
-            var today = new Date();
-            return {
-                newest: today.getTime(),
-                oldest: today.getTime()
-            };
         };
 
         AgendaService.getSubscription = function(agenda, me){
@@ -52,9 +56,7 @@ angular
                 }
             }
             return;
-        };
-
-        
+        };        
 
         AgendaService.subscribe = function(id, note, callback){            
             $http.get(apiUrl + "/agenda/subscribe?id="+id+"&note="+note)
