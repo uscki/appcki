@@ -50,7 +50,7 @@ angular
 					for(var i = 0; i < data.content.length; i++) {
 						var item = data.content[i];
 						item.when = DateHelper.difference(item.timestamp);
-						$scope.items.unshift(item);
+						$scope.items.push(item);
 					}
 				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
