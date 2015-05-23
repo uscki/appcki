@@ -15,7 +15,6 @@ angular
 				{
 					var oldwhen = $scope.items[i].when;
 					$scope.items[i].when = DateHelper.difference($scope.items[i].timestamp);
-					console.log("yeah " + i);
 					if(oldwhen == $scope.items[i].when)
 					{
 						break;
@@ -24,7 +23,6 @@ angular
 			}
 
 			$scope.doRefresh = function(){
-				console.log("refreshing...");
 				var items = [];
 				RoephoekService.getNewer(newestId, function(data){
 					newestId = (data.content.length > 0) ? data.content[0].id : newestId;
