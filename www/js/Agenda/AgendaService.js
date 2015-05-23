@@ -39,7 +39,7 @@ angular
 
         AgendaService.getDetails = function(id, callback){
             $http({
-                url: apiUrl + "agenda/newer", 
+                url: apiUrl + "agenda/get", 
                 method: "GET",
                 params: {id: id}
             })
