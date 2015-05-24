@@ -14,9 +14,11 @@ angular
 				if(!item.divider){
 				}
 			};
-			
+
+			var dayShort = ["zo", "ma", "di", "wo", "do", "vr", "za"];
+
 			$scope.lowerLast = false;
-			var newest = 0;
+			var newest;
 			var prevBottomDividerString;
 			$scope.loadNewer = function() {
 				AgendaService.getNewer(newest, function(agendasdata){
@@ -25,7 +27,8 @@ angular
 					newest = agendas[agendas.length-1].id;
 
 					for(var i=0; i < agendas.length; i++){
-						var then = new Date(agendas[i].startdate);
+						var agenda = agendas[i];
+						var then = new Date(agenda.startdate);
 						var dividerString = DateHelper.difference(then);
 
 						if(dividerString != prevBottomDividerString){
@@ -33,8 +36,7 @@ angular
 							prevBottomDividerString = dividerString;
 						}
 
-						agenda.dayName = DateHelper.days[thenDay];
-
+						agenda.dayName = dayShort[then.getDay()];
 						$scope.items.push(agenda);
 					}
 
@@ -44,7 +46,7 @@ angular
 					}
 				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
-				}));
+				});
 			};
 
 			$scope.upperLast = false;
@@ -54,12 +56,15 @@ angular
 				AgendaService.getOlder(oldest, function(agendasdata){
 					$scope.upperLast = agendasdata.last;
 					var agendas = agendasdata.content;
-					oldest = agendas[agendas.length-1].id;\
+					if(agendas.length >0){
+						oldest = agendas[agendas.length-1].id;
+					}
 
 					$scope.items.shift(); //remove the top divider.
 
 					for(var i=0; i < agendas.length; i++){
-						var then = new Date(agendas[i].startdate);
+						var agenda = agendas[i];
+						var then = new Date(agenda.startdate);
 						var dividerString = DateHelper.difference(then);
 
 						if(dividerString != prevTopDividerString){
@@ -67,10 +72,11 @@ angular
 							prevTopDividerString = dividerString;
 						}
 
-						agenda.dayName = DateHelper.days[thenDay];
-
+						agenda.dayName = dayShort[then.getDay()];
 						$scope.items.unshift(agenda);
 					}
+
+					$scope.items.unshift({divider: true, label: prevTopDividerString});
 				});
 			};
 
