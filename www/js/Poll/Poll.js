@@ -32,8 +32,8 @@ angular
 			}
 		};
 	}])
-	.controller("appckiPollOverview", ['$scope', '$log', '$http','$state','$filter','PollService',
-		function( $scope, $log, $http, $state, $filter, PollService){
+	.controller("appckiPollOverview", ['$scope', '$log', '$http','$state','$timeout','$filter','PollService',
+		function( $scope, $log, $http, $state, $timeout, $filter, PollService){
 			
 			$scope.votes = 0;
 			$scope.items = [];
@@ -65,6 +65,12 @@ angular
 						$scope.polls.push(item);
 					}
 				}, function(){
+					$scope.last = true;
+					$timeout(function(){
+						$scope.last = false;
+					}, 60000);
+				} 
+				,function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 			}

@@ -1,7 +1,7 @@
 angular
 	.module('appcki.agenda',[])
-	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$state','$filter','AgendaService','UserService','DateHelper',
-		function( $scope, $log, $http, $state, $filter, AgendaService, UserService, DateHelper){
+	.controller("appckiAgendaOverview", ['$scope', '$log', '$http','$state','$timeout','$filter','AgendaService','UserService','DateHelper',
+		function( $scope, $log, $http, $state, $timeout, $filter, AgendaService, UserService, DateHelper){
 
 			var dateFilter = $filter('date');
 
@@ -44,6 +44,11 @@ angular
 						prevTopDividerString = $scope.items[0].label; //get the upper dividerString.
 						oldest = agendas[0].id;
 					}
+				}, function(){
+					$scope.lowerLast = true;
+					$timeout(function(){
+						$scope.lowerLast = false;
+					}, 60000);
 				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});

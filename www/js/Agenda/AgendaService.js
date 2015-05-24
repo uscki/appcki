@@ -23,7 +23,7 @@ angular
         }
 
 
-        AgendaService.getNewer = function(id, callback, finish)
+        AgendaService.getNewer = function(id, callback, error, finish)
         {
             $http({
                 url: apiUrl + "agenda/newer", 
@@ -32,7 +32,10 @@ angular
             })
             .success(function(data){
                 callback(data);
-            }).finally(function(){
+            }).error(function(){
+                error();
+            })
+            .finally(function(){
                 finish();
             });
         }

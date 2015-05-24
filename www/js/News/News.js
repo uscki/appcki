@@ -1,7 +1,7 @@
 angular
 	.module('appcki.news',[])
-	.controller("appckiNewsOverview", ['$scope', '$log', '$http','$state','$filter','NewsService','UserService', 'DateHelper',
-		function( $scope, $log, $http, $state, $filter, NewsService, UserService, DateHelper){
+	.controller("appckiNewsOverview", ['$scope', '$log', '$http','$state','$timeout','$filter','NewsService','UserService', 'DateHelper',
+		function( $scope, $log, $http, $state, $timeout, $filter, NewsService, UserService, DateHelper){
 
 
 			var dateFilter = $filter('date');
@@ -20,6 +20,11 @@ angular
 						article.postedtimeago = DateHelper.difference(article.posteddate);
 						$scope.items.push(article);
 					}
+				}, function(){
+					$scope.last = true;
+					$timeout(function(){
+						$scope.last = false;
+					}, 60000);
 				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});

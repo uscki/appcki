@@ -9,7 +9,7 @@ angular
          * Returns all the polls in the archive
          * API should order them new to old
          */
-        RoephoekService.getOlder = function(id, callback, finish)
+        RoephoekService.getOlder = function(id, callback, error, finish)
         {
             $http({
                 url: apiUrl + "shoutbox/older", 
@@ -19,6 +19,9 @@ angular
         	.success(function(data){
         		callback(data);
         	})
+            .error(function(){
+                error();
+            })
             .finally(function(){
                 finish();
             });

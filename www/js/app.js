@@ -12,6 +12,7 @@ var appcki = angular.module('appcki', [
     'appcki.roephoek',
     'appcki.captioncontest',
     'appcki.leden',
+    'appcki.GoL',
     'appcki.settings',
     'ngStorage',
     'ngRoute',
@@ -97,6 +98,12 @@ appcki
         templateUrl : 'js/Roephoek/roephoek-overview.html',
         controller: 'appckiRoephoekOverview',
         name: 'Roephoek'
+      },
+      'GameOfLife':
+      {
+        templateUrl : 'js/GameOfLife/gameoflife.html',
+        controller: 'GameOfLifeController',
+        name: 'Conway\'s Game of Life'
       }
     }
   })
@@ -180,6 +187,11 @@ appcki
     url: '/captioncontest',
     templateUrl: 'js/Captioncontest/captioncontest-overview.html',
     controller: 'appckiCaptioncontestOverview'
+  })
+  .state('app.GoL', {
+    url : '/gameoflife',
+    templateUrl: 'js/GameOfLife/gameoflife.html',
+    controller: 'GameOfLifeController'
   })
 ;
 })

@@ -24,7 +24,7 @@ angular
          * Returns all the polls in the archive
          * API should order them new to old
          */
-        PollService.getArchive = function(page, callback, finish)
+        PollService.getArchive = function(page, callback, error, finish)
         {
             $http({
                 url : apiUrl + "poll/overview",
@@ -33,6 +33,9 @@ angular
             })
             .success(function(data){
                 callback(data)
+            })
+            .error(function(){
+                error();
             })
             .finally(function(){
                 finish();

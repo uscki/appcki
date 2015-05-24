@@ -15,10 +15,13 @@ angular
             });
         };
 
-        NewsService.getOlder = function(state, callback, finish){
+        NewsService.getOlder = function(state, callback, error, finish){
             $http.get(apiUrl + "news/overview")
             .success(function(data){
                 callback(data);
+            })
+            .error(function(){
+                error();
             })
             .finally(function(){
                 finish();

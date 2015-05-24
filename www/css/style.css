@@ -215,3 +215,29 @@ ion-nav-bar .title-small.title-next2next{
 	/*background-color: white;*/
 	text-align: right;
 }
+
+/** GAME OF LIFE **/
+.conway-canvas
+{
+	/*background-color: red;*/
+}
+
+/*.conway-canvas .conway-row
+{
+	position: relative;
+	clear: both;
+}*/
+
+.conway-canvas .conway-row .conway-cell
+{
+	float: left;
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin: 1px;
+	border: 1px solid #e1e1e1;
+}
+
+.conway-canvas .conway-row .conway-cell-true{
+	background-color: red;
+}

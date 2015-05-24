@@ -1,7 +1,7 @@
 angular
 	.module('appcki.roephoek',[])
-	.controller("appckiRoephoekOverview", ['$scope', '$ionicPopup', '$ionicScrollDelegate', '$interval', 'RoephoekService', 'UserService', 'DateHelper',
-		function( $scope, $ionicPopup, $ionicScrollDelegate, $interval, RoephoekService, UserService, DateHelper){
+	.controller("appckiRoephoekOverview", ['$scope', '$ionicPopup', '$ionicScrollDelegate', '$interval', '$timeout', 'RoephoekService', 'UserService', 'DateHelper',
+		function( $scope, $ionicPopup, $ionicScrollDelegate, $interval, $timeout, RoephoekService, UserService, DateHelper){
 			$scope.last = false;
 			var newestId;
 			var oldestId = -1;
@@ -52,7 +52,14 @@ angular
 						item.when = DateHelper.difference(item.timestamp);
 						$scope.items.push(item);
 					}
-				}, function(){
+				}, 
+				function(){
+					$scope.last = true;
+					$timeout(function(){
+						$scope.last = false;
+					}, 60000);
+				},
+				function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 
@@ -97,11 +104,26 @@ angular
 			   });			
 			};
 
-			$interval(function(){
-				if(newestId)
+			var startInterval = function(){
+				if(angular.isDefined(interval))
 				{
-					$scope.doRefresh();
+					$interval.cancel(interval);
 				}
-			}, 30000);
+				var interval = $interval(function(){
+					if(newestId)
+					{
+						$scope.doRefresh();
+					}
+				}, 30000);
+			}
+			
+			$scope.$on('$ionicView.afterLeave', function(){
+				console.log("Yo to the fucking loo");
+				$interval.cancel(interval);
+			});
+
+			/*element.on('$destroy', function() {
+				$interval.cancel(interval);
+			});*/
 			
 	}]);
