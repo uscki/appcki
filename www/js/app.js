@@ -141,6 +141,11 @@ appcki
     templateUrl: 'js/Poll/poll-overview.html',
     controller: 'appckiPollOverview'
   })
+  .state('app.poll-archive', { 
+    url: '/poll/archive/:id', 
+    templateUrl: 'js/Poll/poll-archive.html',
+    controller: 'appckiPollArchive'
+  })
   .state('app.quote-overview', {
     url: '/quote',
     templateUrl: 'js/Quote/quote-overview.html',

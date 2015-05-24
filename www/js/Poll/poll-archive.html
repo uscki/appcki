@@ -1,0 +1,22 @@
+<ion-view view-title="Poll (archief)">
+  <ion-content>
+  	<div class="card">
+			<div class="item item-text-wrap"> 
+				<h2>{{poll.title}}</h2>
+			</div>
+		</div>
+
+		<div class="card">		
+			<ion-list>
+				<ion-item ng-repeat="item in items">
+					<div>{{item.name}}</div>
+					<div style="height: 1em">
+						<span style="display: block; margin-top: 0.4em;margin-right: 5px; height: 10px; width:{{item.voteCount / votes * 100}}%; background-color: {{item.color}}; float: left"></span>
+						<span class="small" style="float: left">({{item.voteCount}})</span>
+						<i class="radio-icon ion-checkmark float-right" ng-if="item.ivotedforthis"></i>
+					</div>
+				</ion-item>
+			</ion-list>
+		</div>
+  </ion-content>
+</ion-view>

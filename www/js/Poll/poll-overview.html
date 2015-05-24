@@ -24,25 +24,15 @@
 
 		</div>
 
-		<!-- <div class="card">
-			<div class="item item-text-wrap">
-				<h2>Todo's@appcki</h2>
-			</div>
-
-			<div class="item item-text-wrap">
-				<ion-list>
-					<ion-item>Poll archief bekijken</ion-item>
-					<ion-item>$scope.voted zetten op waarde die klopt (API update afwachten)</ion-item>
-				</ion-list>
-			</div>
-		</div> -->
 		<ion-list>
-			<ion-item ng-repeat="poll in archive" ng-click="poll-archive{{poll.id}}">
+			<ion-item class="item item-divider item-text-wrap">Archief</ion-item>
+			<ion-item ng-repeat="poll in polls" ui-sref="app.poll-archive({id: poll.id})">
 				{{poll.title}}
 			</ion-item>
 		</ion-list>
 
 		<ion-infinite-scroll
+			ng-if="!last"
 			on-infinite="loadMore()"
 			distance="1%">
 		</ion-infinite-scroll>

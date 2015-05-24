@@ -11,13 +11,12 @@ angular
          */
         PollService.getActivePoll = function(callback)
         {
-        	$http.get(apiUrl + "poll/overview").success(function(data){
-                for(var i = 0; i < data.content.length; i++)
-                {
-                    if (data.content[i].active){
-                        callback(data.content[i]);
-                    }
-                }
+        	$http({
+                url : apiUrl + "poll/active",
+                method : "GET"
+            })
+            .success(function(data){
+                callback(data);
             });
         }
 
@@ -27,10 +26,6 @@ angular
          */
         PollService.getArchive = function(page, callback, finish)
         {
-        	/*$http.get(apiUrl + "poll/overview").
-        	success(function(data){
-        		callback(data);
-        	});*/
             $http({
                 url : apiUrl + "poll/overview",
                 method : "GET",
@@ -46,7 +41,12 @@ angular
 
         PollService.getDetails = function(id, callback)
         {
-            $http.get(apiUrl + "poll/get?id=" + id)
+            $http({
+                url : apiUrl + "poll/get",
+                method : "GET",
+                params: {id: id}
+            })
+            // $http.get(apiUrl + "poll/get?id=" + id)
             .success(function(data){
                 callback(data);
             });

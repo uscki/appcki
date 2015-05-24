@@ -38,29 +38,27 @@ angular
 			$scope.votes = 0;
 			$scope.items = [];
 			$scope.polls = [];
+			$scope.last;
 			page = 0;
 
-			// TODO: see if user voted (wait for API update)
 			$scope.voted = false;
 			PollService.getActivePoll(function(data){
-				PollService.getDetails(data.id, function(polldata){
-					console.log(polldata);
-					for(var i = 0; i < polldata.options.length; i++)
-					{
-						var item = polldata.options[i];
-						item.ivotedforthis = (item.id == polldata.myVote);
-						$scope.votes += item.voteCount;
-						$scope.items.push(item);
-					}
+				for(var i = 0; i < data.options.length; i++)
+				{
+					var item = data.options[i];
+					item.ivotedforthis = (item.id == data.myVote);
+					$scope.votes += item.voteCount;
+					$scope.items.push(item);
+				}
 
-					$scope.poll = polldata.poll;
-					$scope.voted = polldata.myVote >= 0;
-				});
+				$scope.poll = data.poll;
+				$scope.voted = data.myVote >= 0;
 			});
 
 			$scope.loadMore = function(){
 				PollService.getArchive(page, function(data){
 					page = data.page;
+					$scope.last = data.last;
 					for(var i = 0; i < data.content.length; i++)
 					{
 						var item = data.content[i];
@@ -71,8 +69,6 @@ angular
 				});
 			}
 
-
-
 			$scope.vote = function(id)
 			{
 				PollService.vote(id, function(data){
@@ -80,4 +76,23 @@ angular
 				});
 			}
 
-	}]);
+	}])
+	.controller("appckiPollArchive", ['$scope', '$log', '$http','$state', '$stateParams', '$filter','PollService',
+		function( $scope, $log, $http, $state, $stateParams, $filter, PollService){
+			
+			$scope.votes = 0;
+			$scope.items = [];
+
+			PollService.getDetails($stateParams.id, function(data){
+				for(var i = 0; i < data.options.length; i++)
+				{
+					var item = data.options[i];
+					item.ivotedforthis = (item.id == data.myVote);
+					$scope.votes += item.voteCount;
+					$scope.items.push(item);
+				}
+
+				$scope.poll = data.poll;
+			});
+		}
+	]);
