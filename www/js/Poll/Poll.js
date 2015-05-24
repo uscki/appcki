@@ -42,18 +42,23 @@ angular
 			page = 0;
 
 			$scope.voted = false;
-			PollService.getActivePoll(function(data){
-				for(var i = 0; i < data.options.length; i++)
-				{
-					var item = data.options[i];
-					item.ivotedforthis = (item.id == data.myVote);
-					$scope.votes += item.voteCount;
-					$scope.items.push(item);
-				}
+			loadPoll();
+			
+			function loadPoll(){
+				PollService.getActivePoll(function(data){
+					for(var i = 0; i < data.options.length; i++)
+					{
+						var item = data.options[i];
+						item.ivotedforthis = (item.id == data.myVote);
+						$scope.votes += item.voteCount;
+						$scope.items.push(item);
+					}
 
-				$scope.poll = data.poll;
-				$scope.voted = data.myVote >= 0;
-			});
+					$scope.poll = data.poll;
+					$scope.voted = data.myVote != null;
+				});
+			}
+			
 
 			$scope.loadMore = function(){
 				PollService.getArchive(page, function(data){
@@ -80,6 +85,7 @@ angular
 				PollService.vote(id, function(data){
 					console.log(data);
 				});
+				loadPoll();
 			}
 
 	}])

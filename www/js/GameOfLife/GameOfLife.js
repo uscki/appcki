@@ -50,8 +50,6 @@ function($scope, $state, $interval){
     	start = undefined;
     }
 
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
 	$scope.width = Math.floor((window.innerWidth - 20) / 32);
 	$scope.height = Math.floor(((window.innerHeight / 100 * 70) - 20 )/ 32);
 	$scope.toggleText = "Start";

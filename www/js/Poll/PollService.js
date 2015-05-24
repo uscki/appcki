@@ -29,7 +29,7 @@ angular
             $http({
                 url : apiUrl + "poll/overview",
                 method : "GET",
-                params : {page: page, sort : "id,asc"}
+                params : {page: page, sort : "createdate,asc"}
             })
             .success(function(data){
                 callback(data)
