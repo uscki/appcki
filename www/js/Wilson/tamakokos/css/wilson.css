@@ -1,0 +1,73 @@
+html {
+	background-color: rgb(255,196,255);
+}
+
+.centered {
+	text-align: center;
+}
+
+.nut {
+	padding-top: 10px;
+	max-width: 100%;
+	height: auto;
+}
+
+#body {
+	display: inherit;
+}
+
+#dead {
+	display: none;
+}
+
+#sleeping {
+	display: none;
+}
+
+#ziek {
+	display: none;
+}
+
+#MHMMM_Ninja {
+	display: none;
+}
+
+#queuequeue {
+	display: none;
+}
+
+#counter {
+	font-size: 2em;
+}
+
+@media screen and (orientation: portrait) {
+	.haat {
+		display: none;
+	}
+
+	#wilson {
+		max-width: 100%;
+		height: auto;
+	}
+	
+
+	#counter {
+		font-size: 2em;
+	}
+}
+
+@media screen and (orientation: landscape) {
+	.haat {
+		display: inherit;
+	}
+
+	#wilson {
+		display: none;
+		max-height: 100%;
+		width: auto;
+	}
+
+	#counter {
+		font-size: 2em;
+	}
+}
