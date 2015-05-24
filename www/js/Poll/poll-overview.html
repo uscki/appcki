@@ -9,11 +9,12 @@
 
 		<div class="card">		
 			<ion-list can-swipe="false">
-				<ion-item click-for-options ng-repeat="item in options">
+				<ion-item click-for-options ng-repeat="item in items">
 					<div>{{item.name}}</div>
 					<div style="height: 1em">
-						<span style="display: block; margin-top: 0.4em;margin-right: 5px; height: 10px; width:{{item.results.length / votes * 100}}%; background-color: {{item.color}}; float: left"></span>
-						<span class="small" style="float: left">({{item.results.length}})</span>
+						<span style="display: block; margin-top: 0.4em;margin-right: 5px; height: 10px; width:{{item.voteCount / votes * 100}}%; background-color: {{item.color}}; float: left"></span>
+						<span class="small" style="float: left">({{item.voteCount}})</span>
+						<i class="radio-icon ion-checkmark float-right" ng-if="item.ivotedforthis"></i>
 					</div>
 					<ion-option-button class="button-balanced" ng-click="vote({{item.id}})" ng-if="!voted">
 						Stem
@@ -23,7 +24,7 @@
 
 		</div>
 
-		<div class="card">
+		<!-- <div class="card">
 			<div class="item item-text-wrap">
 				<h2>Todo's@appcki</h2>
 			</div>
@@ -34,6 +35,16 @@
 					<ion-item>$scope.voted zetten op waarde die klopt (API update afwachten)</ion-item>
 				</ion-list>
 			</div>
-		</div>
+		</div> -->
+		<ion-list>
+			<ion-item ng-repeat="poll in archive" ng-click="poll-archive{{poll.id}}">
+				{{poll.title}}
+			</ion-item>
+		</ion-list>
+
+		<ion-infinite-scroll
+			on-infinite="loadMore()"
+			distance="1%">
+		</ion-infinite-scroll>
 	</ion-content>
 </ion-view>

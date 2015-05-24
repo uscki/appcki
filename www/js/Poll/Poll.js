@@ -36,19 +36,42 @@ angular
 		function( $scope, $log, $http, $state, $filter, PollService){
 			
 			$scope.votes = 0;
+			$scope.items = [];
+			$scope.polls = [];
+			page = 0;
 
 			// TODO: see if user voted (wait for API update)
 			$scope.voted = false;
-			PollService.getActivePoll($state, function(data){
+			PollService.getActivePoll(function(data){
 				PollService.getDetails(data.id, function(polldata){
-					$scope.poll = polldata.poll;
-					$scope.options = polldata.options;
-					for(var i = 0; i < $scope.options.length; i++)
+					console.log(polldata);
+					for(var i = 0; i < polldata.options.length; i++)
 					{
-						$scope.votes += $scope.options[i].results.length;
+						var item = polldata.options[i];
+						item.ivotedforthis = (item.id == polldata.myVote);
+						$scope.votes += item.voteCount;
+						$scope.items.push(item);
 					}
+
+					$scope.poll = polldata.poll;
+					$scope.voted = polldata.myVote >= 0;
 				});
 			});
+
+			$scope.loadMore = function(){
+				PollService.getArchive(page, function(data){
+					page = data.page;
+					for(var i = 0; i < data.content.length; i++)
+					{
+						var item = data.content[i];
+						$scope.polls.push(item);
+					}
+				}, function(){
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+				});
+			}
+
+
 
 			$scope.vote = function(id)
 			{
