@@ -47,7 +47,12 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 	 * @param e 	drag event
 	 */
 	var myDrag = function(e){
-		var x = e.gesture.deltaX;
+		var slideIndex = $ionicSlideBoxDelegate.currentIndex();
+		var width = window.innerWidth;
+		var slide = angular.element(document.querySelectorAll('.slider-slide')[slideIndex]);
+		var style = slide[0].style;
+		var re = /.*X\((-?\d*)px\)/;
+		var x = re.exec(style.transform)[1];
 		transformTitleBar(x, false);
 	}
 
