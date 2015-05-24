@@ -29,8 +29,6 @@ angular
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 			};
-
-			$scope.loadOlder();
 	}])
 	.controller("appckiNewsDetails", ['$scope', '$log', '$http','$state','$stateParams','$filter','NewsService','UserService', 'DateHelper',
 		function( $scope, $log, $http, $state, $stateParams, $filter, NewsService, UserService, DateHelper){

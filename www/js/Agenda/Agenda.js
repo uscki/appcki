@@ -86,8 +86,6 @@ angular
 					$scope.$broadcast('scroll.refreshComplete');
 				});
 			};
-
-			$scope.loadNewer();
 	}])
 	.controller("appckiAgendaDetails", ['$scope', '$log', '$ionicPopup','$state','$stateParams','$filter','AgendaService','UserService',
 		function( $scope, $log, $ionicPopup, $state, $stateParams, $filter, AgendaService, UserService){		
