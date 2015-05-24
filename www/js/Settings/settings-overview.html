@@ -6,8 +6,19 @@
 		<div class="card">
 			<div class="item item-text-wrap">
 				<h2>Account</h2>
-				<p>Je bent ingelogd als {{user.firstname}} {{user.middlename}} {{user.lastname}}</p>
+				<p>Je bent ingelogd als {{username}}</p>
 				<button class="button button-full button-positive" ng-click="logout()">Log mij uit</button>
 			</div>
+		</div>
+
+		<div class="card">
+			<div class="item"><h2>Navigatie</h2></div>
+			<ion-list>
+				<ion-item ng-repeat="item in homeviews" ui-sref="{{item.state}}">
+					<!-- <ion-reorder-button class="ion-navicon" on-reorder="function(){console.log('todo');}"></ion-reorder-button> -->
+					{{item.name}}
+					<!-- <ion-option-button class="button-positive">Home</ion-option-button> -->
+				</ion-item>
+			</ion-list>
 		</div>
 	</ion-content>

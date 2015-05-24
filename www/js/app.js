@@ -62,48 +62,57 @@ appcki
       'agenda':{
         templateUrl: 'js/Agenda/agenda-overview.html', 
         controller: 'appckiAgendaOverview',
-        name: 'Agenda' 
+        name: 'Agenda',
+        state: 'app.home.agenda-overview' ,
       },
       'news':{
         templateUrl: 'js/News/news-overview.html',
         controller: 'appckiNewsOverview',
-        name: 'Nieuws'
+        name: 'Nieuws',
+        state: 'app.news-overview',
       },
       'planner':{
         templateUrl: 'js/Planner/planner-overview.html',
         controller: 'appckiPlannerOverview',
-        name: 'Vergaderplanner'
+        name: 'Vergaderplanner',
+        state: 'app.home.planner-overview',
       },
       'poll':{
         templateUrl: 'js/Poll/poll-overview.html',
         controller: 'appckiPollOverview',
-        name: 'Poll'
+        name: 'Poll',
+        state: 'app.poll-overview',
       },
       'quote':{
         templateUrl : 'js/Quote/quote-overview.html',
         controller: 'appckiQuoteOverview',
-        name: 'Quotes'
+        name: 'Quotes',
+        state: 'app.quote-overview',
       },
       'leden':{
         templateUrl : 'js/Leden/leden-overview.html',
         controller: 'appckiLedenOverview',
-        name: 'Leden'
+        name: 'Leden',
+        state: 'app.leden-overview',
       },
       'captioncontest':{
         templateUrl : 'js/Captioncontest/captioncontest-overview.html',
         controller: 'appckiCaptioncontestOverview',
-        name: 'Captioncontest'
+        name: 'Captioncontest',
+        state: 'app.captioncontest',
       },
       'roephoek':{
         templateUrl : 'js/Roephoek/roephoek-overview.html',
         controller: 'appckiRoephoekOverview',
-        name: 'Roephoek'
+        name: 'Roephoek',
+        state: 'app.roephoek',
       },
       'GameOfLife':
       {
         templateUrl : 'js/GameOfLife/gameoflife.html',
         controller: 'GameOfLifeController',
-        name: 'Conway\'s Game of Life'
+        name: 'Conway\'s Game of Life',
+        state: 'app.GoL',
       }
     }
   })
