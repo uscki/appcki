@@ -77,6 +77,8 @@ angular
 					}
 
 					$scope.items.unshift({divider: true, label: prevTopDividerString});
+				}, function(){
+					$scope.$broadcast('scroll.refreshComplete');
 				});
 			};
 
