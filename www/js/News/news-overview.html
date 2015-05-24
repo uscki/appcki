@@ -11,5 +11,11 @@
 				</span>
 			</ion-item>
 		</ion-list>
+		<ion-infinite-scroll
+			ng-if="!last"
+			icon="ion-loading-c"
+			distance="1%"
+			on-infinite="loadOlder()">
+		</ion-infinite-scroll>
 	</ion-content>
 </ion-view>

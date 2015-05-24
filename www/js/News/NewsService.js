@@ -5,17 +5,23 @@ angular
     .factory('NewsService', ['$http', 'apiUrl', function($http,apiUrl){
         var NewsService  ={};
 
-        NewsService.getNewer = function(state, callback){
+        NewsService.getNewer = function(state, callback, finish){
             $http.get(apiUrl + "news/overview")
             .success(function(data){
-                callback(data.content);
+                callback(data);
+            })
+            .finally(function(){
+                finish();
             });
         };
 
-        NewsService.getOlder = function(state, callback){
+        NewsService.getOlder = function(state, callback, finish){
             $http.get(apiUrl + "news/overview")
             .success(function(data){
-                callback(data.content);
+                callback(data);
+            })
+            .finally(function(){
+                finish();
             });
         };
 
