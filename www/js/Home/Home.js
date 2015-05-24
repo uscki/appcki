@@ -3,6 +3,7 @@ angular.module('appcki.home',[])
 function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPosition, $ionicGesture, $log, $http, $location, UserService){
 
 	var element = angular.element(document.querySelector("#main-slide-box"));
+	var slides, slideIndex;
 	var maxDragLeft = 0;
 	var maxDragRight = 0;
 	var titleBarWidth = 0;
@@ -13,17 +14,16 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 	 */
 	$scope.slideChange = function()
 	{
-		var views = Object.keys($state.current.views);
+		slideIndex = $ionicSlideBoxDelegate.currentIndex();
 
-		var i = $ionicSlideBoxDelegate.currentIndex();
-		var next = (i+1) % views.length;
-		var prev = (i == 0) ? views.length-1 : i-1;
-		var next2next = (i+2) % views.length;
-		
-		var currentView = $state.current.views[views[i]].name;
-		var nextView = $state.current.views[views[next]].name;
-		var prevView = $state.current.views[views[prev]].name;
-		var next2nextView = $state.current.views[views[next2next]].name;
+		var next = (slideIndex+1) % slides.length;
+		var prev = (slideIndex == 0) ? slides.length-1 : slideIndex-1;
+		var next2next = (slideIndex+2) % slides.length;
+
+		var currentView = slides[slideIndex].title;
+		var nextView = slides[next].title;
+		var prevView = slides[prev].title;
+		var next2nextView = slides[next2next].title;
 
 		var title = '<div id="header-title-bar">';
 		title += '<span class="title-small title-prev">' + prevView + '</span>';
@@ -39,6 +39,7 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 	}
 
 	$scope.$on('$ionicView.enter', function(){
+		slides = slides = document.querySelectorAll('.slider-slide');
 		$scope.slideChange();
 	});
 
@@ -48,11 +49,8 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 	 */
 	var myDrag = function(e){
 		var slideIndex = $ionicSlideBoxDelegate.currentIndex();
-		var width = window.innerWidth;
-		var slide = angular.element(document.querySelectorAll('.slider-slide')[slideIndex]);
-		var style = slide[0].style;
-		var re = /.*X\((-?\d*)px\)/;
-		var x = re.exec(style.transform)[1];
+		var style = angular.element(slides[slideIndex])[0].style;
+		var x = /.*X\((-?\d*)px\)/.exec(style.transform)[1];
 		transformTitleBar(x, false);
 	}
 
