@@ -63,49 +63,57 @@ appcki
         templateUrl: 'js/Agenda/agenda-overview.html', 
         controller: 'appckiAgendaOverview',
         name: 'Agenda',
-        state: 'app.home.agenda-overview' ,
+        state: 'app.agenda-overview',
+        home: true,
       },
       'news':{
         templateUrl: 'js/News/news-overview.html',
         controller: 'appckiNewsOverview',
         name: 'Nieuws',
         state: 'app.news-overview',
+        home : true,
       },
       'planner':{
         templateUrl: 'js/Planner/planner-overview.html',
         controller: 'appckiPlannerOverview',
         name: 'Vergaderplanner',
-        state: 'app.home.planner-overview',
+        state: 'app.planner-overview',
+        home : true,
       },
       'poll':{
         templateUrl: 'js/Poll/poll-overview.html',
         controller: 'appckiPollOverview',
         name: 'Poll',
         state: 'app.poll-overview',
+        home : true,
       },
       'quote':{
         templateUrl : 'js/Quote/quote-overview.html',
         controller: 'appckiQuoteOverview',
         name: 'Quotes',
         state: 'app.quote-overview',
+        home : false,
       },
       'leden':{
         templateUrl : 'js/Leden/leden-overview.html',
         controller: 'appckiLedenOverview',
         name: 'Leden',
         state: 'app.leden-overview',
+        home : false,
       },
       'captioncontest':{
         templateUrl : 'js/Captioncontest/captioncontest-overview.html',
         controller: 'appckiCaptioncontestOverview',
         name: 'Captioncontest',
         state: 'app.captioncontest',
+        home : false,
       },
       'roephoek':{
         templateUrl : 'js/Roephoek/roephoek-overview.html',
         controller: 'appckiRoephoekOverview',
         name: 'Roephoek',
         state: 'app.roephoek',
+        home : true,
       },
       'GameOfLife':
       {
@@ -113,11 +121,12 @@ appcki
         controller: 'GameOfLifeController',
         name: 'Conway\'s Game of Life',
         state: 'app.GoL',
+        home : false,
       }
     }
   })
 
-  .state('app.home.agenda-overview', { 
+  .state('app.agenda-overview', { 
     url: '/agenda',
     templateUrl: 'js/Agenda/agenda-overview.html', 
     controller: 'appckiAgendaOverview' 
@@ -142,7 +151,7 @@ appcki
     templateUrl: 'js/News/news-details.html',
     controller: 'appckiNewsDetails'
   })
-  .state('app.home.planner-overview', { 
+  .state('app.planner-overview', { 
     url: '/planner', 
     templateUrl: 'js/Planner/planner-overview.html',
     controller: 'appckiPlannerOverview'

@@ -12,12 +12,27 @@
 		</div>
 
 		<div class="card">
-			<div class="item"><h2>Navigatie</h2></div>
-			<ion-list>
+			<ion-list show-reorder="showReorder">
+				<ion-item>
+					<h2 class="float-left">Navigatie</h2>
+					<span class="float-right icon ion-arrow-left-c" size="8" ng-if="!showReorder"></span>
+					<span class="float-right icon ion-navicon" ng-if="showReorder" ng-click="toggleReorder()"></span>
+					<ion-option-button
+						class="button icon ion-navicon"
+						ng-click="toggleReorder()">
+					</ion-option-button>
+				</ion-item>
 				<ion-item ng-repeat="item in homeviews" ui-sref="{{item.state}}">
-					<!-- <ion-reorder-button class="ion-navicon" on-reorder="function(){console.log('todo');}"></ion-reorder-button> -->
+					<ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
 					{{item.name}}
-					<!-- <ion-option-button class="button-positive">Home</ion-option-button> -->
+					<ion-option-button 
+						class="button button-positive icon ion-plus-circled"
+						ng-if="!item.home"
+						ng-click="addToHome(item.id)"></ion-option-button>
+					<ion-option-button 
+						class="button button-assertive icon ion-minus-circled"
+						ng-if="item.home"
+						ng-click="removeFromHome(item.id)"></ion-option-button>
 				</ion-item>
 			</ion-list>
 		</div>

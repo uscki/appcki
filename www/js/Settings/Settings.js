@@ -1,10 +1,11 @@
 angular
 	.module('appcki.settings',[])
-	.controller("appckiSettingsOverview", ['$scope', '$state', '$localStorage', '$log', '$http','$state','$filter','$location', 'UserService',
-		function( $scope, $state, $localStorage, $log, $http, $state, $filter, $location, UserService){
+	.controller("appckiSettingsOverview", ['$rootScope', '$scope', '$state', '$ionicSlideBoxDelegate', 'SettingsService', 'UserService',
+		function( $rootScope, $scope, $state, $ionicSlideBoxDelegate, SettingsService, UserService){
 
 			$scope.username = UserService.fullname();
-			$scope.homeviews = [];
+			$scope.showReorder = false;
+			$rootScope.homeviews = [];
 
 			$scope.logout = function(){          
 				UserService.logout(
@@ -20,27 +21,36 @@ angular
 				);
 			}
 
-			var updateMenuNavigation = function()
+			$scope.removeFromHome = function(item)
 			{
-				var views = $state.get('app.home.views').views;
-				// var viewnames = views.keys();
-				// console.log(views);
-
-				// for(var i = 0; i < viewnames.length; i++)
-				var homeviews = [];
-				var home = {"name" : "Beginscherm", "state" : "app.home"};
-				homeviews.push(home);
-				for(var key in views)
-				{
-					var view = views[key];
-					view.frontpage = true;
-					view.id = key;
-					homeviews.push(view);
-				}
-
-				return homeviews;
+				SettingsService.setHome(item, false);
+				updateMenuNavigation();
 			}
 
-			$scope.homeviews = updateMenuNavigation();
+			$scope.addToHome = function(item)
+			{
+				SettingsService.setHome(item, true);
+				updateMenuNavigation();
+			}
+
+			$scope.moveItem = function(item, $fromIndex, $toIndex)
+			{
+				SettingsService.setNavOrder(item, $fromIndex, $toIndex);
+				updateMenuNavigation();
+			}
+
+			$scope.toggleReorder = function()
+			{
+				console.log("Yoo to the fucking loo");
+				$scope.showReorder = !$scope.showReorder;
+			}
+
+			var updateMenuNavigation = function()
+			{
+				$rootScope.homeviews =  SettingsService.getViews();
+				$ionicSlideBoxDelegate.update();
+			}
+
+			updateMenuNavigation();
 		}
 	]);

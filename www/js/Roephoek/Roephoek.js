@@ -5,6 +5,7 @@ angular
 			$scope.last = false;
 			var newestId;
 			var oldestId = -1;
+			var interval;
 			
 
 			$scope.items = [];
@@ -109,21 +110,22 @@ angular
 				{
 					$interval.cancel(interval);
 				}
-				var interval = $interval(function(){
+				interval = $interval(function(){
 					if(newestId)
 					{
 						$scope.doRefresh();
 					}
 				}, 30000);
 			}
+
+			startInterval();
 			
-			$scope.$on('$ionicView.afterLeave', function(){
-				console.log("Yo to the fucking loo");
-				$interval.cancel(interval);
+			$scope.$on('$ionicView.beforeLeave', function(){
+				if(angular.isDefined(interval))
+				{
+					$interval.cancel(interval);
+					interval = undefined;
+				}
 			});
 
-			/*element.on('$destroy', function() {
-				$interval.cancel(interval);
-			});*/
-			
 	}]);

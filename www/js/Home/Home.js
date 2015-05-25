@@ -1,6 +1,6 @@
-angular.module('appcki.home',[])
-.controller("homePageCtrl", ['$scope', '$state', '$ionicNavBarDelegate', '$ionicSlideBoxDelegate', '$ionicPosition', '$ionicGesture', '$log', '$http','$location','UserService',
-function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPosition, $ionicGesture, $log, $http, $location, UserService){
+angular.module('appcki.home',['ngSanitize'])
+.controller("homePageCtrl", ['$rootScope', '$sce', '$scope', '$state', '$ionicNavBarDelegate', '$ionicSlideBoxDelegate', '$ionicPosition', '$ionicGesture', '$log', '$http','$location','UserService',
+function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPosition, $ionicGesture, $log, $http, $location, UserService){
 
 	var element = angular.element(document.querySelector("#main-slide-box"));
 	var slides, slideIndex;
@@ -144,6 +144,21 @@ function($scope, $state, $ionicNavBarDelegate, $ionicSlideBoxDelegate, $ionicPos
 	var dragEndGesture = $ionicGesture.on('dragend', myDragEnd, element);
 	var dragStartGesture = $ionicGesture.on('dragstart', myDragStart, element);
 
+	// $ionicSlideBoxDelegate.update();
+
+	$scope.randomname = "news";
+
+	/*$scope.$on('$ionicView.afterEnter', function(){
+		var generatedSlides = document.querySelectorAll('.slider-slide');
+		console.log(generatedSlides.length);
+		for(var i = 0; i < generatedSlides.length; i++)
+		{
+			var el = angular.element(generatedSlides[i]);
+			el.html("<ion-nav-view name=\"GoL\"><\/ion-nav-view>");
+		}
+		$ionicSlideBoxDelegate.update();
+	});*/
+	
 
 }])
 .controller("appCtrl", ['$rootScope', '$scope', '$state', '$ionicSideMenuDelegate', '$location',
