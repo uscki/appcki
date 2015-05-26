@@ -17,7 +17,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 		slideIndex = $ionicSlideBoxDelegate.currentIndex();
 
 		var next = (slideIndex+1) % slides.length;
-		var prev = (slideIndex == 0) ? slides.length-1 : slideIndex-1;
+		var prev = (slideIndex === 0) ? slides.length-1 : slideIndex-1;
 		var next2next = (slideIndex+2) % slides.length;
 
 		var currentView = slides[slideIndex].title;
@@ -36,7 +36,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 
 		calculateMaxDrag();
 		setOuterTitlePositions();
-	}
+	};
 
 	$scope.$on('$ionicView.enter', function(){
 		slides = slides = document.querySelectorAll('.slider-slide');
@@ -52,7 +52,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 		var style = angular.element(slides[slideIndex])[0].style;
 		var x = /.*X\((-?\d*)px\)/.exec(style.transform)[1];
 		transformTitleBar(x, false);
-	}
+	};
 
 	/**
 	 * Function that is called when content drag starts
@@ -61,7 +61,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 	var myDragStart = function(e)
 	{
 
-	}
+	};
 
 	/**
 	 * Function that is called when content is done dragging, resetting
@@ -71,7 +71,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 	var myDragEnd = function(e)
 	{
 		transformTitleBar(0, true);
-	}
+	};
 
 	/**
 	 * Function that handles the sliding of the title in the ion-nav-bar
@@ -95,7 +95,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 		// Set new css
 		var transformation = "translate(" + x + "px, 0px)";
 		titleBar.css('transform', transformation);
-	}
+	};
 
 	var setOuterTitlePositions = function()
 	{
@@ -111,7 +111,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 		var right = (titleBarWidth - curTitleWidth - nextTitleWidth - 20 + maxDragLeft) + "px";
 		prevTitle.css('margin-left', left);
 		nextTitle.css('margin-left', right);
-	}
+	};
 
 	/**
 	 * Calculates the maximum distance the title bar can be dragged
@@ -129,7 +129,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 		// Calculate how far the titles can be dragged
 		maxDragLeft = titleBarWidth - nextWidth - 20;
 		maxDragRight = titleBarWidth - curWidth - 20;
-	}
+	};
 
 
 	// Remove event listeners on document destroy

@@ -1,7 +1,6 @@
-'use strict';
-
 angular.module('appcki.helper')
     .factory('DateHelper', [  function( ){
+        'use strict';
 
         var DateHelper = {};
 
@@ -21,7 +20,7 @@ angular.module('appcki.helper')
         {
             var str = (digit < 10) ? "0%d" : "%d";
             return str.sprintf(digit);
-        }
+        };
 
         /** 
          * Splits any of the more common date strings into an object array
@@ -30,9 +29,9 @@ angular.module('appcki.helper')
          * @arg date        Timestamp
          * @return          Object
          */
-        var splitDate = function(date)
+        var splitDate = function(d)
         {
-            var stamp = new Date(date);
+            var stamp = new Date(d);
             var date = {};
             
             date.year           = stamp.getFullYear();
@@ -44,7 +43,7 @@ angular.module('appcki.helper')
             date.second         = stamp.getSeconds();
 
             return date;
-        }
+        };
 
         /**
          * Return the number of milliseconds between a specified date and midnight January 1 1970
@@ -55,7 +54,7 @@ angular.module('appcki.helper')
         {
             var stamp = splitDate(date);
             return Date.UTC(stamp.year, stamp.month, stamp.day, stamp.hour,stamp.minute,stamp.second);
-        }
+        };
 
         /**
          * Formats date and time fully in Dutch, including the names of the weekday and month
@@ -65,7 +64,7 @@ angular.module('appcki.helper')
         DateHelper.full = function(d)
         {
            return "%s %s uur".sprintf(DateHelper.dateFull(d), DateHelper.time(d));
-        }
+        };
 
         /**
          * Formats date fully in Dutch, including the names of the weekday and month
@@ -82,7 +81,7 @@ angular.module('appcki.helper')
                     month[date.month],
                     date.year
                 );
-        }
+        };
 
         /**
          * Formats date in Dutch, including the names of the weekday and month as
@@ -100,7 +99,7 @@ angular.module('appcki.helper')
                     m[date.month],
                     date.year
                 );
-        }
+        };
 
         /**
          * Formats a date in number according to Dutch standards
@@ -116,7 +115,7 @@ angular.module('appcki.helper')
                     twoDigit(date.month),
                     date.year
                 );
-        }
+        };
 
         /**
          * Formats a timestamp to a time
@@ -130,18 +129,18 @@ angular.module('appcki.helper')
                     twoDigit(date.hour),
                     twoDigit(date.minute)
                 );
-        }
+        };
 
         DateHelper.difference = function(d)
         {
             var diff = UTC(new Date()) - UTC(d);
-            var dir, result;
+            var dir, result, q, plural;
             
-            if (diff == 0) {
-                var result = "nu";
+            if (diff === 0) {
+                result = "nu";
                 return result;
             } else if (diff < 0) {
-                dir = "Over %s"
+                dir = "Over %s";
                 diff *= -1;
             } else {
                 dir = "%s geleden";
@@ -151,7 +150,7 @@ angular.module('appcki.helper')
             var halfmin     = 30000;
             var m           = 60000;
             var h           = 3600000;
-            var d           = 84000000;
+            var day         = 84000000;
             var w           = 604800000;
             var month       = 2628000000;
             var year        = 31540000000;
@@ -162,32 +161,32 @@ angular.module('appcki.helper')
             } else if (halfmin < 30000) {
                 result = dir.sprintf("Minder dan een halve minuut");
             } else if (diff < h) {
-                var q = Math.floor(diff / m);
-                var plural = (q == 1) ? "" : "en";
+                q = Math.floor(diff / m);
+                plural = (q == 1) ? "" : "en";
                 result = dir.sprintf("%d minut%s".sprintf(q, plural));
-            } else if (diff < d) {
-                var q = Math.round(diff / h)
+            } else if (diff < day) {
+                q = Math.round(diff / h);
                 result = dir.sprintf("%d uur".sprintf(q));
             } else if (diff < w) {
-                var q = Math.round(diff / d);
-                var plural = (q == 1) ? "" : "en";
+                q = Math.round(diff / day);
+                plural = (q == 1) ? "" : "en";
                 result = dir.sprintf("%d dag%s".sprintf(q, plural));
             } else if (diff < month) {
-                var q = Math.round(diff / w);
-                var plural = (q == 1) ? "week" : "weken";
+                q = Math.round(diff / w);
+                plural = (q == 1) ? "week" : "weken";
                 result = dir.sprintf("%d %s".sprintf(q, plural));
             } else if (diff < year) {
-                var q = Math.round(diff / month);
-                var plural = (q == 1) ? "" : "en";
+                q = Math.round(diff / month);
+                plural = (q == 1) ? "" : "en";
                 result = dir.sprintf("%d maand%s".sprintf(q, plural));
             } else {
-                var q = Math.round(diff / year);
+                q = Math.round(diff / year);
                 result = dir.sprintf("%d jaar".sprintf(q));
             }
 
             return result;
 
-        }
+        };
 
         
         return DateHelper;

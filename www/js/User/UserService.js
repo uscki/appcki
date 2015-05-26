@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('appcki.user')
     .factory('UserService', ['$http', '$localStorage','apiUrl', function($http, $localStorage, apiUrl){
+        'use strict';
+
         function changeUser(user) {
             angular.extend(currentUser, user);
         }
@@ -55,11 +55,12 @@ angular.module('appcki.user')
         function getUserLastName()
         {
             var user = getUserFromToken;
+            var name;
             if(user.middlename)
             {
-                var name = "%s %s".sprintf(user.middlename, user.lastname);
+                name = "%s %s".sprintf(user.middlename, user.lastname);
             } else {
-                var name = user.lastname;
+                name = user.lastname;
             }
 
             return name;
@@ -89,10 +90,16 @@ angular.module('appcki.user')
                         $localStorage.token = token;
                         success(data);
                     })
-                    .error(error)
+                    .error(error);
             },
             me: function(success, error) {
-                $http.get(apiUrl + '/user/current').success(function(data){success(data)}).error(function(data){error(data)});
+                $http.get(apiUrl + '/user/current')
+                .success(function(data){
+                    success(data);
+                })
+                .error(function(data){
+                    error(data);
+                });
             },
             logout: function(success) {
                 changeUser({});

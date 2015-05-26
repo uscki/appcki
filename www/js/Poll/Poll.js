@@ -38,7 +38,7 @@ angular
 			$scope.votes = 0;
 			$scope.items = [];
 			$scope.polls = [];
-			$scope.last;
+			$scope.last = false;
 			page = 0;
 
 			$scope.voted = false;
@@ -55,7 +55,7 @@ angular
 					}
 
 					$scope.poll = data.poll;
-					$scope.voted = data.myVote != null;
+					$scope.voted = data.myVote !== null;
 				});
 			}
 			
@@ -74,11 +74,11 @@ angular
 					$timeout(function(){
 						$scope.last = false;
 					}, 60000);
-				} 
-				,function(){
+				}, 
+				function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
-			}
+			};
 
 			$scope.vote = function(id)
 			{
@@ -86,7 +86,7 @@ angular
 					console.log(data);
 				});
 				loadPoll();
-			}
+			};
 
 	}])
 	.controller("appckiPollArchive", ['$scope', '$log', '$http','$state', '$stateParams', '$filter','PollService',

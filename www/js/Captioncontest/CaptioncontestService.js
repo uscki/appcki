@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.captioncontest')
     .factory('CaptioncontestService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+        
         var CaptioncontestService  ={};
 
         /**
@@ -13,7 +13,7 @@ angular
         	$http.get(apiUrl + "captioncontest/active").success(function(data){
                 callback(data);
             });
-        }
+        };
 
         /**
          * Returns all the contests in the archive
@@ -25,7 +25,7 @@ angular
         	.success(function(data){
         		callback(data);
         	});
-        }
+        };
 
         CaptioncontestService.vote = function(id, callback)
         {
@@ -36,7 +36,7 @@ angular
             .error(function(data){
                 callback(data);
             });
-        }
+        };
         
         return CaptioncontestService;
     }

@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.roephoek')
     .factory('RoephoekService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+
         var RoephoekService  ={};
 
         /**
@@ -25,7 +25,7 @@ angular
             .finally(function(){
                 finish();
             });
-        }
+        };
 
 
         RoephoekService.getNewer = function(id, callback, finish)
@@ -40,7 +40,7 @@ angular
             }).finally(function(){
                 finish();
             });
-        }
+        };
 
         RoephoekService.post = function(name, message, callback, error)
         {
@@ -57,7 +57,7 @@ angular
             .error(function(data){
                 error(data);
             });
-        }
+        };
         
 
         return RoephoekService;

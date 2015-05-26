@@ -17,9 +17,9 @@ angular
 				$scope.total = $scope.allInFavor + $scope.allAgainst;
 				$scope.favorPct = Math.max(5, Math.min(95, $scope.allInFavor / $scope.total * 100));
 				$scope.againstPct = 100;
-				if($scope.total == 0) { $scope.favorPct = 50;}
+				if($scope.total === 0) { $scope.favorPct = 50;}
 				
-			}
+			};
 			
 			$scope.random = function()
 			{
@@ -27,21 +27,21 @@ angular
 				QuoteService.getRandom(state, function(data){
 					populateScope(data);
 				});
-			}
+			};
 
 			refresh = function()
 			{
 				QuoteService.getDetails($scope.quote.id, function(){
 					populateScope(data);
 				});
-			}
+			};
 
 			$scope.vote = function(pos)
 			{
 				// Do a callback with the vote where pos is bool
 				$scope.voted = true;
 				refresh();
-			}
+			};
 
 			$scope.random();
 			
@@ -61,7 +61,7 @@ angular
 			$scope.swipeRight = function()
 			{
 				console.log("swept of da flow");
-			}
+			};
 			
 	}])
 	.controller("appckiQuoteAdd", ['$scope', '$log', '$http','$state','$stateParams','$filter','QuoteService','UserService',

@@ -1,14 +1,9 @@
-'use strict';
-
 angular.module('appcki.settings')
     .factory('SettingsService', ['$state', '$localStorage', 
     	function($state, $localStorage){
-    		var SettingsService = {};
+            'use strict';
 
-    		// if(!angular.isDefined($localStorage.navMenu))
-			// {
-				
-			// }
+    		var SettingsService = {};
 
     		var setNavMenuInStorage = function()
     		{
@@ -32,7 +27,7 @@ angular.module('appcki.settings')
 				}
 
 				$localStorage.navMenu = homeviews;
-    		}
+    		};
     		
             $localStorage.navMenu = undefined;
     		
@@ -47,17 +42,17 @@ angular.module('appcki.settings')
     			
     			for(var key in homeviews)
     			{
-    				var view = homeviews[key]
+    				var view = homeviews[key];
     				views[view.position] = view;
     			}
     			
     			return views;
-    		}
+    		};
 
     		SettingsService.setHome = function(item, state)
     		{
     			$localStorage.navMenu[item].home = state;
-    		}
+    		};
 
     		SettingsService.setNavOrder = function(item, indexOld, indexNew)
     		{
@@ -88,7 +83,7 @@ angular.module('appcki.settings')
     			}
 
     			$localStorage.navMenu = homeViews;
-    		}
+    		};
 
     		return SettingsService;
     	}

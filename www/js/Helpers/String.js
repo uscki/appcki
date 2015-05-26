@@ -160,8 +160,7 @@ String.validBrackets = function(br)
 	var quot = "''\"\"`'``";
 	var sgl = "<>{}[]()%%||//\\\\";
 	var dbl = "/**/<??><%%>(**)";
-	return (br.length == 2 && (quot + sgl).indexOf(br) != -1)
-		|| (br.length == 4 && dbl.indexOf(br) != -1);
+	return (br.length == 2 && (quot + sgl).indexOf(br) != -1) || (br.length == 4 && dbl.indexOf(br) != -1);
 };
 
 /**
@@ -209,10 +208,10 @@ String.prototype.unbracketize = function(br)
 		return string;
 	}
 	var midPos = br.length / 2;
-	var i = string.indexOf(br.substr(0, midPos));
+	var k = string.indexOf(br.substr(0, midPos));
 	var j = string.lastIndexOf(br.substr(midPos));
-	if (i == 0 && j == string.length - midPos) {
-		string = string.substring(i + midPos, j);
+	if (k === 0 && j == string.length - midPos) {
+		string = string.substring(k + midPos, j);
 	}
 	return string;
 };
@@ -675,7 +674,7 @@ String.prototype.sprintf.u = function(ins, x)
 };
 String.prototype.sprintf.f = function(ins, x)
 {
-	var ins = Number(ins);
+	ins = Number(ins);
 //	var fn = String.prototype.padding;
 	if (x[5]) {
 		ins = ins.toFixed(x[5]);
@@ -707,14 +706,14 @@ String.prototype.sprintf.X = function(ins, x)
 };
 String.prototype.sprintf.h = function(ins, x)
 {
-	var ins = String.prototype.replace.call(ins, /,/g, '');
+	ins = String.prototype.replace.call(ins, /,/g, '');
 	// Invert sign because this is not number but string
 	x[2] = x[2] == "-" ? "+" : "-";
 	return Number(ins).human(x[5], true).padding(x[2] + x[4], x[3]);
 };
 String.prototype.sprintf.H = function(ins, x)
 {
-	var ins = String.prototype.replace.call(ins, /,/g, '');
+	ins = String.prototype.replace.call(ins, /,/g, '');
 	// Invert sign because this is not number but string
 	x[2] = x[2] == "-" ? "+" : "-";
 	return Number(ins).human(x[5], false).padding(x[2] + x[4], x[3]);
@@ -768,9 +767,9 @@ String.prototype.compile = function()
 			return "%";
 		}
 
-		arguments.length = 7;
+		argumentslength = 7;
 		x = [];
-		for (var i = 0; i < arguments.length; i++) {
+		for (var i = 0; i < argumentslength; i++) {
 			x[i] = arguments[i] || '';
 		}
 		x[3] = x[3].slice(-1) || ' ';

@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.news')
     .factory('NewsService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+        
         var NewsService  ={};
 
         NewsService.getNewer = function(state, callback, finish){

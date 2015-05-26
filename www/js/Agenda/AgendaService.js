@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.agenda')
     .factory('AgendaService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+        
         var AgendaService  = {};
 
 
@@ -20,7 +20,7 @@ angular
             .finally(function(){
                 finish();
             });
-        }
+        };
 
 
         AgendaService.getNewer = function(id, callback, error, finish)
@@ -38,7 +38,7 @@ angular
             .finally(function(){
                 finish();
             });
-        }
+        };
 
         AgendaService.getDetails = function(id, callback){
             $http({
@@ -70,7 +70,7 @@ angular
 
         AgendaService.getIcalUrl = function(id){
             return apiUrl + "/public/agenda-cal/" + id ;
-        }
+        };
 
         AgendaService.unSubscribe = function(id, callback){
             $http.get(apiUrl + "/agenda/unsubscribe?id="+id)
@@ -78,6 +78,7 @@ angular
                 callback(true);
             });        
         };
+        
         return AgendaService;
 
     }

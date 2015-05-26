@@ -40,7 +40,7 @@ angular
 						$scope.items.push(agenda);
 					}
 
-					if (prevTopDividerString == undefined) {
+					if (!angular.isDefined(prevTopDividerString)) {
 						prevTopDividerString = $scope.items[0].label; //get the upper dividerString.
 						oldest = agendas[0].id;
 					}
@@ -101,7 +101,7 @@ angular
 						$scope.subscribed = true;
 						AgendaService.getDetails($stateParams.id, function(agenda){ $scope.agenda = agenda; });
 					}
-				})
+				});
 			};
 
 			$scope.unSubscribe = function(){
@@ -112,7 +112,7 @@ angular
 						AgendaService.getDetails($stateParams.id, function(agenda){ $scope.agenda = agenda; });
 					}
 				});
-			}
+			};
 
 			//$scope.data = {}
 
@@ -139,13 +139,11 @@ angular
 			   });			
 			};
 
-		})
+		});
 	}])
 	.controller("appckiAgendaParticipants", ['$scope', '$log', '$http','$state','$stateParams','$filter','AgendaService','UserService',
 		function( $scope, $log, $http, $state, $stateParams, $filter, AgendaService, UserService){
 		AgendaService.getDetails($stateParams.id, function(agenda){
 			$scope.agenda = agenda;
-		})
-	}])
-
-	;
+		});
+	}]);

@@ -1,9 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.quote')
     .factory('QuoteService', ['$http', 'apiUrl', function($http,apiUrl){
-        
+        'use strict';
+
         var QuoteService  ={};
 
         QuoteService.getRandom = function(state, callback)
@@ -26,9 +25,9 @@ angular
         {
             $http.get(apiUrl + "quote/get?id=" + id)
             .success(function(data){
-                callback(data)
+                callback(data);
             });
-        }       
+        };       
 
         QuoteService.createState = function(){
             return 0;

@@ -21,7 +21,7 @@ angular
 						break;
 					}
 				}
-			}
+			};
 
 			$scope.doRefresh = function(){
 				var items = [];
@@ -38,7 +38,7 @@ angular
 				function(){
 					$scope.$broadcast('scroll.refreshComplete');
 				});
-			}
+			};
 
 			$scope.loadMoreData = function()
 			{
@@ -64,7 +64,7 @@ angular
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 
-			}
+			};
 
 			$scope.openShout = function(){
 				$scope.shout = {};
@@ -78,7 +78,7 @@ angular
 			     buttons: [
 			       { text: 'Annuleren',
 			       	 onTap: function(e) {
-			       	 	return cancelled = true;
+			       	 	cancelled = true;
 			       	 }
 			       },
 			       {
@@ -90,7 +90,6 @@ angular
 			       },
 			     ]
 			   }).then(function(res) {
-			   		console.log($scope.cancelled);
 			   		if(!cancelled)
 			   		{
 						RoephoekService.post($scope.shout.name, $scope.shout.message, function(d){
@@ -116,7 +115,7 @@ angular
 						$scope.doRefresh();
 					}
 				}, 30000);
-			}
+			};
 
 			startInterval();
 			

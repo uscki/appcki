@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.planner')
     .factory('PlannerService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+        
         var PlannerService = {};
 
         /**

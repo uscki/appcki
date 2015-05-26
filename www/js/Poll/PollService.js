@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.poll')
     .factory('PollService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+
         var PollService  ={};
 
         /**
@@ -18,7 +18,7 @@ angular
             .success(function(data){
                 callback(data);
             });
-        }
+        };
 
         /**
          * Returns all the polls in the archive
@@ -32,15 +32,15 @@ angular
                 params : {page: page, sort : "createdate,asc"}
             })
             .success(function(data){
-                callback(data)
+                callback(data);
             })
             .error(function(){
                 error();
             })
             .finally(function(){
                 finish();
-            })
-        }
+            });
+        };
 
         PollService.getDetails = function(id, callback)
         {
@@ -53,7 +53,7 @@ angular
             .success(function(data){
                 callback(data);
             });
-        }
+        };
 
         PollService.vote = function(id, callback)
         {
@@ -64,7 +64,7 @@ angular
             .error(function(data){
                 callback(data);
             });
-        }
+        };
         
 
         return PollService;

@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.wilson')
     .factory('WilsonService', ['$http', 'apiUrl', function($http,apiUrl){
+    	'use strict';
+
 		var WilsonService  ={};
 
 		WilsonService.getMyWilson = function(){
@@ -10,7 +10,7 @@ angular
 				"name" : "Wilson", 
 				"hp": 100,
 			};
-		}
+		};
 
 		return WilsonService;
 	}]);

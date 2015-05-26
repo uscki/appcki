@@ -64,12 +64,13 @@ angular
 
 			$scope.setPreference = function(id)
 			{
+				var comment;
 				if($scope.modal.isShown())
 				{
 					$scope.modal.hide();
-					var comment = $scope.modal.comment;
+					comment = $scope.modal.comment;
 				} else {
-					var comment = $scope.usercomment[id];
+					comment = $scope.usercomment[id];
 				}
 
 				// Push data to server
@@ -79,16 +80,16 @@ angular
 					$ionicPopup.alert({
 						title: 'Verbinding mislukt',
                        	template: 'Jouw voorkeur voor dit tijdstip kon niet worden opgeslagen omdat de server niet bereikt kon worden. Probeer het later nog eens. Als dit probleem zich blijft voordoen, neem dan contact op met de systeembeheerder.'
-					})
+					});
 				});
-			}		
+			};		
 
 			$scope.openModal = function(index)
 			{
 				$scope.modal.item = $scope.meeting.slots[index];
 				$scope.modal.comment = unescape(($scope.preferences && $scope.preferences[index].notes) ? $scope.preferences[index].notes : "");
 				$scope.modal.show();
-			}
+			};
 
 			/**
 			 * Populates the scope, but populateState sounds better
@@ -111,7 +112,7 @@ angular
 					// Prepare slots for scope
 					prepareSlots($scope.meeting.slots, meetingdata.myPreferences);
 				});
-			}
+			};
 
 			populateState();
 
@@ -137,10 +138,9 @@ angular
 					userpreference[item.id] = (preferences[i]) ? preferences[i].canattend : false;
 					usercomment[item.id] = (preferences[i]) ? preferences[i].notes : null;
 
-					getAvailability(item.preferences, function(cando, nocando){
-						item.cando = cando; 
-						item.nocando = nocando;
-					});
+					var canorcant = getAvailability(item.preferences);
+					item.cando = canorcant.cando;
+					item.nocando = canorcant.nocando;
 
 					// Check if a divider is required
 					var thisDate = $filter('date')(item.starttime, 'EEEE dd MMMM yyyy');
@@ -161,7 +161,7 @@ angular
 				$scope.slots = slots;
 				$scope.userpreference = userpreference;
 				$scope.usercomment = usercomment;
-			}
+			};
 
 			/**
 			 * Gives a list of people who are available and a list of
@@ -169,7 +169,7 @@ angular
 			 * @arg slotpreferences		The list of preferences for the slot
 			 * @return 	list of lists of people who are available or not available
 			 */
-			getAvailability = function(slotpreferences, callback)
+			getAvailability = function(slotpreferences)
 			{
 				var cando = [];
 				var nocando = [];
@@ -185,8 +185,8 @@ angular
 					}
 				}
 
-				callback(cando, nocando);
-			}
+				return {"cando" : cando, "nocando" : nocando};
+			};
 
 		    /**
 		     * Returns an rgb color that indicates the percentage, with
@@ -203,5 +203,5 @@ angular
 			    green = (percent > 50) ? 255 : percent * 5.12;
 			    
 			    return "rgb(" + Math.round(red) + "," + Math.round(green) + ",0)";
-		    }
+		    };
 	}]);

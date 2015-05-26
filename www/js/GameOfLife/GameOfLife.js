@@ -4,7 +4,7 @@ function($scope, $state, $interval){
 
 	$scope.newGame = function(){
 		$scope.board = init($scope.height, $scope.width);
-	}
+	};
 
 	$scope.toggle = function (row, cell) {
         $scope.board[row][cell] = !$scope.board[row][cell];
@@ -42,13 +42,13 @@ function($scope, $state, $interval){
 
     $scope.reset = function(){
     	$scope.board = (angular.isDefined(start)) ? start : $scope.board;
-    }
+    };
 
     $scope.new = function()
     {
     	$scope.newGame();
     	start = undefined;
-    }
+    };
 
 	$scope.width = Math.floor((window.innerWidth - 20) / 32);
 	$scope.height = Math.floor(((window.innerHeight / 100 * 70) - 20 )/ 32);
@@ -88,22 +88,20 @@ function($scope, $state, $interval){
     var update = function()
     {
     	$scope.board = computeNext($scope.board);	
-    }
+    };
 
 	function willLive(board, row, cell) {
-        return cellAt(board, row, cell) 
-            && neighbours(board, row, cell) >= 2 
-            && neighbours(board, row, cell) <= 3;
+        return cellAt(board, row, cell) && neighbours(board, row, cell) >= 2 && neighbours(board, row, cell) <= 3;
     }
+
     function willDie(board, row, cell) {
-        return cellAt(board, row, cell) 
-        && (neighbours(board, row, cell) < 2 
-                || neighbours(board, row, cell) > 3);
+        return cellAt(board, row, cell) && (neighbours(board, row, cell) < 2 || neighbours(board, row, cell) > 3);
     }
+
     function newCell(board, row, cell) {
-        return !cellAt(board, row, cell) 
-            && neighbours(board, row, cell) == 3;
+        return !cellAt(board, row, cell) && neighbours(board, row, cell) == 3;
     }
+
     
     function neighbours(board, row, cell) {
         var n = 0;
@@ -124,9 +122,5 @@ function($scope, $state, $interval){
         return board[row][cell];
 
     }
-
-	/*element.on('$destroy', function() {
-		$interval.cancel(interval);
-	});*/
 
 }]);

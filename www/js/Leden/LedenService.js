@@ -1,8 +1,8 @@
-'use strict';
-
 angular
     .module('appcki.leden')
     .factory('LedenService', ['$http', 'apiUrl', function($http,apiUrl){
+        'use strict';
+
         var LedenService  ={};
 
         /**
@@ -15,7 +15,7 @@ angular
             .success(function(data){
                 callback(data);
             });
-        }
+        };
 
         LedenService.getDetails = function(id, callback)
         {
@@ -23,7 +23,7 @@ angular
             .success(function(data){
                 callback(data);
             });
-        }        
+        };       
 
         return LedenService;
     }

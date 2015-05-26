@@ -1,5 +1,5 @@
 angular.module('appcki.user',[])
-	.controller("loginPageController", ['$scope', '$http','$location','$ionicPopup','UserService',
+	.controller("loginPageController", ['$scope', '$http', '$location', '$ionicPopup','UserService',
         function($scope, $http, $location, $ionicPopup, UserService){	
 
         $scope.credentials = {};
@@ -7,10 +7,6 @@ angular.module('appcki.user',[])
         var animation = 'logo-animating-topturn';
 
 		$scope.login = function(){           
-			console.log("inloggen met: " 
-				+ $scope.credentials.username + ", " 
-				+ $scope.credentials.password);
-
             // Make logo spin
             var el = angular.element(document.querySelector('.logo-login'));
             el.addClass(animation);
