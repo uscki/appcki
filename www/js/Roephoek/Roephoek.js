@@ -34,8 +34,6 @@ angular
 						$scope.items.unshift(item);
 					}
 					updateTime();
-				},
-				function(){
 					$scope.$broadcast('scroll.refreshComplete');
 				});
 			};
@@ -53,14 +51,13 @@ angular
 						item.when = DateHelper.difference(item.timestamp);
 						$scope.items.push(item);
 					}
+					$scope.$broadcast('scroll.infiniteScrollComplete');
 				}, 
 				function(){
 					$scope.last = true;
 					$timeout(function(){
 						$scope.last = false;
 					}, 60000);
-				},
-				function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 

@@ -69,13 +69,12 @@ angular
 						var item = data.content[i];
 						$scope.polls.push(item);
 					}
+					$scope.$broadcast('scroll.infiniteScrollComplete');
 				}, function(){
 					$scope.last = true;
 					$timeout(function(){
 						$scope.last = false;
 					}, 60000);
-				}, 
-				function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 			};

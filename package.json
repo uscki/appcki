@@ -19,5 +19,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/uscki/appcki.git"
-  }
+  },
+  "cordovaPlugins": [],
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }

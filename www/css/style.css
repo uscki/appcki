@@ -5,9 +5,9 @@ body {
 }
 
 /* Articles */
-.article:nth-child(even) {
+/*.article:nth-child(even) {
 	background-color: rgb(243,243,243);
-}
+}*/
 
 .no-border {
 	border: none;
@@ -122,9 +122,6 @@ div.custom-login form {
 }
 
 
-
-
-
 /* planner box that indicates availability by color */
 .current-response-box{
 	display: block;
@@ -217,16 +214,6 @@ ion-nav-bar .title-small.title-next2next{
 }
 
 /** GAME OF LIFE **/
-.conway-canvas
-{
-	/*background-color: red;*/
-}
-
-/*.conway-canvas .conway-row
-{
-	position: relative;
-	clear: both;
-}*/
 
 .conway-canvas .conway-row .conway-cell
 {

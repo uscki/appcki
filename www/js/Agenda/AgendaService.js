@@ -6,7 +6,7 @@ angular
         var AgendaService  = {};
 
 
-        AgendaService.getOlder = function(id, callback, finish)
+        AgendaService.getOlder = function(id, callback)
         {
 
             $http({
@@ -16,14 +16,11 @@ angular
             })
             .success(function(data){
                 callback(data);
-            })
-            .finally(function(){
-                finish();
             });
         };
 
 
-        AgendaService.getNewer = function(id, callback, error, finish)
+        AgendaService.getNewer = function(id, callback, error)
         {
             $http({
                 url: apiUrl + "agenda/newer", 
@@ -34,9 +31,6 @@ angular
                 callback(data);
             }).error(function(){
                 error();
-            })
-            .finally(function(){
-                finish();
             });
         };
 
@@ -62,18 +56,24 @@ angular
         };        
 
         AgendaService.subscribe = function(id, note, callback){            
-            $http.get(apiUrl + "/agenda/subscribe?id="+id+"&note="+note)
+            $http({
+                url: apiUrl + "agenda/subscribe?id="+id+"&note="+note,
+                method: "GET"
+            })
             .success(function(data){
                 callback(true);
             });
         };
 
         AgendaService.getIcalUrl = function(id){
-            return apiUrl + "/public/agenda-cal/" + id ;
+            return apiUrl + "public/agenda-cal/" + id ;
         };
 
         AgendaService.unSubscribe = function(id, callback){
-            $http.get(apiUrl + "/agenda/unsubscribe?id="+id)
+            $http({
+                url: apiUrl + "agenda/unsubscribe?id="+id,
+                method: "GET"
+            })
             .success(function(data){
                 callback(true);
             });        

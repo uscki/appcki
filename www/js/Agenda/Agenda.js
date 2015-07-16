@@ -44,12 +44,13 @@ angular
 						prevTopDividerString = $scope.items[0].label; //get the upper dividerString.
 						oldest = agendas[0].id;
 					}
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+
 				}, function(){
 					$scope.lowerLast = true;
 					$timeout(function(){
 						$scope.lowerLast = false;
 					}, 60000);
-				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 			};
@@ -82,7 +83,6 @@ angular
 					}
 
 					$scope.items.unshift({divider: true, label: prevTopDividerString});
-				}, function(){
 					$scope.$broadcast('scroll.refreshComplete');
 				});
 			};

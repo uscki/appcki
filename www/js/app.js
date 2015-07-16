@@ -8,10 +8,10 @@ var appcki = angular.module('appcki', [
     'appcki.news',
     'appcki.planner',
     'appcki.poll',
-    'appcki.quote',
+    // 'appcki.quote',
     'appcki.roephoek',
-    'appcki.captioncontest',
-    'appcki.leden',
+    // 'appcki.captioncontest',
+    // 'appcki.leden',
     'appcki.GoL',
     'appcki.settings',
     'ngStorage',
@@ -97,27 +97,27 @@ appcki
         state: 'app.poll-overview',
         home : true,
       },
-      'quote':{
-        templateUrl : 'js/Quote/quote-overview.html',
-        controller: 'appckiQuoteOverview',
-        name: 'Quotes',
-        state: 'app.quote-overview',
-        home : false,
-      },
-      'leden':{
-        templateUrl : 'js/Leden/leden-overview.html',
-        controller: 'appckiLedenOverview',
-        name: 'Leden',
-        state: 'app.leden-overview',
-        home : false,
-      },
-      'captioncontest':{
-        templateUrl : 'js/Captioncontest/captioncontest-overview.html',
-        controller: 'appckiCaptioncontestOverview',
-        name: 'Captioncontest',
-        state: 'app.captioncontest',
-        home : false,
-      },
+      // 'quote':{
+      //   templateUrl : 'js/Quote/quote-overview.html',
+      //   controller: 'appckiQuoteOverview',
+      //   name: 'Quotes',
+      //   state: 'app.quote-overview',
+      //   home : false,
+      // },
+      // 'leden':{
+      //   templateUrl : 'js/Leden/leden-overview.html',
+      //   controller: 'appckiLedenOverview',
+      //   name: 'Leden',
+      //   state: 'app.leden-overview',
+      //   home : false,
+      // },
+      // 'captioncontest':{
+      //   templateUrl : 'js/Captioncontest/captioncontest-overview.html',
+      //   controller: 'appckiCaptioncontestOverview',
+      //   name: 'Captioncontest',
+      //   state: 'app.captioncontest',
+      //   home : false,
+      // },
       'roephoek':{
         templateUrl : 'js/Roephoek/roephoek-overview.html',
         controller: 'appckiRoephoekOverview',
@@ -181,46 +181,47 @@ appcki
     templateUrl: 'js/Poll/poll-archive.html',
     controller: 'appckiPollArchive'
   })
-  .state('app.quote-overview', {
-    url: '/quote',
-    templateUrl: 'js/Quote/quote-overview.html',
-    controller: 'appckiQuoteOverview'
-  })
-  .state('app.quote-list', {
-    url: '/quote/list',
-    templateUrl: 'js/Quote/quote-list.html',
-    controller: 'appckiQuoteList'
-  })
-  .state('app.quote-add', {
-    url: '/quote/add',
-    templateUrl: 'js/Quote/quote-add.html',
-    controller: 'appckiQuoteAdd'
-  })
-  .state('app.leden-overview', {
-    url: '/leden',
-    templateUrl: 'js/Leden/leden-overview.html',
-    controller: 'appckiLedenOverview'
-  })
-  .state('app.leden-details', {
-    url: '/leden/detail/:id',
-    templateUrl: 'js/Leden/leden-details.html',
-    controller: 'appckiLedenDetails'
-  })
+  // .state('app.quote-overview', {
+  //   url: '/quote',
+  //   templateUrl: 'js/Quote/quote-overview.html',
+  //   controller: 'appckiQuoteOverview'
+  // })
+  // .state('app.quote-list', {
+  //   url: '/quote/list',
+  //   templateUrl: 'js/Quote/quote-list.html',
+  //   controller: 'appckiQuoteList'
+  // })
+  // .state('app.quote-add', {
+  //   url: '/quote/add',
+  //   templateUrl: 'js/Quote/quote-add.html',
+  //   controller: 'appckiQuoteAdd'
+  // })
+  // .state('app.leden-overview', {
+  //   url: '/leden',
+  //   templateUrl: 'js/Leden/leden-overview.html',
+  //   controller: 'appckiLedenOverview'
+  // })
+  // .state('app.leden-details', {
+  //   url: '/leden/detail/:id',
+  //   templateUrl: 'js/Leden/leden-details.html',
+  //   controller: 'appckiLedenDetails'
+  // })
   .state('app.roephoek', {
     url: '/roephoek',
     templateUrl: 'js/Roephoek/roephoek-overview.html',
     controller: 'appckiRoephoekOverview'
   })
-  .state('app.captioncontest', {
-    url: '/captioncontest',
-    templateUrl: 'js/Captioncontest/captioncontest-overview.html',
-    controller: 'appckiCaptioncontestOverview'
-  })
+  // .state('app.captioncontest', {
+  //   url: '/captioncontest',
+  //   templateUrl: 'js/Captioncontest/captioncontest-overview.html',
+  //   controller: 'appckiCaptioncontestOverview'
+  // })
   .state('app.GoL', {
     url : '/gameoflife',
     templateUrl: 'js/GameOfLife/gameoflife.html',
     controller: 'GameOfLifeController'
-  });
+  })
+  ;
 
   $httpProvider.interceptors.push(['$q', '$location', '$localStorage', 
   function($q, $location, $localStorage) {

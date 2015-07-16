@@ -1,4 +1,4 @@
-angular.module('appcki.GoL',[])
+angular.module('appcki.GoL', [])
 .controller("GameOfLifeController", ['$scope', '$state', '$interval',
 function($scope, $state, $interval){
 
@@ -44,11 +44,12 @@ function($scope, $state, $interval){
     	$scope.board = (angular.isDefined(start)) ? start : $scope.board;
     };
 
-    $scope.new = function()
+    $scope.doNew = function()
     {
     	$scope.newGame();
     	start = undefined;
     };
+
 
 	$scope.width = Math.floor((window.innerWidth - 20) / 32);
 	$scope.height = Math.floor(((window.innerHeight / 100 * 70) - 20 )/ 32);

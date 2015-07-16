@@ -20,12 +20,12 @@ angular
 						article.postedtimeago = DateHelper.difference(article.posteddate);
 						$scope.items.push(article);
 					}
+					$scope.$broadcast('scroll.infiniteScrollComplete');
 				}, function(){
 					$scope.last = true;
 					$timeout(function(){
 						$scope.last = false;
 					}, 60000);
-				}, function(){
 					$scope.$broadcast('scroll.infiniteScrollComplete');
 				});
 			};

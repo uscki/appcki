@@ -5,26 +5,20 @@ angular
         
         var NewsService  ={};
 
-        NewsService.getNewer = function(state, callback, finish){
+        NewsService.getNewer = function(state, callback){
             $http.get(apiUrl + "news/overview")
             .success(function(data){
                 callback(data);
-            })
-            .finally(function(){
-                finish();
             });
         };
 
-        NewsService.getOlder = function(state, callback, error, finish){
+        NewsService.getOlder = function(state, callback, error){
             $http.get(apiUrl + "news/overview")
             .success(function(data){
                 callback(data);
             })
             .error(function(){
                 error();
-            })
-            .finally(function(){
-                finish();
             });
         };
 
