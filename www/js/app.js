@@ -20,7 +20,9 @@ var appcki = angular.module('appcki', [
 ]);
 
 appcki
-.run(function($ionicPlatform) {
+.run(['$ionicPlatform', '$rootScope', 
+  function($ionicPlatform, $rootScope) {
+  
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -31,8 +33,16 @@ appcki
       StatusBar.styleDefault();
     }
   });
-})
-.config(function($stateProvider, $urlRouterProvider) {
+
+  $rootScope.$on('$stateChangeStart', 
+  function(event, toState, toParams, fromState, fromParams){ 
+    $rootScope.bodyLayout = toState.name.match(/\.detail$/g) ? 'detailed':'';
+  });
+}])
+
+.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', 
+  function($httpProvider, $stateProvider, $urlRouterProvider) {
+  
   $urlRouterProvider.otherwise('/login');
 
   $stateProvider.state('wilson', {
@@ -210,48 +220,32 @@ appcki
     url : '/gameoflife',
     templateUrl: 'js/GameOfLife/gameoflife.html',
     controller: 'GameOfLifeController'
-  })
-;
-})
-.config(['$httpProvider',
-  function( $httpProvider ) {
-
- //   $httpProvider.defaults.useXDomain = true;
- //   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
-    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', 
-      function($q, $location, $localStorage) {
-        return {
-            'request': function (config) {
-                config.headers = config.headers || {};
-                // console.log($localStorage);
-                if ($localStorage.token) {
-                    config.headers['X-AUTH-TOKEN'] = $localStorage.token;
-                }
-                return config;
-            },
-            'responseError': function(response) {
-              console.log(response);
-                if(response.status === 0 || response.status === 401 || response.status === 403) {
-                  delete $localStorage.token;
-                  $location.path('/login');
-                }
-                return $q.reject(response);
-            }
-        };
-    }]);
-
-  }]);
-
-appcki.run(['$rootScope',function($rootScope){
-  $rootScope.$on('$stateChangeStart', 
-  function(event, toState, toParams, fromState, fromParams){ 
-    $rootScope.bodyLayout = toState.name.match(/\.detail$/g) ? 'detailed':'';
   });
+
+  $httpProvider.interceptors.push(['$q', '$location', '$localStorage', 
+  function($q, $location, $localStorage) {
+    return {
+        'request': function (config) {
+            config.headers = config.headers || {};
+            // console.log($localStorage);
+            if ($localStorage.token) {
+                config.headers['X-AUTH-TOKEN'] = $localStorage.token;
+            }
+            return config;
+        },
+        'responseError': function(response) {
+          console.log(response);
+            if(response.status === 0 || response.status === 401 || response.status === 403) {
+              delete $localStorage.token;
+              $location.path('/login');
+            }
+            return $q.reject(response);
+        }
+    };
+  }]);
 }]);
 
-appcki
-.directive("appckiPhotoMedia",function(){
+appcki.directive("appckiPhotoMedia",function(){
   return {
     restrict:'E',
     replace: true,
@@ -262,4 +256,3 @@ appcki
     template: '<img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{mid}}&size={{size}}" />'
   };
 });
-
