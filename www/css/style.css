@@ -1,13 +1,15 @@
 /* Empty. Add your own CSS if you like */
 
-body {
-  cursor: url('http://ionicframework.com/img/finger.png'), auto;
-}
+/**
+ * Non working tags:
+ * Float: left/right
+ * svg werkt niet waar png wel werkt. Waarom?
+ /*
 
 /* Articles */
-/*.article:nth-child(even) {
+.article:nth-child(even) {
 	background-color: rgb(243,243,243);
-}*/
+}
 
 .no-border {
 	border: none;
@@ -21,16 +23,11 @@ body {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+  display: block;
 }
 
 .logo-login{
 	margin-top: 5%;
-}
-
-.logo-40vh{
-	height: 40vh;
-	width: 40vh;
-	display: block;
 }
 
 .logo::before, .logo::after{
@@ -53,6 +50,8 @@ body {
 	background: url('../img/bottom-01-transparant.svg') no-repeat;
 	background-size: 100%;
 }
+
+
 
 /** Logo animation top-turn **/
 @-webkit-keyframes logo-y { 
@@ -99,13 +98,13 @@ body {
 *****************************************************/
 div.custom-login div.background-login, div.custom-login div.eclipse-fadeout {
 	top: 0px;
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 	position: absolute;
 }
 
 div.custom-login div.background-login {
-	background-color: #990000;
+	background-color: #990000 !important;
 	opacity: 1;
 	z-index: -1;
 }
@@ -115,10 +114,6 @@ div.custom-login div.eclipse-fadeout{
 		#fff 25%, #990000 75%); /* Chrome10+,Safari5.1+ */
 	opacity: 0.1;
 	z-index: 0;
-}
-
-div.custom-login form {
-	margin-top: 5vh;
 }
 
 
@@ -168,7 +163,7 @@ div.custom-login form {
 }
 
 .quote-bar .quote-bar-right{
-	/*float: left;*/
+	float: left;
 	background-color: #DB1818;
 	border-radius: 10px 10px 10px 10px;
 }
@@ -204,12 +199,12 @@ ion-nav-bar .title-small.title-next2next{
 	position: absolute;
 }
 
-/** SHOUTBOX!!!!!!!**/
+/** SHOUTBOX!!!!!!!*/
 .message-box-bottom {
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
-	/*background-color: white;*/
+	background-color: transparent;
 	text-align: right;
 }
 
@@ -217,7 +212,6 @@ ion-nav-bar .title-small.title-next2next{
 
 .conway-canvas .conway-row .conway-cell
 {
-	float: left;
 	display: block;
 	width: 30px;
 	height: 30px;

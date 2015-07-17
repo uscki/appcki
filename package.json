@@ -1,5 +1,5 @@
 {
-  "name": "appcki",
+  "name": "wilson",
   "version": "1.0.0",
   "description": "Wilson",
   "dependencies": {
@@ -22,6 +22,7 @@
   },
   "cordovaPlugins": [],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    "android"
   ]
 }

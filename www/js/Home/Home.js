@@ -144,20 +144,7 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 	var dragEndGesture = $ionicGesture.on('dragend', myDragEnd, element);
 	var dragStartGesture = $ionicGesture.on('dragstart', myDragStart, element);
 
-	// $ionicSlideBoxDelegate.update();
 
-	$scope.randomname = "news";
-
-	/*$scope.$on('$ionicView.afterEnter', function(){
-		var generatedSlides = document.querySelectorAll('.slider-slide');
-		console.log(generatedSlides.length);
-		for(var i = 0; i < generatedSlides.length; i++)
-		{
-			var el = angular.element(generatedSlides[i]);
-			el.html("<ion-nav-view name=\"GoL\"><\/ion-nav-view>");
-		}
-		$ionicSlideBoxDelegate.update();
-	});*/
 	
 
 }])

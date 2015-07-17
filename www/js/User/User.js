@@ -1,4 +1,16 @@
 angular.module('appcki.user',[])
+    .directive("logoDirective", function(){
+        return function(s, e, a){
+            var h = Math.round(.01 * window.innerHeight * a.h) + "px";
+            e.css({height: h, width: h});
+        }
+    })
+    .directive("offsetDirective", function(){
+        return function(s, e, a){
+            var h = Math.round(.01 * window.innerHeight * a.h) + "px";
+            e.css({marginTop: h});
+        }
+    })
 	.controller("loginPageController", ['$scope', '$http', '$location', '$ionicPopup','UserService',
         function($scope, $http, $location, $ionicPopup, UserService){	
 
@@ -17,8 +29,8 @@ angular.module('appcki.user',[])
                     password: $scope.credentials.password
                 },
                 function(data){
-                    el.removeClass(animation);
                     $location.path('/home');
+                    el.removeClass(animation);
                 },
                 function(){
                     el.removeClass(animation);
