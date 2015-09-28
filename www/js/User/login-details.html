@@ -5,7 +5,9 @@
 			<div class="background-login"></div>
 			<div class="eclipse-fadeout"></div>
 			<div class="padding">
-				<div class="logo logo-login" logo-directive="" h="40"></div>
+				<!-- <div class="logo logo-login logo-animating-topturn" logo-directive="" h="40" ng-if="animating"></div>
+				<div class="logo logo-login" logo-directive="" h="40" ng-if="!animating"></div> -->
+				<logo h="40" class="logo-login"></logo>
 				<form ng-submit="login()" offset-directive="" h="5"> 
 					<div class="item item-input">
 						<input type="text" name="username" placeholder="Gebruikersnaam" ng-model="credentials.username"/>
@@ -19,6 +21,7 @@
 					</button>
 
 				</form>
+				<button class="button button-full button-positive" ng-click="animate()">Animate</button>
 			</div>
 		</div>
   </ion-content>

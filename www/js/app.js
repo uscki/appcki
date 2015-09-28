@@ -26,9 +26,9 @@ appcki
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
+    // if(window.cordova && window.cordova.plugins.Keyboard) {
+    //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    // }
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
@@ -228,14 +228,12 @@ appcki
     return {
         'request': function (config) {
             config.headers = config.headers || {};
-            // console.log($localStorage);
             if ($localStorage.token) {
                 config.headers['X-AUTH-TOKEN'] = $localStorage.token;
             }
             return config;
         },
         'responseError': function(response) {
-          console.log(response);
             if(response.status === 0 || response.status === 401 || response.status === 403) {
               delete $localStorage.token;
               $location.path('/login');
@@ -245,15 +243,3 @@ appcki
     };
   }]);
 }]);
-
-appcki.directive("appckiPhotoMedia",function(){
-  return {
-    restrict:'E',
-    replace: true,
-    scope:{
-      mid:'@',
-      size:'@'
-    },
-    template: '<img src="https://www.uscki.nl/?pagina=Media/MediaObject/Photo/Jpeg&mediaFile={{mid}}&size={{size}}" />'
-  };
-});

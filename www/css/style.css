@@ -18,12 +18,12 @@
 /**
  * logo class
  */
-.logo{
+/*.logo{
 	position: relative;
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-  display: block;
+  	display: block;
 }
 
 .logo-login{
@@ -39,26 +39,28 @@
 	top:0;
 	left: 0;
 	transition: 0.2s;
+	-webkit-transition: 0.2s;
 }
 
 .logo::before{
-	background: url('../img/top-01.svg') no-repeat;
+	background: url('../img/top-01-02.png') no-repeat;
 	background-size: 100%;
 }
 
 .logo::after{
-	background: url('../img/bottom-01-transparant.svg') no-repeat;
+	background: url('../img/bottom-01-transparant-02.png') no-repeat;
 	background-size: 100%;
 }
 
 
 
-/** Logo animation top-turn **/
 @-webkit-keyframes logo-y { 
 	from { 
-		-webkit-transform: rotateY(0deg); 
+		-webkit-transform: rotate3d(0,1,0,0deg); 
+		-webkit-transform: rotate3d(0,1,0,0deg); 
 	} to { 
-		-webkit-transform: rotateY(-360deg); 
+		-webkit-transform: rotate3d(0,1,0,180deg); 
+		-webkit-transform: rotate3d(0,1,0,-360deg); 
 	} 
 }
 
@@ -67,15 +69,25 @@
 		-moz-transform: rotateY(0deg);
 		-ms-transform: rotateY(0deg);
 		transform: rotateY(0deg);
+		-moz-transform: rotate3d(0,1,0,0deg);
+		-ms-transform: rotate3d(0,1,0,0deg);
+		transform: rotate3d(0,1,0,0deg);
+		left: 0px;
+		background-color: transparent;
 	} 
 	to {
 		-moz-transform: rotateY(-360deg);
 		-ms-transform: rotateY(-360deg);
 		transform: rotateY(-360deg); 
+		-moz-transform: rotate3d(0,1,0,-360deg);
+		-ms-transform: rotateY(0,1,0,-360deg);
+		transform: rotateY(0,1,0,-360deg); 
+		left: 100px;
+		background-color: green;
 	}
-}
+}*/
 
-.logo-animating-topturn::before
+/*.logo-animating-topturn::before
 {
 	-webkit-animation-name: logo-y; 
 	-webkit-animation-timing-function: linear; 
@@ -89,7 +101,9 @@
 	-moz-transform-style: preserve-3d; 
 	-ms-transform-style: preserve-3d; 
 	transform-style: preserve-3d;
-}
+	background-color: green;
+}*/
+
 
 /*****************************************************
 ******************************************************

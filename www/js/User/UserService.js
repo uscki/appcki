@@ -75,10 +75,6 @@ angular.module('appcki.user')
             firstname : getUserFirstName,
             lastname : getUserLastName,
             signin: function(data, success, error) {
-                console.log(data);
-
-               // console.log(error);
-                
                 $http({
                         url: apiUrl + 'login',
                         method: "GET",
@@ -97,9 +93,7 @@ angular.module('appcki.user')
                 .success(function(data){
                     success(data);
                 })
-                .error(function(data){
-                    error(data);
-                });
+                .error(error);
             },
             logout: function(success) {
                 changeUser({});

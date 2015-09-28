@@ -8,10 +8,10 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 	var maxDragRight = 0;
 	var titleBarWidth = 0;
 	
-	/**
-	 * Method to set the title in the nav bar to the title of
-	 * the view that is being shown
-	 */
+	
+	/*Method to set the title in the nav bar to the title of
+	the view that is being shown*/
+	
 	$scope.slideChange = function()
 	{
 		slideIndex = $ionicSlideBoxDelegate.currentIndex();
@@ -50,7 +50,27 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 	var myDrag = function(e){
 		var slideIndex = $ionicSlideBoxDelegate.currentIndex();
 		var style = angular.element(slides[slideIndex])[0].style;
-		var x = /.*X\((-?\d*)px\)/.exec(style.transform)[1];
+		console.log(style);
+		ks = Object.keys(style);
+		console.log(ks);
+		for(var i = 0; i < ks.length; i++)
+		{
+			console.log("%d (%s) = %s\n".sprintf(i, ks[i], style[ks[i]]));
+		}
+		console.log(/.*X\((-?\d*)px\)/.exec(style.transform));
+		if(angular.isDefined(style.MozTransform))
+		{
+			var x = /.*X\((-?\d*)px\)/.exec(style.MozTransform)[1];
+		} else if(angular.isDefined(style.msTransform)) {
+			var x = /.*X\((-?\d*)px\)/.exec(style.msTransform)[1];
+		} else if(angular.isDefined(style.transform)) {
+			var x = /.*X\((-?\d*)px\)/.exec(style.transform)[1];
+		} else if(angular.isDefined(style.OTransform)) {
+			var x = /.*X\((-?\d*)px\)/.exec(style.OTransform)[1];
+		} else {
+			var x = "0px";
+		}
+
 		transformTitleBar(x, false);
 	};
 
@@ -86,15 +106,18 @@ function($rootScope, $sce, $scope, $state, $ionicNavBarDelegate, $ionicSlideBoxD
 		{
 			titleBar.addClass('resetting');
 		} else {
-			titleBar.removeClass('resetting');
+		titleBar.removeClass('resetting');
 		}
 		
 		x = (x < -maxDragLeft) ? -maxDragLeft : x;
 		x = (x > maxDragRight) ? maxDragRight : x;
 		
 		// Set new css
-		var transformation = "translate(" + x + "px, 0px)";
+		var transformation = "translateX(" + x + "px)";
 		titleBar.css('transform', transformation);
+		titleBar.css('MozTransform', transformation);
+		titleBar.css('msTransform', transformation);
+		titleBar.css('OTransform', transformation);
 	};
 
 	var setOuterTitlePositions = function()

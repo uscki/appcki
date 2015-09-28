@@ -1,12 +1,6 @@
 <ion-view view-title="Game of Life">   
 	<ion-content>
-		<div class="conway-canvas padding">
-			<div id="conway-row-{{$index}}" class="row conway-row" ng-repeat="row in board track by $index">
-				<span id="conway-cell-{{$parent.$index}}-{{$index}}" class="col conway-cell conway-cell-{{cell}}" ng-repeat="cell in row track by $index" 
-					ng-click="toggle($parent.$index, $index)">
-					
-				</span>
-			</div>
+		<div appcki-game-of-life="" class="conway-canvas padding">
 		</div>
 		<div class="button-bar">
 			<button class="button button-positive" ng-click="playPause()">{{toggleText}}</button>

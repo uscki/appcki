@@ -124,4 +124,21 @@ function($scope, $state, $interval){
 
     }
 
-}]);
+}])
+.directive('appckiGameOfLife', [
+    function(){
+        return {
+            restrict: 'A',
+            link: function(scope, el, attrs) {
+                scope.width = Math.floor((window.innerWidth - 20) / 32);
+                scope.height = Math.floor(((window.innerHeight / 100 * 70) - 20 )/ 32);
+                scope.toggleText = "Start";
+                scope.speed = 1000;
+                scope.newGame();
+                var interval;
+                var start;
+            },
+            templateUrl: 'js/GameOfLife/cells.html'
+        };
+    }
+]);

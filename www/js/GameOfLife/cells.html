@@ -1,0 +1,5 @@
+<div id="conway-row-{{$index}}" class="row conway-row" ng-repeat="row in board track by $index">
+	<span id="conway-cell-{{$parent.$index}}-{{$index}}" class="col conway-cell conway-cell-{{cell}}" ng-repeat="cell in row track by $index" 
+	ng-click="toggle($parent.$index, $index)">
+	</span>
+</div>
